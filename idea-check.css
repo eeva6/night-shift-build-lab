@@ -1,0 +1,99 @@
+      .x-stepper { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0 0 28px; padding: 0; }
+      .x-stepper button { display: inline-flex; align-items: center; gap: 8px; min-height: var(--tap); padding: 6px 14px; border-radius: var(--r-pill); border: 1px solid var(--stroke-primary); background: var(--fill-primary-on); color: var(--text-primary); font: var(--type-tag); cursor: pointer; }
+      .x-stepper button:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-stepper button[aria-current="step"] { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-primary); }
+      .x-stepper b { font-weight: var(--weight-regular); opacity: 0.75; font-variant-numeric: tabular-nums; }
+      .x-meter { display: flex; align-items: center; gap: 14px; font: var(--type-label); margin-bottom: 24px; }
+      .x-meter span { flex: 1; max-width: 360px; height: 6px; border-radius: var(--r-pill); background: var(--fill-tertiary); overflow: hidden; }
+      .x-meter i { display: block; height: 100%; background: var(--fill-primary); transition: width var(--dur-quick) var(--ease-out); }
+      .x-form { display: grid; gap: 20px; max-width: 720px; }
+      .x-field { display: grid; gap: 6px; }
+      .x-field label { font: var(--type-label); }
+      .x-field small, .x-hint { font: var(--type-caption); color: var(--text-secondary); }
+      .x-in { width: 100%; min-height: var(--tap); padding: 10px 12px; border: 1px solid var(--stroke-primary); border-radius: var(--r-s); background: var(--fill-primary-on); color: var(--text-primary); font: var(--type-body); }
+      textarea.x-in { min-height: 88px; resize: vertical; }
+      .x-gaps { display: grid; gap: 12px; max-width: 720px; margin-top: 32px; }
+      .x-gaps h3 { font: var(--type-heading); }
+      .x-gap { display: grid; gap: 8px; padding: 16px 18px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      .x-gap p { font: var(--type-label); }
+      .x-gap p + p { font: var(--type-small); color: var(--text-secondary); }
+      .x-gap.is-ok { background: transparent; border: 1px solid var(--stroke-secondary); }
+      .x-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+      .x-row label { flex: none; }
+      .x-row select.x-in { flex: 1 1 240px; width: auto; min-width: 0; }
+      @media (max-width: 760px) { .x-row select.x-in { flex-basis: 100%; max-width: none !important; } }
+      .x-wiznav { display: flex; justify-content: space-between; gap: 12px; margin-top: 36px; max-width: 720px; }
+      .x-ev { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto auto; gap: 10px; align-items: end; max-width: 900px; }
+      @media (max-width: 760px) { .x-ev { grid-template-columns: 1fr; } }
+      .x-bars text { font: var(--type-caption); fill: var(--text-secondary); }
+      .x-bars .x-v { fill: var(--text-primary); font-weight: var(--weight-bold); }
+      .x-bars .x-tr { fill: var(--stroke-secondary); }
+      .x-bars .x-b { fill: var(--text-primary); }
+      .x-gap .chip, .x-head-chip { justify-self: start; }
+      button.btn { cursor: pointer; }
+      /* Idea Check: Who's tried this (competition rows and searches) */
+      .x-comp { display: grid; gap: 32px; max-width: 720px; margin-bottom: 20px; }
+      .x-comp h3 { font: var(--type-heading); }
+      .x-comp-part { display: grid; gap: 14px; min-width: 0; }
+      .x-comp-groups { display: grid; gap: 18px; }
+      .x-comp-group { display: grid; gap: 4px; min-width: 0; }
+      .x-comp-group h4, .x-crow__head h4 { font: var(--type-label); margin: 0; }
+      .x-comp-group .links { flex-wrap: wrap; margin-top: 6px; }
+      .x-comp-notes { display: grid; gap: 6px; }
+      .x-comp-past { font: var(--type-small); white-space: pre-line; overflow-wrap: anywhere; }
+      .x-crows { display: grid; gap: 14px; }
+      .x-crow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; padding: 16px 18px; border-radius: var(--r-m); border: 1px solid var(--stroke-secondary); background: var(--fill-primary-on); }
+      .x-crow > .x-field { min-width: 0; }
+      .x-crow .x-wide, .x-crow__head { grid-column: 1 / -1; }
+      .x-crow__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+      @media (max-width: 599px) { .x-crow { grid-template-columns: minmax(0, 1fr); padding: 14px; } }
+      html.present .x-comp { max-width: none; }
+      html.present .x-crow { grid-template-columns: minmax(0, 1fr); padding: 24px; }
+      html.present .x-comp h3 { font-size: 40px; line-height: 1.15; }
+      html.present .x-comp-group h4, html.present .x-crow__head h4, html.present .x-comp .x-field label { font-size: 28px; line-height: 1.3; }
+      html.present .x-comp .x-hint, html.present .x-comp .x-field small, html.present .x-comp-past { font-size: 22px; line-height: 1.35; }
+      html.present .x-comp .x-in { font-size: 24px; min-height: 56px; }
+      html.present .x-comp .btn { font-size: 24px; min-height: 56px; padding: 0 24px; }
+      @media print { .x-comp-sc tr { break-inside: avoid; } .x-comp-sc > h3 { break-after: avoid; } }
+      /* Idea Check: Find investors mode (investor-find.js) */
+      .x-inv-only[hidden] { display: none !important; }
+      .x-inv { display: grid; gap: 28px; }
+      .x-inv > .head { margin-bottom: 0; }
+      .x-inv-form { gap: 24px; }
+      .x-inv-opts { display: flex; flex-wrap: wrap; gap: 8px; border: 0; margin: 0; padding: 0; min-width: 0; }
+      .x-inv-opts legend { font: var(--type-label); padding: 0; margin-bottom: 8px; }
+      .x-inv-opts label { position: relative; display: inline-flex; align-items: center; min-height: var(--tap); padding: 8px 14px; border-radius: var(--r-pill); border: 1px solid var(--stroke-primary); background: var(--fill-primary-on); color: var(--text-primary); font: var(--type-small); cursor: pointer; }
+      .x-inv-opts label:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-inv-opts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      .x-inv-opts label:has(input:checked) { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-primary); }
+      .x-inv-opts label:has(input:focus-visible) { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+      .x-inv-out { display: grid; gap: 32px; scroll-margin-top: 96px; }
+      .x-inv-out:empty { display: none; }
+      .x-inv-group { display: grid; gap: 12px; }
+      .x-inv-group > h3 { font: var(--type-heading); }
+      .x-inv-res > div { display: grid; align-content: start; gap: 8px; }
+      .x-inv-res > div > * { margin: 0; }
+      .x-inv-res h3 { margin-bottom: 0; overflow-wrap: anywhere; }
+      .x-inv-res li { font: var(--type-small); overflow-wrap: anywhere; }
+      .x-inv-res li small { display: block; font: var(--type-caption); color: var(--text-secondary); margin-bottom: 2px; }
+      .x-inv-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+      .x-inv-meta { font: var(--type-small); color: var(--text-secondary); }
+      .x-inv-warn { padding: 10px 12px; border-radius: var(--r-s); border: 1px solid var(--fill-system-red); font: var(--type-small); }
+      .x-inv-go { padding-top: 4px; }
+      .x-inv-res > .x-inv-hi { box-shadow: inset 0 0 0 2px var(--fill-primary); }
+      .x-inv-empty { font: var(--type-body); padding: 18px 20px; border-radius: var(--r-m); border: 1.5px dashed var(--stroke-primary); max-width: 62ch; }
+      .x-inv-next { max-width: 72ch; }
+      html.present .x-inv-opts legend { font-size: 28px; }
+      html.present .x-inv-opts label { font-size: 24px; min-height: 56px; padding: 10px 20px; }
+      html.present .x-inv .btn { font-size: 24px; min-height: 56px; padding: 0 24px; }
+      html.present .x-inv-group > h3 { font-size: 40px; line-height: 1.15; }
+      html.present .main .x-inv-res p { font-size: 24px; line-height: 1.3; }
+      html.present .main .x-inv-res h3 { font-size: 32px; }
+      html.present .x-inv-res li { font-size: 24px; line-height: 1.3; }
+      html.present .x-inv-res li small { font-size: 20px; }
+      html.present .x-inv .x-hint, html.present .x-inv-empty, html.present .x-inv-next p { font-size: 28px; line-height: 1.3; }
+      html.present .x-inv .fineprint { display: none; }
+      @media (max-width: 599px) { .x-inv-opts label { padding: 8px 12px; } #check .x-fp-switch { border-radius: var(--r-l); } }
+      @media print {
+        .nav, .x-stepper, .x-wiznav, .x-noprint, .foot nav, #agent, .hero { display: none !important; }
+      }

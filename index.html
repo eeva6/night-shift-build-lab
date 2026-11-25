@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Night Shift Talk Track</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <link rel="stylesheet" href="idea-check.css" />
+    <style>
+      /* Presenter stops: one full-height screen each, type sized for the back of a room. */
+      .section.x-stop { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; scroll-margin-top: 0; padding-block: clamp(48px, 8vh, 96px); }
+      .x-stop > .head { grid-template-columns: minmax(0, 1fr); margin-bottom: clamp(16px, 3vh, 32px); }
+      .x-stop > .head .head__eyebrow { font: var(--weight-medium) clamp(15px, 1.4vw, 20px)/var(--lh) var(--sans); font-variant-numeric: tabular-nums; }
+      .x-stop > .head h2 { font: var(--weight-medium) clamp(36px, 5.2vw, 72px)/1.08 var(--sans); max-width: 22ch; text-wrap: balance; }
+      .x-big { font: var(--weight-medium) clamp(72px, 13vw, 168px)/1 var(--sans); font-variant-numeric: tabular-nums; }
+      .x-big small { display: block; margin-top: 14px; max-width: 34ch; font: var(--weight-regular) clamp(20px, 2.3vw, 32px)/1.25 var(--sans); color: var(--text-secondary); }
+      .x-figs { display: grid; gap: clamp(24px, 4vh, 44px); margin-bottom: clamp(16px, 3vh, 32px); }
+      .x-figs .x-big { font-size: clamp(56px, 9vw, 128px); }
+      .x-weeks { margin: 14px 0 0; max-width: 70ch; font: var(--type-body); color: var(--text-secondary); }
+      html.present .x-weeks { font-size: 28px; line-height: 1.35; }
+      .x-perks { display: grid; gap: 14px; margin-top: 24px; padding: 22px 24px; border: 1px solid var(--stroke-secondary); border-radius: var(--r-m); min-width: 0; }
+      .x-perks > .chip { justify-self: start; }
+      .x-perks > h3 { font: var(--type-heading); }
+      .x-perks > p { max-width: 70ch; font: var(--type-body); color: var(--text-secondary); }
+      .x-perks .cards h3 { margin-bottom: 6px; }
+      .x-perks .cards p { font: var(--type-body); color: var(--text-secondary); }
+      .x-perks .fineprint a { overflow-wrap: anywhere; }
+      @media (max-width: 599px) { .x-perks { padding: 18px; } }
+      html.present .main .x-perks > h3 { font-size: 44px; line-height: 1.15; }
+      html.present .main .x-perks > p { font-size: 32px; line-height: 1.3; max-width: none; }
+      html.present .main .x-perks > .chip { font-size: 22px; }
+      html.present .main .x-perks .cards p { font-size: 30px; line-height: 1.3; }
+      html.present .main .x-perks > p.fineprint { display: block; font-size: 24px; line-height: 1.35; }
+      .x-line { font: var(--weight-regular) clamp(24px, 3.1vw, 44px)/1.22 var(--sans); max-width: 32ch; text-wrap: balance; }
+      .x-line strong { font-weight: var(--weight-medium); }
+      .x-stop > .table-wrap table { font-size: clamp(15px, 1.5vw, 21px); }
+      .x-stop > .table-wrap thead th { font-size: clamp(12px, 1.1vw, 15px); }
+      .x-stop > .table-wrap td small, .x-stop > .table-wrap th small { font-size: clamp(12px, 1.1vw, 15px); }
+      .x-stop > .cards h3 { font-size: clamp(20px, 2vw, 28px); }
+      .x-stop > .cards p { font-size: clamp(15px, 1.5vw, 21px); }
+      .x-stop > .checklist .checklist__item { font-size: clamp(16px, 1.7vw, 24px); }
+      .x-stop > .checklist .checklist__item small { font-size: clamp(13px, 1.2vw, 17px); }
+      .x-stop > .steps h3 { font-size: clamp(20px, 2vw, 28px); }
+      .x-stop > .steps p { font-size: clamp(15px, 1.5vw, 21px); }
+      .x-stop > .x-subhead { font: var(--type-heading); margin: clamp(20px, 3vh, 32px) 0 14px; }
+      .x-contact { font: var(--weight-regular) clamp(17px, 1.8vw, 24px)/1.4 var(--sans); }
+      /* The hero is stop 1 and fills the first screen. */
+      .x-hero { min-height: calc(100vh - 24px); min-height: calc(100svh - 24px); scroll-margin-top: 12px; }
+      .x-hero h1 { font-size: clamp(48px, 8vw, 112px); line-height: 1; }
+      .x-hero .hero__sub { font-size: clamp(18px, 2vw, 28px); max-width: 30ch; }
+      .x-tag { font: var(--weight-medium) clamp(18px, 2vw, 26px)/1.25 var(--sans); }
+      .x-three { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 980px; }
+      .x-three li { display: grid; align-content: start; gap: 4px; padding: 12px 14px; border-radius: var(--r-m); background: var(--hero-glass); border: 1px solid var(--hero-glass-stroke); -webkit-backdrop-filter: var(--hark-blur); backdrop-filter: var(--hark-blur); font: var(--type-small); color: var(--hero-text); }
+      .x-three b { font: var(--type-label); font-weight: var(--weight-bold); }
+      @media (max-width: 760px) { .x-three { grid-template-columns: minmax(0, 1fr); } }
+      /* Read more */
+      .x-more > summary { list-style: none; cursor: pointer; width: max-content; }
+      .x-more > summary::-webkit-details-marker { display: none; }
+      .x-more > summary::after { content: "+"; color: var(--text-secondary); }
+      .x-more[open] > summary::after { content: "\2212"; }
+      .x-more[open] .x-closed, .x-more:not([open]) .x-opened { display: none; }
+      .x-more > .aside { margin-top: 14px; max-width: 78ch; display: grid; gap: 10px; font-size: var(--size-prose); }
+      .x-more > .aside ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+      /* Idea Check block inside stop 6 */
+      .x-block { margin-top: clamp(32px, 5vh, 56px); }
+      .x-stop > .head + #check.x-block { margin-top: 0; }
+      .x-block > h3 { font: var(--type-heading); margin-bottom: 6px; }
+      .x-block > .x-sub { font: var(--type-small); color: var(--text-secondary); margin-bottom: 18px; }
+      .x-ic { display: grid; gap: 14px; padding: clamp(20px, 3vw, 32px); border-radius: var(--r-l); background: var(--fill-tertiary); margin-bottom: 28px; }
+      .x-ic h3 { font: var(--weight-medium) clamp(26px, 3vw, 40px)/1.15 var(--sans); }
+      .x-ic p { font: var(--weight-regular) clamp(17px, 1.7vw, 22px)/1.35 var(--sans); max-width: 44ch; }
+      .x-ic .fineprint { font-size: var(--size-small); }
+      .x-ic p.x-ic__dek { font: var(--weight-medium) clamp(22px, 2.4vw, 32px)/1.2 var(--sans); max-width: 30ch; }
+      .x-ic p.x-ic__sub { font: var(--weight-regular) clamp(16px, 1.5vw, 19px)/1.4 var(--sans); color: var(--text-secondary); max-width: 60ch; }
+      .x-ic .fineprint + .fineprint { margin-top: -10px; }
+      .x-ic p.x-ic__intro { font: var(--type-body); color: var(--text-secondary); max-width: 60ch; }
+      .x-cta { justify-self: start; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 28px; border: 0; border-radius: var(--r-pill); background: var(--fill-primary); color: var(--text-primary-on); font: var(--weight-medium) clamp(17px, 1.6vw, 20px)/1 var(--sans); cursor: pointer; box-shadow: var(--hark-shadow); transition: box-shadow var(--dur-quick) ease, transform var(--dur-quick) ease; }
+      .x-cta:hover { box-shadow: var(--hark-shadow), inset 0 0 0 100px var(--hover-wash-primary-on); }
+      .x-cta:active { transform: scale(0.98); }
+      .x-cta:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 3px; }
+      button.btn { cursor: pointer; font: var(--type-tag); }
+      /* More detail blocks */
+      .x-detail > h3 { font: var(--type-heading); margin-bottom: 14px; }
+      .x-detail + .x-detail { margin-top: clamp(40px, 5vw, 64px); }
+      .x-act { margin-top: 12px; }
+      /* Jump bar: a hover strip on the left edge reveals the nine stops. */
+      .x-jumpzone { position: fixed; inset-block: 0; left: 0; width: 28px; z-index: 30; display: flex; align-items: center; }
+      .x-jumpzone::before { content: ""; position: absolute; left: 4px; top: 50%; width: 3px; height: 72px; margin-top: -36px; border-radius: var(--r-pill); background: var(--stroke-primary); transition: opacity var(--dur-quick) ease; }
+      .x-jump { position: absolute; left: 10px; top: 50%; transform: translate(-16px, -50%); opacity: 0; visibility: hidden; padding: 6px; border-radius: var(--r-l); box-shadow: var(--hark-shadow); transition: opacity var(--dur-quick) var(--ease-out), transform var(--dur-quick) var(--ease-out), visibility 0s linear var(--dur-quick); }
+      .x-jumpzone:hover .x-jump, .x-jumpzone:focus-within .x-jump { opacity: 1; visibility: visible; transform: translate(0, -50%); transition-delay: 0s; }
+      .x-jumpzone:hover::before, .x-jumpzone:focus-within::before { opacity: 0; }
+      .x-jump ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+      .x-jump a { display: flex; align-items: center; gap: 12px; min-height: var(--tap); padding: 0 16px 0 10px; border-radius: var(--r-pill); color: var(--text-secondary-on); font: var(--type-label); text-decoration: none; white-space: nowrap; }
+      .x-jump a b { width: 22px; text-align: right; font-weight: var(--weight-regular); font-variant-numeric: tabular-nums; }
+      .x-jump a:hover { color: var(--text-primary-on); background: var(--hover-wash-primary-on); }
+      .x-jump a[aria-current="true"] { background: var(--fill-primary-on); color: var(--text-primary); }
+      .x-jump a:focus-visible { outline: 2px solid var(--fill-primary-on); outline-offset: -2px; }
+      .x-jump p { padding: 8px 12px 4px; font: var(--type-caption); color: var(--text-secondary-on); }
+      @media (hover: none) { .x-jumpzone { display: none; } }
+      @media print { .x-jumpzone { display: none; } .section.x-stop { min-height: 0; } }
+      /* Presentation mode: an optional large-text switch for a projector. Standard sizes stay above. */
+      .x-present { position: fixed; top: auto; left: auto; bottom: 20px; right: 20px; z-index: 1000; display: inline-flex !important; visibility: visible; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border: 2px solid var(--fill-primary); border-radius: var(--r-pill); background: var(--fill-primary); color: var(--text-primary-on); font-family: var(--sans); font-size: 18px; font-weight: var(--weight-medium); line-height: 1.2; white-space: nowrap; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22), 0 1px 3px rgba(0, 0, 0, 0.18); cursor: pointer; transition: box-shadow var(--dur-quick) ease, transform var(--dur-quick) ease, border-color var(--dur-quick) ease; }
+      .x-present b { font-weight: var(--weight-bold); }
+      .x-present:hover { box-shadow: 0 6px 22px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2); transform: translateY(-1px); }
+      .x-present[aria-pressed="true"] { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-system-orange); box-shadow: 0 0 0 3px var(--fill-system-orange), 0 4px 16px rgba(0, 0, 0, 0.22); }
+      .x-present:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 5px; }
+      @media (max-width: 480px) { .x-present { bottom: 16px; right: 16px; } }
+      @media print { .x-present { display: none; } }
+      html.present .x-stop > .head .head__eyebrow { font-size: 28px; }
+      html.present .x-stop > .head h2 { font-size: clamp(48px, 6.5vw, 96px); max-width: 20ch; }
+      html.present .main .cards { grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); }
+      html.present .main .cards h3, html.present .main .steps h3 { font-size: 40px; line-height: 1.15; }
+      html.present .main .cards p, html.present .main .steps p { font-size: 36px; line-height: 1.3; }
+      html.present .main .step { grid-template-columns: 112px minmax(0, 1fr); }
+      html.present .main .step__pills li { font-size: 26px; }
+      html.present .main .table-wrap table { font-size: 36px; line-height: 1.3; }
+      html.present .main .table-wrap thead th { font-size: 26px; }
+      html.present .main .table-wrap th, html.present .main .table-wrap td, html.present .main .table-wrap td.num { white-space: normal; overflow-wrap: anywhere; }
+      html.present .main .table-wrap td small, html.present .main .table-wrap th small { font-size: 26px; line-height: 1.3; }
+      html.present .main .checklist .checklist__item { font-size: 38px; line-height: 1.3; }
+      html.present .main .checklist .checklist__item small { font-size: 28px; }
+      html.present .x-contact { font-size: 36px; }
+      html.present .x-ic p { font-size: 36px; }
+      html.present .x-ic p.x-ic__dek { font-size: 44px; line-height: 1.15; }
+      html.present .x-ic p.x-ic__sub { font-size: 26px; line-height: 1.35; max-width: 60ch; }
+      html.present .x-ic p.x-ic__intro { font-size: 22px; line-height: 1.4; max-width: 60ch; }
+      html.present .x-three { max-width: none; }
+      html.present .x-three li { font-size: 24px; line-height: 1.3; }
+      html.present .x-three b { font-size: 28px; }
+      html.present .main .x-more, html.present .main .fineprint { display: none; }
+      html.present .x-detail > h3, html.present .head__sub { font-size: 40px; line-height: 1.15; }
+      html.present .page, html.present .main { overflow-x: clip; }
+      /* Idea Check: Find a problem mode */
+      .x-fp-only { display: contents; }
+      .x-fp-only[hidden] { display: none; }
+      .x-fp-switch { justify-self: start; display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: var(--r-pill); background: var(--fill-primary-on); border: 1px solid var(--stroke-primary); }
+      .x-fp-switch button { min-height: var(--tap); padding: 0 18px; border: 0; border-radius: var(--r-pill); background: transparent; color: var(--text-primary); font: var(--type-label); cursor: pointer; }
+      .x-fp-switch button:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-fp-switch button[aria-pressed="true"] { background: var(--fill-primary); color: var(--text-primary-on); }
+      .x-fp-switch button:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+      .x-fp-prob { display: grid; gap: 16px; padding: 18px 20px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      .x-fp-prob h3 { font: var(--type-heading); }
+      .x-fp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      @media (max-width: 760px) { .x-fp-grid { grid-template-columns: minmax(0, 1fr); } .x-fp-prob { padding: 16px; } }
+      .x-fp-opts { display: flex; flex-wrap: wrap; gap: 8px; border: 0; margin: 0; padding: 0; min-width: 0; }
+      .x-fp-opts legend { font: var(--type-label); padding: 0; margin-bottom: 8px; }
+      .x-fp-opts label { position: relative; display: inline-flex; align-items: center; min-height: var(--tap); padding: 8px 14px; border-radius: var(--r-pill); border: 1px solid var(--stroke-primary); background: var(--fill-primary-on); font: var(--type-small); cursor: pointer; }
+      .x-fp-opts label:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-fp-opts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      .x-fp-opts label:has(input:checked) { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-primary); }
+      .x-fp-opts label:has(input:focus-visible) { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+      .x-fp-res > div { display: grid; align-content: start; gap: 10px; }
+      .x-fp-res > div > * { margin: 0; }
+      .x-fp-res .chip { justify-self: start; }
+      .x-fp-res h4 { font: var(--type-label); color: var(--text-secondary); margin-top: 6px; }
+      .x-fp-res li small { display: block; font: var(--type-caption); color: var(--text-secondary); }
+      .x-fp-res .btn { justify-self: start; }
+      html.present .x-fp-switch button { font-size: 24px; min-height: 56px; padding: 0 24px; }
+      html.present .x-fp-res li, html.present .x-fp-res h4 { font-size: 28px; line-height: 1.3; }
+      html.present .x-fp-res li small { font-size: 22px; }
+      /* Find a problem: Kevin Ryan's trends, crush check and pitfalls */
+      .x-fp-look { margin-bottom: 20px; max-width: 720px; }
+      .x-fp-look ul { margin: 8px 0 0; padding-left: 1.2em; display: grid; gap: 4px; font: var(--type-small); }
+      .x-fp-look .x-hint { margin: 0; }
+      .x-fp-trow__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; }
+      .x-fp-trow__head h3 { margin: 0; }
+      .x-fp-trow select.x-in { max-width: 320px; }
+      .x-fp-crush { display: grid; gap: 8px; padding: 12px 14px; border-radius: var(--r-s); border: 1px solid var(--stroke-secondary); background: var(--fill-primary-on); }
+      .x-fp-crush > * { margin: 0; }
+      .x-fp-crush__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font: var(--type-label); }
+      .x-fp-res .x-fp-crush .btn { justify-self: auto; }
+      .x-fp-pits { display: grid; gap: 14px; max-width: 720px; margin-top: 28px; padding: 18px 20px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      .x-fp-pits > * { margin: 0; }
+      .x-fp-pits h3 { font: var(--type-heading); }
+      .x-fp-pits ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+      .x-fp-pit { display: flex; align-items: flex-start; gap: 12px; min-height: var(--tap); cursor: pointer; }
+      .x-fp-pit input { flex: none; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--fill-primary); }
+      .x-fp-pit > span { display: grid; gap: 4px; min-width: 0; font: var(--type-small); }
+      .x-fp-pit strong { font: var(--type-label); font-weight: var(--weight-medium); }
+      .x-fp-pit .chip { justify-self: start; }
+      .x-fp-pit q, .x-fp-pit em { color: var(--text-secondary); }
+      @media (max-width: 760px) { .x-fp-pits { padding: 16px; } .x-fp-trow select.x-in { max-width: none; } }
+      @media print { .x-fp-pits, .x-fp-crush { break-inside: avoid; } .x-fp-crush .btn { display: none; } }
+      html.present .x-fp-look ul, html.present .x-fp-look .x-hint, html.present .x-fp-pit > span { font-size: 24px; line-height: 1.35; }
+      html.present .x-fp-pit strong, html.present .x-fp-crush__row { font-size: 28px; line-height: 1.3; }
+      html.present .x-fp-pits h3, html.present .x-fp-look h3 { font-size: 40px; line-height: 1.15; }
+      html.present .x-fp-pits { max-width: none; padding: 28px 32px; }
+      html.present .x-fp-pit input { width: 28px; height: 28px; }
+      html.present .x-fp-trow select.x-in { max-width: none; }
+      /* Idea Check: Investor diligence mode (diligence.js); choice pills reuse .x-inv-opts */
+      .x-dd-only[hidden] { display: none !important; }
+      .x-dd-out { display: grid; gap: 28px; }
+      .x-dd-out > * { margin: 0; }
+      .x-dd-total { font: var(--type-body); }
+      .x-dd-secs { display: grid; gap: 20px; }
+      .x-dd-sec, .x-dd-box { display: grid; gap: 14px; max-width: 900px; padding: 18px 20px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      .x-dd-sec > *, .x-dd-box > * { margin: 0; }
+      .x-dd-sec__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+      .x-dd-sec__head h3, .x-dd-box h3 { font: var(--type-heading); margin: 0; }
+      .x-dd-count { margin-left: auto; font: var(--type-small); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+      .x-dd-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+      .x-dd-item { display: grid; gap: 8px; padding: 12px 0; border-top: 1px solid var(--stroke-secondary); }
+      .x-dd-q { margin: 0; font: var(--type-label); }
+      .x-dd-flag { margin-left: 4px; white-space: nowrap; }
+      .x-dd-opts { gap: 6px; }
+      .x-dd-opts label { padding: 6px 12px; }
+      .x-dd-flags { border-top: 1px solid var(--stroke-secondary); padding-top: 12px; }
+      .x-dd-flags summary { min-height: var(--tap); display: flex; align-items: center; font: var(--type-label); cursor: pointer; }
+      .x-dd-flags ul, .x-dd-box ul { margin: 6px 0 0; padding-left: 1.2em; display: grid; gap: 4px; font: var(--type-small); }
+      .x-dd-box h4 { font: var(--type-label); margin: 6px 0 0; }
+      .x-dd-box h4 small { font: var(--type-caption); color: var(--text-secondary); margin-left: 6px; }
+      .x-dd-box p { font: var(--type-small); }
+      @media (max-width: 760px) { .x-dd-sec, .x-dd-box { padding: 16px; } .x-dd-count { margin-left: 0; flex-basis: 100%; } }
+      @media print { .x-dd-sec, .x-dd-box { break-inside: avoid-page; } .x-dd-item { break-inside: avoid; } .x-dd-opts label:not(:has(input:checked)) { display: none; } }
+      html.present .x-dd-sec, html.present .x-dd-box { max-width: none; padding: 28px 32px; }
+      html.present .x-dd-sec__head h3, html.present .x-dd-box h3 { font-size: 40px; line-height: 1.15; }
+      html.present .x-dd-q, html.present .x-dd-flags summary, html.present .x-dd-total, html.present .x-dd-box h4 { font-size: 28px; line-height: 1.3; }
+      html.present .x-dd-count, html.present .x-dd-flags ul, html.present .x-dd-box ul, html.present .x-dd-box p, html.present .x-dd-box h4 small { font-size: 24px; line-height: 1.35; }
+      html.present .x-dd-opts label { font-size: 22px; min-height: 52px; padding: 8px 18px; }
+      html.present #dil-form .x-field label { font-size: 28px; }
+      html.present #dil-form .x-field small { font-size: 22px; }
+      html.present #dil-form .x-in { font-size: 24px; min-height: 56px; }
+      html.present #dil-panel .btn { font-size: 24px; min-height: 56px; padding: 0 24px; }
+      /* Idea Check: Find programs mode (programs-find.js); cards reuse the investor mode's .x-inv-* styles */
+      .x-pg-only[hidden] { display: none !important; }
+      .x-inv-res > .x-pg-closed { background: transparent; box-shadow: inset 0 0 0 1px var(--stroke-secondary); }
+      .x-pg-closed h3, .x-pg-muted { color: var(--text-secondary); }
+      /* Founder interest form (restored), scoped so the Idea Check's own .x-form is untouched */
+      #interest { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 720px; padding: 22px 24px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      #interest .x-wide { grid-column: 1 / -1; }
+      #interest .x-field { display: grid; gap: 6px; font: var(--type-label); min-width: 0; }
+      #interest .x-field input, #interest .x-field select, #interest .x-field textarea { font: var(--type-body); color: var(--text-primary); background: var(--fill-primary-on); border: 1px solid var(--stroke-primary); border-radius: var(--r-s); padding: 10px 12px; min-height: var(--tap); width: 100%; }
+      #interest .x-field textarea { min-height: 96px; resize: vertical; }
+      #interest fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+      #interest legend { font: var(--type-label); padding: 0; margin-bottom: 8px; }
+      #interest .x-opts { clear: both; display: flex; flex-wrap: wrap; gap: 8px; }
+      #interest .x-opts label { position: relative; display: inline-flex; align-items: center; min-height: var(--tap); padding: 8px 14px; border-radius: var(--r-pill); border: 1px solid var(--stroke-primary); background: var(--fill-primary-on); font: var(--type-small); cursor: pointer; transition: box-shadow var(--dur-quick) ease; }
+      #interest .x-opts label:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      #interest .x-opts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      #interest .x-opts label:has(input:checked) { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-primary); }
+      #interest .x-opts label:has(input:focus-visible) { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+      #interest .x-quiz__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 4px; }
+      #interest .x-quiz__foot .fineprint { margin: 0; }
+      @media (max-width: 599px) { #interest { grid-template-columns: 1fr; padding: 18px; } }
+      html.present #interest { max-width: 1100px; gap: 28px; padding: 32px 36px; }
+      html.present #interest .x-field, html.present #interest legend { font-size: 28px; }
+      html.present #interest .x-field input, html.present #interest .x-field select, html.present #interest .x-field textarea { font-size: 30px; min-height: 64px; padding: 12px 16px; }
+      html.present #interest .x-field textarea { min-height: 140px; }
+      html.present #interest .x-opts label { font-size: 28px; min-height: 64px; padding: 10px 22px; }
+      html.present #interest .btn { font-size: 28px; min-height: 64px; padding: 0 28px; }
+      #founder-form > .x-sub { font: var(--type-small); color: var(--text-secondary); margin-bottom: 18px; }
+      html.present #founder-form > .x-sub { font-size: 32px; }
+      @media (max-width: 599px) { html.present #interest { padding: 18px; } }
+      /* Idea Check front door: "Start here" and the three-step path through the modes */
+      .x-ic .x-start-chip { margin: 0; }
+      .x-path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 10px; max-width: 1080px; }
+      .x-path li { display: flex; }
+      .x-path button { flex: 1; display: flex; align-items: flex-start; gap: 12px; min-height: var(--tap); padding: 14px 16px; border: 1px solid var(--stroke-primary); border-radius: var(--r-m); background: var(--fill-primary-on); color: var(--text-secondary); font: var(--type-small); text-align: left; cursor: pointer; transition: box-shadow var(--dur-quick) ease, border-color var(--dur-quick) ease; }
+      .x-path button:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-path button:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+      .x-path b { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: var(--r-pill); background: var(--fill-tertiary); color: var(--text-primary); font: var(--type-label); font-weight: var(--weight-bold); font-variant-numeric: tabular-nums; }
+      .x-path strong { display: block; margin-bottom: 2px; color: var(--text-primary); font: var(--type-label); font-weight: var(--weight-medium); }
+      .x-path button[aria-current="true"] { border-color: var(--fill-primary); box-shadow: inset 0 0 0 1px var(--fill-primary); }
+      .x-path button[aria-current="true"] b { background: var(--fill-primary); color: var(--text-primary-on); }
+      @media (max-width: 760px) { .x-path { grid-template-columns: minmax(0, 1fr); } }
+      html.present .x-path { max-width: none; }
+      html.present .x-path button { font-size: 22px; line-height: 1.3; padding: 18px 20px; }
+      html.present .x-path strong { font-size: 26px; }
+      html.present .x-path b { width: 40px; height: 40px; font-size: 22px; }
+      /* Check an idea: describe it, or upload a deck */
+      .x-imp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 980px; margin-bottom: 14px; }
+      .x-imp__opt { display: grid; align-content: start; gap: 10px; padding: 18px 20px; border-radius: var(--r-m); background: var(--fill-primary-on); border: 1px solid var(--stroke-secondary); }
+      .x-ic .x-imp h3, .x-ic .x-imp__sum h3 { font: var(--type-heading); }
+      .x-imp__opt textarea.x-in { min-height: 112px; }
+      .x-imp__opt input[type="file"].x-in { padding: 9px 12px; cursor: pointer; }
+      .x-imp__opt .x-cta { margin-top: 4px; }
+      .x-ic #imp-msg { max-width: 980px; margin-bottom: 14px; font: var(--type-small); }
+      .x-imp__sum { display: grid; gap: 12px; max-width: 980px; margin-bottom: 14px; padding: 18px 20px; border-radius: var(--r-m); background: var(--fill-primary-on); scroll-margin-top: 24px; }
+      .x-imp__sum[hidden] { display: none; }
+      .x-ic .x-imp__sum p.x-hint { font: var(--type-small); color: var(--text-secondary); max-width: none; }
+      .x-found { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+      .x-found li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border-radius: var(--r-s); background: var(--fill-tertiary); font: var(--type-small); }
+      @media (max-width: 760px) { .x-imp { grid-template-columns: minmax(0, 1fr); } .x-imp__opt, .x-imp__sum { padding: 16px; } }
+      html.present .x-imp { max-width: none; }
+      html.present .x-ic .x-imp h3, html.present .x-ic .x-imp__sum h3 { font-size: 32px; line-height: 1.2; }
+      html.present .x-imp .x-hint, html.present .x-ic .x-imp__sum p.x-hint { font-size: 22px; line-height: 1.35; }
+      html.present .x-imp .x-in { font-size: 24px; }
+      html.present .x-found li { font-size: 22px; }
+      /* Find a problem: describe your experience, or upload a resume or research */
+      .x-ic #fp-msg { max-width: 980px; font: var(--type-small); }
+      .x-ic #fp-msg[data-ok] { border-color: var(--stroke-primary); }
+      html.present .x-imp.x-fp-imp { grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr)); }
+      html.present .x-ic #fp-msg { font-size: 22px; line-height: 1.35; max-width: none; }
+      /* Find investors: Show matches is the panel's primary button (.x-cta) */
+      .x-inv .x-inv-show { min-height: 52px; padding: 0 28px; }
+      html.present .x-inv .x-inv-show { font-size: 26px; min-height: 64px; padding: 0 36px; }
+      /* Find investors: optional stage follow-up questions (investor-find.js, #inv-more) */
+      .x-inv-q { display: grid; gap: 20px; padding: 18px 20px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      .x-inv-q > h3 { font: var(--type-heading); margin: 0; }
+      .x-inv-q textarea.x-in { min-height: 0; }
+      .x-inv-q .x-inv-opts legend .x-hint { font: var(--type-caption); color: var(--text-secondary); }
+      .x-inv-share { display: flex; align-items: center; gap: 10px; min-height: var(--tap); font: var(--type-label); color: var(--text-primary); cursor: pointer; }
+      .x-inv-share input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: var(--fill-primary); }
+      .x-inv-sharef { display: grid; gap: 16px; }
+      .x-inv-sharef[hidden] { display: none; }
+      .x-inv-who { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .x-inv-sharef .links, .x-inv-sharef .fineprint { margin: 0; }
+      @media (max-width: 599px) { .x-inv-q { padding: 16px; } .x-inv-who { grid-template-columns: minmax(0, 1fr); } }
+      html.present .x-inv-q > h3 { font-size: 40px; line-height: 1.15; }
+      html.present .x-inv-q .x-field label, html.present .x-inv-sharef .x-field label, html.present .x-inv-share { font-size: 28px; line-height: 1.3; }
+      html.present .x-inv-q .x-in, html.present .x-inv-sharef .x-in { font-size: 24px; }
+      html.present .x-inv-share input { width: 28px; height: 28px; }
+      html.present .x-inv .x-inv-q .fineprint, html.present .x-inv .x-inv-sharef .fineprint { display: block; font-size: 22px; line-height: 1.35; }
+    </style>
+  </head>
+  <body>
+    <button type="button" class="x-present" id="x-present" aria-pressed="false" title="Presentation mode (P)"><b aria-hidden="true">Aa</b><span>Large text</span></button>
+    <div class="x-jumpzone">
+      <nav class="x-jump glass" aria-label="Talk stops">
+        <ol>
+          <li><a href="#s1"><b>1</b>Night Shift</a></li>
+          <li><a href="#s7"><b>2</b>Idea Check</a></li>
+          <li><a href="#s2"><b>3</b>The gap starts upstream</a></li>
+          <li><a href="#s3"><b>4</b>Women-founded startups</a></li>
+          <li><a href="#s4"><b>5</b>Who it's for</a></li>
+          <li><a href="#s6"><b>6</b>Micro-grants</a></li>
+          <li><a href="#s10"><b>7</b>Join</a></li>
+        </ol>
+        <p>Space or arrows to move · P for large text</p>
+      </nav>
+    </div>
+    <div class="page" id="top">
+      <main class="main">
+        <!-- 1 -->
+        <section class="hero x-hero" id="s1">
+          <img class="hero__img" src="buildlab-hero.png" alt="Women at an evening build night in a brick coworking loft, laptops and a small robot arm on the table" />
+          <div class="hero__copy">
+            <p class="hero__eyebrow">A Nebraska pilot · 2026 StartupLNK JumpStart Challenge</p>
+            <h1>Night Shift</h1>
+            <p class="x-tag">A pre-accelerator for Nebraska women</p>
+            <ul class="x-three" aria-label="What founders get">
+              <li><b>Community</b>A cohort of 15 women, plus Build Nights and kid-friendly weekend coffee work sessions.</li>
+              <li><b>Context</b>A clear read on the startup ecosystem: the current funding landscape, and which Nebraska resources fit your path.</li>
+              <li><b>Coaching</b>Two mentors per founder, one operator and one investor, and steady support at every milestone.</li>
+            </ul>
+            <p class="hero__meta">All three serve one goal: <strong>momentum</strong>. Idea to first evidence in two weeks, then steady execution.</p>
+            <p class="hero__sub">A nights-and-weekends pre-accelerator that helps Nebraska women turn industry problems into evidence-backed businesses.</p>
+            <p class="hero__meta">From idea to first traction, building with flexibility around work and life.</p>
+          </div>
+        </section>
+
+        <!-- 7 -->
+        <section class="section x-stop" id="s7">
+          <div class="head">
+            <p class="head__eyebrow">02 / 6</p>
+            <h2>Idea Check</h2>
+          </div>
+
+          <div class="x-block" id="check">
+            <div class="x-ic">
+              <p class="x-start-chip"><span class="chip chip--solid">Start here</span></p>
+              <p class="x-ic__intro">Idea Check is a DIY coaching tool we use alongside mentor feedback. Founders run it in week one and before each micro-grant milestone, then talk through the results with their mentors.</p>
+              <ol class="x-path x-noprint" aria-label="How the modes fit together">
+                <li><button type="button" data-start-mode="find"><b>1</b><span><strong>Find a problem</strong>Start from work you know.</span></button></li>
+                <li><button type="button" data-start-mode="check"><b>2</b><span><strong>Check an idea</strong>Find the holes and your next test.</span></button></li>
+                <li><button type="button" data-start-mode="investors"><b>3</b><span><strong>Find investors and programs</strong>See who funds ideas like yours, and by when.</span></button></li>
+                <li><button type="button" data-start-mode="diligence"><b>4</b><span><strong>Investor diligence</strong>See what investors may ask before they ask it.</span></button></li>
+              </ol>
+              <div class="x-fp-switch" role="group" aria-label="Idea Check mode">
+                <button type="button" id="x-mode-find" aria-pressed="false">Find a problem</button>
+                <button type="button" id="x-mode-check" aria-pressed="true">Check an idea</button>
+                <button type="button" data-mode="investors" aria-pressed="false">Find investors</button>
+                <button type="button" id="x-mode-dil" data-mode="diligence" aria-pressed="false">Investor diligence</button>
+                <button type="button" id="x-mode-prog" data-mode="programs" aria-pressed="false">Find programs</button>
+              </div>
+              <p class="x-ic__dek" data-fp-mode="find" hidden>Spot the startup ideas hiding in work you know.</p>
+              <p class="x-ic__sub" data-fp-mode="find" hidden>Start from your experience or from research about a problem. You'll list the problems you've seen, what they cost and why now, then get an idea card for each, with the ones worth testing first flagged and the investor themes they overlap.</p>
+              <p class="x-ic__dek" data-fp-mode="check">Find the holes in your idea before an investor does.</p>
+              <p class="x-ic__sub" data-fp-mode="check">Idea Check helps you pressure-test your idea, see where it's weak and decide what to do next. It checks your idea against Thiel's seven questions, the Lean Canvas, Techstars' team-first criteria, Y Combinator and a16z requests for startups, and 24 current VC theses, then gives you a test to run, adjacent markets to explore, and investors who back ideas like yours.</p>
+              <div class="x-fp-only" data-fp-mode="check">
+                <div class="x-imp x-noprint">
+                  <div class="x-imp__opt">
+                    <h3>Describe your idea</h3>
+                    <label class="x-hint" for="imp-text">Your idea in your own words. One point per line works best.</label>
+                    <textarea class="x-in" id="imp-text" placeholder="A few sentences: who has the problem, what you'd build, why you"></textarea>
+                    <button type="button" class="x-cta" id="imp-text-go">Check my idea</button>
+                  </div>
+                  <div class="x-imp__opt">
+                    <h3>Upload a pitch deck</h3>
+                    <label class="x-hint" for="imp-file">PDF, PowerPoint (.pptx), .txt or .md, up to 25 MB.</label>
+                    <input class="x-in" type="file" id="imp-file" accept=".pdf,.pptx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation,text/plain,text/markdown" />
+                    <button type="button" class="x-cta" id="imp-file-go">Check my deck</button>
+                  </div>
+                </div>
+                <p class="x-inv-warn" id="imp-msg" role="status" aria-live="polite" hidden></p>
+                <div class="x-imp__sum" id="imp-sum" hidden></div>
+                <div class="x-row x-noprint">
+                  <label class="x-hint" for="ex-pick">Or try a real example:</label>
+                  <select class="x-in" id="ex-pick" style="max-width:420px"><option value="">Pick a real example</option></select>
+                  <button type="button" class="btn" id="load-ex">Load example</button>
+                  <button type="button" class="btn" id="reset">Start over</button>
+                </div>
+              </div>
+              <div class="x-fp-only" data-fp-mode="find" hidden>
+                <div class="x-imp x-fp-imp x-noprint">
+                  <div class="x-imp__opt">
+                    <h3>Describe your experience</h3>
+                    <label class="x-hint" for="fp-text">Your work in your own words: industries, roles, what you ran day to day, and what kept going wrong.</label>
+                    <textarea class="x-in" id="fp-text" placeholder="Where you worked, what you did, what broke every week"></textarea>
+                    <button type="button" class="x-cta" id="fp-text-go">Find problems in my experience</button>
+                  </div>
+                  <div class="x-imp__opt">
+                    <h3>Upload your experience or research</h3>
+                    <label class="x-hint" for="fp-file">A resume or LinkedIn PDF, or research about a problem: a paper, article, industry report or interview notes. PDF, .pptx, .txt or .md, up to 25 MB.</label>
+                    <input class="x-in" type="file" id="fp-file" accept=".pdf,.pptx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation,text/plain,text/markdown" />
+                    <button type="button" class="x-cta" id="fp-file-go">Find problems in this file</button>
+                  </div>
+                </div>
+                <p class="x-inv-warn" id="fp-msg" role="status" aria-live="polite" hidden></p>
+                <p class="x-ic__intro x-noprint">Your answers fill in the steps below. Edit anything before you see results.</p>
+              </div>
+              <div class="x-fp-only x-inv-only" data-fp-mode="investors" hidden>
+                <p>Who might fund this, and when? A starting list of Nebraska, Midwest and women-focused investors, family offices and grants.</p>
+              </div>
+              <div class="x-fp-only" data-fp-mode="programs" hidden>
+                <p>Fellowships, grants, accelerators and pitch competitions open to Nebraska founders, soonest deadline first.</p>
+              </div>
+              <p class="fineprint" id="fp-fine-default">Describe your idea, upload a deck or pick an example to see its gaps and next steps.</p>
+              <p class="fineprint" data-fp-mode="find" hidden>Describe your experience or upload a resume or research to start, or fill in the steps.</p>
+            </div>
+            <div class="x-fp-only" data-fp-mode="check">
+              <ol class="x-stepper" id="stepper" aria-label="Idea Check steps"></ol>
+              <div id="stage"></div>
+              <p class="fineprint">Frameworks credited to Y Combinator, Peter Thiel, Bill Aulet (MIT), Alexander Osterwalder, Ash Maurya, Techstars, Balaji Srinivasan and Village Capital. Not affiliated with any of them. Investor theses checked Nov 14, 2026.</p>
+            </div>
+            <div class="x-fp-only" data-fp-mode="find" hidden>
+              <ol class="x-stepper" id="fp-stepper" aria-label="Find a problem steps"></ol>
+              <div id="fp-stage"></div>
+              <p class="fineprint">Based on Paul Graham's advice: don't think up ideas, look for problems, preferably ones you have yourself (<a class="link" href="https://paulgraham.com/startupideas.html" target="_blank" rel="noopener">How to Get Startup Ideas</a>, 2012). Start from problems, then use themes as a lens. Trend steps from Kevin Ryan (MongoDB, AlleyCorp) on <a class="link" href="https://tim.blog/2026/09/24/kevin-ryan/" target="_blank" rel="noopener">The Tim Ferriss Show #884</a>, Sept 2026. Kevin Ryan co-founded MongoDB, Business Insider, Gilt and Zola, was CEO of DoubleClick, and founded AlleyCorp; see also <a class="link" href="https://www.steelatlas.vc/gaining-momentum" target="_blank" rel="noopener">Lessons Working for Kevin Ryan</a> (Steel Atlas, Aug 2023). Not affiliated with either.</p>
+            </div>
+            <div class="x-inv-only x-inv" data-fp-mode="investors" id="inv-panel" hidden>
+              <div class="head"><p class="head__eyebrow">Find investors</p><h2>Who might fund this, and when?</h2></div>
+              <div class="x-inv-out" id="inv-out" aria-live="polite"></div>
+              <p class="fineprint">Public info checked November 17, 2026. Check sizes and criteria change. Confirm on each investor's site. Not financial or legal advice.</p>
+            </div>
+            <div class="x-inv x-dd-only" data-fp-mode="diligence" id="dil-panel" hidden>
+              <div class="head"><p class="head__eyebrow">Investor diligence</p><h2>See what investors may ask before they ask it.</h2><p class="head__sub">A due diligence checklist investors use. Not every investor asks for all of it, especially early. Use it to spot what you can already answer and what to prepare.</p></div>
+              <div class="x-form" id="dil-form"></div>
+              <div class="x-dd-out" id="dil-out"></div>
+              <p class="fineprint">Adapted from Startup Science's <a class="link" href="https://startupscience.io/articles/startup-due-diligence-checklist" target="_blank" rel="noopener">Startup Due Diligence Checklist for Investors</a> (Gregory Shepard, May 20, 2026). Not affiliated.</p>
+            </div>
+            <div class="x-inv x-pg-only" data-fp-mode="programs" id="prog-panel" hidden>
+              <div class="head"><p class="head__eyebrow">Find programs</p><h2>What can you apply to, and by when?</h2><p class="head__sub">Pick a type, or see them all.</p></div>
+              <div class="x-form x-inv-form" id="prog-form"></div>
+              <div class="x-inv-out" id="prog-out" aria-live="polite"></div>
+              <p class="fineprint">Deadlines checked Nov 22, 2026. Confirm on each program's site.</p>
+            </div>
+            <script type="text/csv" id="investors-page" src="investors-page.csv"></script>
+          </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="section x-stop" id="s2">
+          <div class="head">
+            <p class="head__eyebrow">03 / 6</p>
+            <h2>The gap starts upstream.</h2>
+          </div>
+          <p class="x-big">1.1%<small>of US venture dollars went to all-women founding teams in 2025. That's the downstream gap.</small></p>
+          <div class="cards">
+            <div><h3>Upstream</h3><p>Too few women reach the stage of testing a scalable business.</p></div>
+            <div><h3>Night Shift</h3><p>Helps more women test early, then builds stronger paths to the next support.</p></div>
+          </div>
+          <details class="x-more">
+            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
+            <div class="aside">
+              <p>Too few women get to the point of testing a business that could scale, and those who do still face barriers to capital. Night Shift focuses on that early stage.</p>
+              <p><strong>Nebraska context:</strong> 11% of women-owned firms have employees, against 22.5% of men-owned (SBA Office of Advocacy, 2025).</p>
+              <p class="fineprint">1.1%: PitchBook-NVCA Venture Monitor, 2025 data. Guzman &amp; Kacperczyk (Research Policy, 2019) linked about 65% of the funding disparity to growth orientation at founding, in California and Massachusetts registrations from 1995 to 2011.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- 3 -->
+        <section class="section x-stop" id="s3">
+          <div class="head">
+            <p class="head__eyebrow">04 / 6 · How women-founded startups perform</p>
+            <h2>Women-founded startups do more with less.</h2>
+          </div>
+          <div class="x-figs">
+            <p class="x-big">78¢ vs 31¢<small>Revenue per dollar invested: startups founded or cofounded by women vs those founded by men (BCG and MassChallenge, 2018).</small></p>
+            <p class="x-big">63%<small>How much better First Round Capital's investments with a female founder performed than its all-male teams, over 10 years (2015).</small></p>
+          </div>
+          <details class="x-more">
+            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
+            <div class="aside">
+              <p>In BCG's MassChallenge data, women-founded startups raised $935,000 on average, less than half the $2.1 million raised by startups founded by men, yet earned 10% more revenue over five years ($730,000 vs. $662,000). In 2025, companies with at least one female founder were 25% of US venture-backed exits (PitchBook, March 2026).</p>
+              <p>Nebraska has thousands of women like that: claims managers, nurses, engineers, ops leads who know exactly what's broken. They can't quit to find out if it's a business. Night Shift lets them test and build it first, without quitting their day (or night) job.</p>
+              <p class="fineprint">BCG, 'Why Women-Owned Startups Are a Better Bet,' June 6, 2018; First Round Capital, 10 Year Project, 2015 (value growth from First Round's investment to exit or 2014 fair value, Uber excluded); PitchBook, 2025 US All In: Female Founders in the VC Ecosystem.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- 4 -->
+        <section class="section x-stop" id="s4">
+          <div class="head">
+            <p class="head__eyebrow">05 / 6</p>
+            <h2>Who it's for</h2>
+          </div>
+          <p class="x-line">Nebraska women who know an industry or customer group <strong>firsthand</strong>.</p>
+          <ul class="checklist">
+            <li><span class="checklist__item">A recurring problem in mind <small>Or wants help choosing one</small></span></li>
+            <li><span class="checklist__item">4 hours a week to start, up to 20 <small>Flexible around work and family</small></span></li>
+            <li><span class="checklist__item">No cofounder, product or pitch needed to apply</span></li>
+          </ul>
+          <details class="x-more">
+            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
+            <div class="aside">
+              <ul>
+                <li><strong>Admission:</strong> a short application plus a 15-minute commitment conversation.</li>
+                <li><strong>Time:</strong> start at 4 hours a week, scaling to 10, or 20 for founders going all in.</li>
+                <li>Best for founders ready to build a business.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 6 -->
+        <section class="section x-stop" id="s6">
+          <div class="head">
+            <p class="head__eyebrow">06 / 6</p>
+            <h2>Micro-grants cover the cost of testing.</h2>
+          </div>
+          <p class="x-big">$2K<small>Up to, per founder, equity-free. Covers real costs like interview incentives, prototype tools and a first pilot, released at each milestone.</small></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Stage</th><th scope="col">By week</th><th scope="col">Released when</th><th scope="col">Grant</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Commit</th><td>Week 1</td><td>Shows up to Week 1</td><td class="num">$100 deposit back <small>Waived for hardship</small></td></tr>
+                <tr><th scope="row">Learn</th><td>By week 8</td><td>Finishes I-Corps or 20 reviewed interviews</td><td class="num">$250</td></tr>
+                <tr><th scope="row">Test</th><td>By week 12</td><td>Runs a cheap test of their riskiest assumption</td><td class="num">$250</td></tr>
+                <tr><th scope="row">Execute</th><td>By week 20</td><td>Builds a first version with our help</td><td class="num">$500</td></tr>
+                <tr class="is-highlight"><th scope="row">Commit a customer</th><td>By week 26</td><td>Has a qualified customer and a scoped pilot</td><td class="num">$1,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="x-weeks">About 26 weeks at 4 to 10 hours a week. Founders putting in 20 hours a week can move faster; nobody waits on the calendar.</p>
+          <div class="x-perks">
+            <span class="chip">Partners in progress</span>
+            <h3>Free tools while you build</h3>
+            <p>Accelerators like Techstars, Y Combinator and gener8tor give founders free cloud, AI and software credits through partner programs. Night Shift is lining up the same kind of perks for each cohort.</p>
+            <div class="cards">
+              <div><h3>Cloud and AI credits</h3><p>Credits for hosting and AI tools, so founders can build a prototype without paying out of pocket.</p></div>
+              <div><h3>Software for running the business</h3><p>Free or discounted CRM, docs, design and accounting tools during the program.</p></div>
+              <div><h3>Expert office hours</h3><p>Time with legal, finance and technical experts from partner firms.</p></div>
+            </div>
+            <p class="fineprint">Perk partners are being lined up. None are confirmed yet. Interested in offering a perk? <a class="link" href="mailto:?subject=Night%20Shift%3A%20Perk%20partner">Email us</a>.</p>
+          </div>
+          <details class="x-more">
+            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
+            <div class="aside">
+              <ul>
+                <li>Founders in an I-Corps cohort reach Learn when I-Corps ends, then keep the same order.</li>
+                <li>Each admitted founder has up to $2,000 set aside from day one.</li>
+                <li>Two mentors review monthly against a published rubric. Unused funds are reassigned at review dates set before recruiting starts.</li>
+                <li>Test and Execute grants are paid up front against a plan, so founders don't pay out of pocket. Later grants follow evidence.</li>
+                <li>They pay for interview gift cards and travel, time and data during discovery, prototype tools and hosting, and pilot costs.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 10: founder interest form -->
+        <section class="section x-stop" id="s10">
+          <div class="head">
+            <p class="head__eyebrow">Join</p>
+            <h2>Join the first cohort</h2>
+          </div>
+          <div id="founder-form">
+            <p class="x-sub">Fill this in and your email app opens with it ready to send.</p>
+            <form class="x-form" id="interest">
+              <label class="x-field">Name<input name="name" autocomplete="name" required /></label>
+              <label class="x-field">Email<input name="email" type="email" autocomplete="email" required /></label>
+              <label class="x-field">City<input name="city" autocomplete="address-level2" /></label>
+              <label class="x-field">Where are you on the path?
+                <select name="stage"><option value="">Choose one</option><option>Just a hunch</option><option>Picked a problem</option><option>Done customer discovery or I-Corps</option><option>Have an MVP or first users</option></select>
+              </label>
+              <label class="x-field x-wide">What do you know better than most people?<textarea name="know"></textarea></label>
+              <fieldset class="x-wide"><legend>Best times</legend>
+                <div class="x-opts"><label><input type="checkbox" name="times" value="Weeknights" />Weeknights</label><label><input type="checkbox" name="times" value="Weekend mornings" />Weekend mornings</label></div>
+              </fieldset>
+              <div class="x-wide x-quiz__foot">
+                <a class="btn" id="interest-send" href="mailto:?subject=Night%20Shift%3A%20Founder%20interest">Send by email</a>
+                <p class="fineprint">Sign-ups are sent by email for now.</p>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- MORE DETAIL -->
+        <section class="section" id="more">
+          <div class="head">
+            <p class="head__eyebrow">For questions</p>
+            <h2>More detail</h2>
+            <p class="head__sub">Not part of the talk. Everything behind the six stops, in one place.</p>
+          </div>
+
+          <div class="x-detail" id="handoff">
+            <h3>The hand-off: every founder leaves with a next step</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th scope="col">Where the founder is</th><th scope="col">Next step</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Ready for an accelerator</th><td>NMotion, Techstars Founder Catalyst, gener8tor <small>Proposed</small></td></tr>
+                  <tr><th scope="row">Ready for capital</th><td>Invest Nebraska, Nebraska Angels, AQi <small>Proposed</small></td></tr>
+                  <tr><th scope="row">Ready to bootstrap</th><td>NBDC, GROW Nebraska WBC <small>Proposed</small></td></tr>
+                  <tr><th scope="row">Evidence says stop, or not ready</th><td class="muted">Rejoin the next cohort</td></tr>
+                  <tr class="is-highlight"><th scope="row">Everyone</th><td>Follow-up at 6 and 12 months</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="fineprint">Each hand-off package holds an evidence and milestone file, a financing-pathway assessment, matched intros, and a feedback meeting with the partner. All partners are proposed, none confirmed.</p>
+          </div>
+
+          <div class="x-detail" id="budget">
+            <h3>Pilot budget and targets</h3>
+            <div class="pair">
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th scope="col">Item</th><th scope="col">Estimate</th><th scope="col">Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr class="is-highlight"><th scope="row">Founder grants <small>Cohort of 15</small></th><td class="num">~$14,000</td><td>This award</td></tr>
+                    <tr><th scope="row">Facilitation and admin</th><td class="muted">TBD</td><td>In-kind sought</td></tr>
+                    <tr><th scope="row">Technical and specialist review</th><td class="muted">TBD</td><td>In-kind sought</td></tr>
+                    <tr><th scope="row">Follow-up at 6 and 12 months</th><td class="muted">TBD</td><td>Lead's role</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="fineprint">Pilot targets: 15 founders admitted and 5 customer commitments. These are assumptions, not established conversion rates. Returned deposits are refunds, not cost.</p>
+            </div>
+            <p class="fineprint">The award amount is unconfirmed ($15K per the packet, against LaunchLNK's $20K plus about $23K in-kind).</p>
+          </div>
+
+          <div class="x-detail" id="results">
+            <h3>Other programs' results</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th scope="col">Program</th><th scope="col">Reported result</th><th scope="col">Caveat</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">NSF I-Corps</th><td>52% of National teams linked to startups <small>1,696 of 3,231 teams; $7.01B follow-on, FY2012-24</small></td><td class="muted">National teams, not regional</td></tr>
+                  <tr><th scope="row">MIT delta v</th><td>63% raised money <small>181 teams, ten-year study, 2022</small></td><td class="muted">MIT students and alumni</td></tr>
+                  <tr><th scope="row">Doyenne Group</th><td>~70% still open after a year <small>$500 deposit and $2,500 grant model</small></td><td class="muted">Self-reported</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="fineprint">Sources: NSF I-Corps biennial report (2025); MIT delta v ten-year study (2022); Doyenne Group, Madison. These are not forecasts for Night Shift.</p>
+          </div>
+
+          <div class="x-detail" id="ways-in">
+            <h3>Four ways in</h3>
+            <div class="cards">
+              <div><h3>Founders</h3><p>Join the first cohort, starting January 2027.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Founder%20interest">Join the first cohort</a></p></div>
+              <div><h3>Mentors</h3><p>Be one of a founder's two mentors, operator or investor.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Mentor%20interest">Become a mentor</a></p></div>
+              <div><h3>Investors</h3><p>Take the hand-off: meet founders who already have an MVP and first traction.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Investor%20interest">Take the hand-off</a></p></div>
+              <div><h3>Partners</h3><p>Take founders after first traction, fund a cohort, or host a Build Night.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Partner%20interest">Partner with us</a></p></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="foot">
+        <p>Night Shift is a working name. Pilot proposed for the 2026 JumpStart Challenge. All amounts, dates, targets and partners are proposals.</p>
+        <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
+      </footer>
+    </div>
+    <script src="hark.js"></script>
+    <script src="idea-check.js"></script>
+    <script src="pdf.min.js"></script>
+    <script src="pdf.worker.min.js"></script>
+    <script src="jszip.min.js"></script>
+    <script src="idea-import.js"></script>
+    <script>
+      // Idea Check, Find a problem mode. Answers are saved in localStorage.
+      (function () {
+        var $ = function (id) { return document.getElementById(id); };
+        var e = function (x) { return String(x == null ? "" : x).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+        var KEY = "nsfp-v2";
+        var blank = function () { return { step: 1, exp: { ind: "", roles: "", flows: "" }, probs: [{}], why: [], src: "", trends: [{}, {}, {}], pits: {} }; };
+        var st = blank();
+        try {
+          var sv = JSON.parse(localStorage.getItem(KEY));
+          if (sv && sv.exp && sv.probs) {
+            // Saves from before the 10-year trends step: Why now and Results moved from 3 and 4 to 4 and 5.
+            if (!Array.isArray(sv.trends) && +sv.step >= 3) sv.step = +sv.step + 1;
+            st = Object.assign(blank(), sv);
+            if (!Array.isArray(st.trends) || !st.trends.length) st.trends = [{}, {}, {}];
+            if (!st.pits || typeof st.pits !== "object") st.pits = {};
+          }
+        } catch (x) {}
+        var save = function () { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (x) {} };
+        var t = function (x) { return String(x || "").trim(); };
+        var STEPS = ["Your experience", "Problems you've seen", "10-year trends", "Why now", "Results"];
+        var NS = STEPS.length;
+        var TMAX = 20;
+        var CROSS = [["crossed", "Already crossed"], ["soon", "Crossing in 1-3 years"], ["further", "Further out"], ["unsure", "Not sure"]];
+        var crossLabel = function (c) { var o = CROSS.filter(function (x) { return x[0] === c; })[0]; return o ? o[1] : ""; };
+        var tFilled = function (r) { return r && (t(r.trend) || t(r.exists) || t(r.second) || t(r.cost)); };
+        var LOOK = [
+          "Something is too expensive, hard to get, or inaccessible.",
+          "A task that takes you more than 3 minutes online.",
+          "A market where companies make 40% profit margins. There's probably a better way.",
+          "A question you want answered, and no site that answers it.",
+          "A $50-100 billion category, often B2B, with no one place to figure out what to buy."
+        ];
+        var PITS = [
+          ["early", "Too early", "Has the cost curve crossed, or will it within your runway? Markets need a cross-over point before a product works."],
+          ["moat", "No moat", "As the market matures, products get commoditized. What will still set you apart when competitors arrive?", "If it's any good at all, there are 20 people doing the same thing."],
+          ["broad", "Starting too broad", "Start narrow.", "It's better to do one thing really well than a bad job on everything."],
+          ["customers", "Skipping customers", "Ryan builds no financial model at the idea stage; he interviews people to understand their problems."]
+        ];
+        var farOut = function () { return st.trends.some(function (r) { return r && r.cross === "further" && tFilled(r); }); };
+        // Trends behind a problem: rows that share a meaningful word with it.
+        var TSTOP = /^(that|this|with|from|have|they|them|their|there|what|when|which|will|would|could|more|less|than|then|into|over|some|each|every|does|doing|done|make|makes|need|needs|help|work|time|cost|costs|people|today|still|just|very|much|many|also|about|other|thing|things|being|been|were|your|yours|year|years|lot|lots)$/;
+        var words = function (x) {
+          var o = {};
+          String(x || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).forEach(function (w) {
+            if (w.length < 4 || TSTOP.test(w)) return;
+            o[w.length > 4 ? w.replace(/(ies|es|s)$/, function (m) { return m === "ies" ? "y" : ""; }) : w] = 1;
+          });
+          return o;
+        };
+        var trendText = function (r) { return [r.trend, r.exists, r.second, r.cost].join(" "); };
+        var trendsFor = function (p) {
+          var pw = words([p.prob, p.who, p.how, p.cost].join(" "));
+          return st.trends.filter(function (r) {
+            if (!tFilled(r)) return false;
+            var tw = words(trendText(r));
+            return Object.keys(tw).some(function (w) { return pw[w]; });
+          });
+        };
+        var DAY = 86400000;
+        var crushDay = function (p) {
+          var d = Date.parse(p && p.crush); if (isNaN(d)) return 0;
+          var a = new Date(d), n = new Date();
+          var start = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate()), now = Date.UTC(n.getFullYear(), n.getMonth(), n.getDate());
+          return Math.max(1, Math.floor((now - start) / DAY) + 1);
+        };
+        var crushText = function (p) {
+          var n = crushDay(p); if (!n) return "";
+          return n > 14 ? "Two weeks in. If it's still growing in your head, test it with customers." : "Day " + n + " of 14";
+        };
+        var FREQ = [["weekly", "Weekly"], ["monthly", "Monthly"], ["rarely", "Rarely"]];
+        var WHY = [
+          ["ai", "AI made it cheaper", "ai"],
+          ["sensors", "Sensors or hardware got cheaper", "sensors hardware"],
+          ["rule", "New rule or regulation", "compliance regulated government"],
+          ["labor", "Labor shortage", "workforce hiring"],
+          ["platform", "A platform or market shift", "marketplace platform"],
+          ["none", "None yet", ""]
+        ];
+        var whyLabel = function () { return WHY.filter(function (w) { return st.why.indexOf(w[0]) > -1; }).map(function (w) { return w[1]; }); };
+        var filled = function (p) { return p && (t(p.prob) || t(p.who) || t(p.how) || t(p.cost)); };
+
+        var field = function (id, label, val, opt) {
+          opt = opt || {};
+          var inp = opt.area ? '<textarea class="x-in" id="' + id + '" data-fp="' + opt.k + '">' + e(val) + "</textarea>" : '<input class="x-in" type="text" id="' + id + '" data-fp="' + opt.k + '" value="' + e(val) + '"' + (opt.ph ? ' placeholder="' + e(opt.ph) + '"' : "") + " />";
+          return '<div class="x-field"><label for="' + id + '">' + e(label) + "</label>" + (opt.h ? "<small>" + e(opt.h) + "</small>" : "") + inp + "</div>";
+        };
+        var head = function (i, sub) { return '<div class="head"><p class="head__eyebrow">Step ' + i + " of " + NS + " · Find a problem</p><h2>" + e(STEPS[i - 1]) + '</h2><p class="head__sub">' + e(sub) + "</p></div>"; };
+        var nav = function (i) {
+          return '<div class="x-wiznav">' + (i > 1 ? '<button type="button" class="btn" data-fp-go="' + (i - 1) + '">← ' + e(STEPS[i - 2]) + "</button>" : "<span></span>") + (i < NS ? '<button type="button" class="btn" data-fp-go="' + (i + 1) + '">' + e(STEPS[i]) + " →</button>" : "") + "</div>";
+        };
+        var stepper = function () {
+          $("fp-stepper").innerHTML = STEPS.map(function (n, k) { return '<li><button type="button" data-fp-go="' + (k + 1) + '"' + (st.step === k + 1 ? ' aria-current="step"' : "") + ">" + (k + 1) + " · " + e(n) + "</button></li>"; }).join("");
+        };
+
+        // Themes: the investor theses and requests for startups already in idea-check.js.
+        var STOP = /^(about|their|there|these|those|which|where|while|with|from|that|this|startups?|companies|plus|other|every|more|less|build|work|make|help|across|world)$/;
+        var GENERIC = /^(ai|operations|workflow|data|enterprise|services|software|model|automation|agents|b2b|saas)$/;
+        var themes = function (p) {
+          var T = window.__nsic && window.__nsic.theses ? window.__nsic.theses() : [];
+          var why = WHY.filter(function (w) { return st.why.indexOf(w[0]) > -1; }).map(function (w) { return w[2]; });
+          var norm = function (x) { return " " + String(x || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ") + " "; };
+          var tr = st.trends.filter(tFilled).map(function (r) { return [r.trend, r.exists, r.second].join(" "); });
+          var ind = norm(st.exp.ind), c = norm([st.exp.ind, p.prob, p.who, p.cost].concat(why, tr).join(" "));
+          var has = function (s, g) { return s.indexOf(" " + g + " ") > -1 || s.indexOf(" " + g + "s ") > -1; };
+          return T.map(function (th) {
+            var hit = [], sc = 0;
+            th.tags.forEach(function (tag) { var g = tag.toLowerCase(); if (has(c, g)) { hit.push(g); sc += (GENERIC.test(g) ? 1 : g.indexOf(" ") > -1 ? 4 : 3) * (has(ind, g) ? 2 : 1); } });
+            (th.title + " " + th.summary).toLowerCase().replace(/[^a-z ]+/g, " ").split(/\s+/).forEach(function (w) { if (w.length > 4 && !STOP.test(w) && c.indexOf(" " + w + " ") > -1) sc += 1; });
+            return { t: th, hit: hit, sc: sc };
+          }).filter(function (m) { return m.hit.some(function (h) { return !GENERIC.test(h); }); }).sort(function (a, b) { return b.sc - a.sc; }).slice(0, 3);
+        };
+        var worth = function (p) { return (p.freq === "weekly" || p.freq === "monthly") && !!t(p.cost); };
+        var freqLabel = function (f) { var o = FREQ.filter(function (x) { return x[0] === f; })[0]; return o ? o[1] : ""; };
+        var dot = function (x) { x = t(x); return !x ? "" : /[.!?]$/.test(x) ? x : x + "."; };
+        var cardText = function (p) {
+          var w = whyLabel().filter(function (x) { return x !== "None yet"; });
+          return [dot(p.prob), t(p.who) ? "Who has it: " + dot(p.who) : "", t(p.how) ? "Today: " + dot(p.how) : "", t(p.cost) ? "Cost: " + dot(p.cost) : "", p.freq ? "Happens " + freqLabel(p.freq).toLowerCase() + "." : "", w.length ? "Why now: " + dot(w.join(", ")) : "", trendLine(p), p.crush ? "Business crush check: " + dot(crushText(p)) : "", pitLine()].filter(Boolean).join(" ");
+        };
+        var trendLine = function (p) {
+          var tr = trendsFor(p);
+          return tr.length ? "Trends behind it: " + dot(tr.map(function (r) { var c = crossLabel(r.cross); return (t(r.trend) || cut(r.exists, 60)) + (c ? " (" + c.toLowerCase() + ")" : ""); }).join("; ")) : "";
+        };
+        var pitLine = function () {
+          var open = PITS.filter(function (x) { return !st.pits[x[0]]; }).map(function (x) { return x[1].toLowerCase(); });
+          return open.length ? "Pitfalls to check: " + dot(open.join(", ")) : "Pitfalls checked: too early, no moat, too broad, skipping customers.";
+        };
+
+        var views = {
+          1: function () {
+            return head(1, "Start from work you know. Short notes are enough.") +
+              '<div class="x-form">' +
+              field("fp-ind", "Industries you've worked in", st.exp.ind, { k: "exp.ind", h: "With years, if you like: \"Hospital billing, 6 years\"." }) +
+              field("fp-roles", "Roles you've held", st.exp.roles, { k: "exp.roles" }) +
+              field("fp-flows", "Workflows or processes you've run", st.exp.flows, { k: "exp.flows", area: true, h: "Scheduling, intake, billing, inspections, ordering, handoffs." }) +
+              '<div class="links x-noprint"><button type="button" class="btn" id="fp-reset">Start over</button></div></div>' + nav(1);
+          },
+          2: function () {
+            var boxes = st.probs.map(function (p, k) {
+              var id = "fp-p" + k + "-";
+              return '<div class="x-fp-prob" role="group" aria-labelledby="' + id + 'h"><h3 id="' + id + 'h">Problem ' + (k + 1) + "</h3>" +
+                field(id + "prob", "The problem, in a sentence", p.prob, { k: "p." + k + ".prob", area: true }) +
+                '<div class="x-fp-grid">' +
+                field(id + "who", "Who has it (role)", p.who, { k: "p." + k + ".who" }) +
+                field(id + "how", "How they handle it today", p.how, { k: "p." + k + ".how" }) +
+                field(id + "cost", "What it costs them", p.cost, { k: "p." + k + ".cost", h: "Time, money or risk." }) +
+                '<div class="x-field"><label for="' + id + 'freq">How often it happens</label><small>Weekly, monthly or rarely.</small><select class="x-in" id="' + id + 'freq" data-fp="p.' + k + '.freq"><option value="">Choose…</option>' + FREQ.map(function (f) { return '<option value="' + f[0] + '"' + (p.freq === f[0] ? " selected" : "") + ">" + f[1] + "</option>"; }).join("") + "</select></div>" +
+                "</div></div>";
+            }).join("");
+            return head(2, "Up to three. Facts from real weeks, not guesses.") +
+              (st.src === "research" ? '<div class="aside" style="margin-bottom:20px"><p>Pulled from your file. A paper shows a problem exists. Talking to 5 people who have it shows whether they\'d pay to fix it.</p></div>' : "") +
+              '<div class="prose" style="margin-bottom:20px"><p>What did people complain about every week? What lived in a spreadsheet or on paper? What did someone get hired to do by hand? What kept breaking?</p></div>' +
+              '<div class="aside x-fp-look"><h3>Where to look</h3><p class="x-hint">Kevin Ryan\'s problem spotters</p><ul>' + LOOK.map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul></div>" +
+              '<div class="x-form">' + boxes + (st.probs.length < 3 ? '<div class="links x-noprint"><button type="button" class="btn" id="fp-add">Add another problem</button></div>' : "") + "</div>" + nav(2);
+          },
+          3: function () {
+            var rows = st.trends.map(function (r, k) {
+              var id = "fp-t" + k + "-";
+              r = r || {};
+              return '<div class="x-fp-prob x-fp-trow" role="group" aria-labelledby="' + id + 'h"><div class="x-fp-trow__head"><h3 id="' + id + 'h">Trend ' + (k + 1) + "</h3>" +
+                (st.trends.length > 1 ? '<button type="button" class="btn x-noprint" data-fp-trm="' + k + '" aria-label="Remove trend ' + (k + 1) + '">Remove</button>' : "") + "</div>" +
+                field(id + "trend", "Trend you believe will last 10 years", r.trend, { k: "t." + k + ".trend", ph: "Gig work, automation in restaurants, healthy eating, nuclear energy" }) +
+                field(id + "exists", "What will exist that doesn't exist today?", r.exists, { k: "t." + k + ".exists", area: true }) +
+                field(id + "second", "Second-order: who supplies it, what supports it, and how does behavior change?", r.second, { k: "t." + k + ".second", area: true, h: "Don't stop at the winner. When Shopify grows, think about who supplies those stores and what new needs their owners have. When gig work grows, who handles their payroll taxes and insurance?" }) +
+                field(id + "cost", "Cost curve: what cost is falling, and when does it cross what people will pay?", r.cost, { k: "t." + k + ".cost", area: true, h: "In 2003 DoubleClick saw video serving costs falling as ad rates rose. They didn't build it. YouTube did, two years later." }) +
+                '<div class="x-field"><label for="' + id + 'cross">Crossed yet?</label><select class="x-in" id="' + id + 'cross" data-fp="t.' + k + '.cross"><option value="">Choose…</option>' + CROSS.map(function (c) { return '<option value="' + c[0] + '"' + (r.cross === c[0] ? " selected" : "") + ">" + c[1] + "</option>"; }).join("") + "</select></div>" +
+                "</div>";
+            }).join("");
+            return head(3, "Bet on trends that will still be true in 10 years. An important company takes about a decade to build, so a trend that's hyped today and done in two years is too late.") +
+              '<p class="x-hint" style="margin-bottom:20px;max-width:720px">Kevin Ryan lists 20 trends he believes will last 10 years, then asks what each one makes possible.</p>' +
+              '<div class="x-form">' + rows + (st.trends.length < TMAX ? '<div class="links x-noprint"><button type="button" class="btn" id="fp-tadd">Add a trend</button></div>' : '<p class="x-hint">That\'s 20, Ryan\'s full list.</p>') + "</div>" + nav(3);
+          },
+          4: function () {
+            return head(4, "What changed that makes these easier to solve now? Pick any that apply.") +
+              '<div class="x-form"><fieldset class="x-fp-opts"><legend>Why now</legend>' +
+              WHY.map(function (w) { return '<label><input type="checkbox" data-fp-why="' + w[0] + '"' + (st.why.indexOf(w[0]) > -1 ? " checked" : "") + " />" + e(w[1]) + "</label>"; }).join("") +
+              "</fieldset></div>" + nav(4);
+          },
+          5: function () {
+            var ps = st.probs.filter(filled);
+            var why = whyLabel();
+            if (!ps.length) return head(5, "One idea card per problem.") + '<p class="x-hint">Add at least one problem in step 2 to see its idea card.</p>' + pitsCard() + nav(5);
+            var cards = ps.map(function (p) {
+              var ok = worth(p), m = themes(p), k = st.probs.indexOf(p), tr = trendsFor(p), cd = crushDay(p);
+              return "<div>" +
+                '<span class="chip' + (ok ? " chip--solid" : "") + '">' + (ok ? "Worth testing" : "An inconvenience for now") + "</span>" +
+                "<h3>" + e(t(p.prob) || "Problem " + (k + 1)) + "</h3>" +
+                "<ul>" +
+                "<li><small>Who</small>" + e(t(p.who) || "Not said yet") + "</li>" +
+                "<li><small>Today's workaround</small>" + e(t(p.how) || "Not said yet") + "</li>" +
+                "<li><small>What it costs</small>" + e(t(p.cost) || "Not said yet") + "</li>" +
+                "<li><small>How often</small>" + e(freqLabel(p.freq) || "Not said yet") + "</li>" +
+                "<li><small>Why now</small>" + e(why.length ? why.join(", ") : "Not said yet") + "</li>" +
+                "</ul>" +
+                (ok ? "" : '<p class="x-hint">' + (!t(p.cost) ? "Add what it costs to see if it's worth testing." : "Rare problems are hard to sell. Watch whether it comes up more often.") + "</p>") +
+                "<h4>Related investor themes (overlap, not endorsement)</h4>" +
+                (m.length ? "<ul>" + m.map(function (x) { return '<li><a class="link" href="' + e(x.t.url) + '" target="_blank" rel="noopener">' + e(x.t.title) + "</a><small>" + e(x.t.src) + "</small></li>"; }).join("") + "</ul>"
+                  : '<p class="x-hint">No close theme match; that can be fine. Plenty of good businesses aren\'t on anyone\'s list.</p>') +
+                (tr.length ? "<h4>Trends behind it</h4><ul>" + tr.map(function (r) { var c = crossLabel(r.cross); return "<li>" + e(t(r.trend) || cut(r.exists, 80)) + (c ? "<small>" + e(c) + "</small>" : "") + "</li>"; }).join("") + "</ul>" : "") +
+                '<div class="x-fp-crush"><h4>Business crush check</h4>' +
+                '<p class="x-hint">Kevin Ryan\'s test: if an idea sticks with you for two weeks and keeps growing, with new features, people and uses, it\'s worth pursuing.</p>' +
+                '<div class="x-fp-crush__row">' + (cd ? '<span class="chip' + (cd > 14 ? " chip--solid" : "") + '">' + e(cd > 14 ? "Two weeks in" : "Day " + cd + " of 14") + "</span>" +
+                  '<button type="button" class="btn" data-fp-crush="' + k + '" aria-pressed="true">Stop tracking</button>'
+                  : '<button type="button" class="btn" data-fp-crush="' + k + '" aria-pressed="false">Still thinking about it?</button>') + "</div>" +
+                (cd > 14 ? "<p>" + e(crushText(p)) + "</p>" : cd ? '<p class="x-hint">Marked ' + e(new Date(Date.parse(p.crush)).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + ". Come back as it grows.</p>" : "") +
+                "</div>" +
+                "<p><strong>Next step:</strong> Talk to 5 people who have this problem about the last time it happened. Don't pitch.</p>" +
+                '<button type="button" class="btn" data-fp-check="' + k + '">Check this idea</button>' +
+                "</div>";
+            }).join("");
+            return head(5, "One idea card per problem. Frequent problems with a stated cost are worth testing first.") + '<div class="cards x-fp-res">' + cards + "</div>" + pitsCard() + nav(5);
+          }
+        };
+        var pitsCard = function () {
+          var far = farOut();
+          return '<div class="x-fp-pits" role="group" aria-labelledby="fp-pits-h"><h3 id="fp-pits-h">Common pitfalls</h3><p class="x-hint">Check each one off once you\'ve thought it through.</p><ul>' +
+            PITS.map(function (x) {
+              var gap = x[0] === "early" && far;
+              return '<li><label class="x-fp-pit"><input type="checkbox" data-fp-pit="' + x[0] + '"' + (st.pits[x[0]] ? " checked" : "") + " /><span><strong>" + e(x[1]) + "</strong>" +
+                (gap ? '<span class="chip chip--solid">Gap: a trend is further out</span>' : "") +
+                e(x[2]) + (x[3] ? " <q>" + e(x[3]) + "</q>" : "") + "</span></label></li>";
+            }).join("") + "</ul></div>";
+        };
+
+        var render = function () { if (!views[st.step]) st.step = 1; stepper(); $("fp-stage").innerHTML = views[st.step](); };
+        // Steps switch in place: hold the stepper where it was on screen.
+        var go = function (i, fromNav) {
+          var sp = $("fp-stepper"), y0 = sp ? sp.getBoundingClientRect().top : 0;
+          st.step = Math.max(1, Math.min(NS, +i || 1)); save(); render();
+          if (!sp) return;
+          var d = sp.getBoundingClientRect().top - y0;
+          if (Math.abs(d) > 0.5) window.scrollBy({ top: d, left: 0, behavior: "instant" });
+          if (fromNav) {
+            var r = sp.getBoundingClientRect();
+            if (r.top < 0 || r.bottom > window.innerHeight) sp.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
+          }
+        };
+
+        var setMode = function (m) {
+          [].slice.call(document.querySelectorAll("#check [data-fp-mode]")).forEach(function (el) { el.hidden = el.getAttribute("data-fp-mode") !== m; });
+          $("x-mode-find").setAttribute("aria-pressed", m === "find" ? "true" : "false");
+          $("x-mode-check").setAttribute("aria-pressed", m === "check" ? "true" : "false");
+          var inv = document.querySelector('#check [data-mode="investors"]');
+          if (inv) inv.setAttribute("aria-pressed", m === "investors" ? "true" : "false");
+          if (m === "find") render();
+        };
+
+        // ---- Start options: read experience or research and fill the steps. Keyword rules only.
+        var cl = function (x) { return String(x || "").replace(/\s+/g, " ").trim(); };
+        var cut = function (x, n) { x = cl(x); return x.length > n ? x.slice(0, n - 1).replace(/\s\S*$/, "") + "…" : x; };
+        var nWords = function (x) { return cl(x).split(" ").filter(Boolean).length; };
+        var uniq = function (a) { var seen = {}; return a.filter(function (x) { var k = x.toLowerCase(); if (!x || seen[k]) return false; seen[k] = 1; return true; }); };
+        var DATES = /\b(?:19|20)\d{2}\s*(?:-|–|—|to)\s*(?:(?:19|20)\d{2}|present|current|now|today)\b/i;
+        var TITLE = /\b(manager|director|analyst|engineer|lead|specialist|coordinator|supervisor|technician|assistant|officer|consultant|administrator|associate|intern|nurse|president|founder|owner|foreman|superintendent|dispatcher|scheduler|planner|clerk|representative|accountant|mechanic|operator|inspector|teacher|therapist)\b/i;
+        var HEADS = /^(?:work |professional |relevant )?(experience|employment(?: history)?|work history|education|skills|summary|certifications?)\s*:?$/i;
+        var VERBS = /\b(scheduled|scheduling|managed|managing|ran|running|processed|processing|coordinated|coordinating|inspected|inspecting|billed|billing|ordered|ordering|reviewed|reviewing|handled|handling|reconciled|reconciling|dispatched|dispatching|onboarded|onboarding)\b/i;
+        var CUE = /\b(manual(?:ly)?|by hand|spreadsheets?|paper(?:work)?|delays?|delayed|backlogs?|shortages?|errors?|rework|wasted?|wastes|downtime|compliance|burnout|turnover|costs?|costly|hours|lost|fail(?:s|ed|ing|ures?)?|risks?)\b/gi;
+        var MEASURE = /\$\s?\d|\d\s?(?:%|percent\b)|\bhours\b/i;
+        var COST = /\$\s?\d[\d,.]*(?:\s*(?:[kmb]n?\b|million|billion|thousand))?(?:\s+(?:a|per|each|every|in)\s+(?:year|month|week|day|shift|hour|patient|employee|worker|farm|unit|visit))?|\d[\d,.]*\s?(?:%|percent)(?:\s+of\s+(?:[a-z-]+\s)?[a-z-]+)?|\d[\d,.]*(?:\s*(?:-|–|to)\s*\d[\d,.]*)?\s+(?:hours?|hrs)(?:\s+(?:a|per|each|every)\s+(?:day|week|month|year|shift))?|\b(?:many |countless |several )?hours\s+(?:a|per|each|every)\s+(?:day|week|month|year|shift)\b/i;
+        var ROLES = "nurses|technicians|techs|supervisors|farmers|ranchers|growers|clinicians|physicians|doctors|pharmacists|teachers|educators|drivers|truckers|inspectors|operators|managers|owners|dispatchers|schedulers|mechanics|electricians|plumbers|contractors|accountants|bookkeepers|clerks|caregivers|aides|engineers|analysts|administrators|coordinators|adjusters|paralegals|attorneys|lawyers|therapists|dentists|veterinarians|planners|buyers|foremen|superintendents|crews|workers|employees|staff";
+        var WHO = new RegExp("\\b(?:([A-Za-z][A-Za-z-]+)\\s+)?(" + ROLES + ")\\b", "gi");
+        var GENERIC_WHO = /^(crews|workers|employees|staff)$/i;
+        var STOPW = /^(the|a|an|of|and|or|for|many|most|our|their|its|to|by|with|some|all|these|those|that|which|who|other|more|less|among|between|from|in|on|at|as|are|is|were|was|have|has|than|such|new|said|says|how|when|where|what|while|every|each|both|few|two|three|four|five|six|ten|percent|of)$/i;
+        var INDUSTRIES = [
+          ["Healthcare", /\b(health ?care|hospitals?|clinics?|clinical|medical|nursing)\b/i],
+          ["Manufacturing", /\b(manufactur\w*|factory|factories|production line|plant floor)\b/i],
+          ["Logistics", /\b(logistics|warehous\w*|supply chain|freight|shipping|distribution center)\b/i],
+          ["Transportation", /\b(transportation|trucking|rail|railroad|railway|transit|fleet)\b/i],
+          ["Construction", /\b(construction|general contractor|building trades)\b/i],
+          ["Agriculture", /\b(agricultur\w*|farms?|farming|ranch\w*|crops?|livestock|agronom\w*)\b/i],
+          ["Food service and hospitality", /\b(restaurants?|food service|hospitality|hotels?|catering)\b/i],
+          ["Retail", /\b(retail|e-?commerce|grocery)\b/i],
+          ["Education", /\b(education|schools?|universit\w*|colleges?|k-12|classrooms?)\b/i],
+          ["Finance", /\b(finance|financial services|banking|banks?|accounting|credit union)\b/i],
+          ["Insurance", /\b(insurance|underwriting)\b/i],
+          ["Real estate", /\b(real estate|property management|mortgages?)\b/i],
+          ["Energy and utilities", /\b(energy|utilit(?:y|ies)|oil and gas|solar|electric grid)\b/i],
+          ["Government", /\b(government|public sector|municipal)\b/i],
+          ["Nonprofit", /\b(non-?profits?|charit\w*)\b/i],
+          ["Legal", /\b(law firms?|legal services|paralegal)\b/i],
+          ["Software", /\b(software|saas)\b/i],
+          ["Pharma and biotech", /\b(pharma\w*|biotech\w*|life sciences)\b/i],
+          ["Automotive", /\b(automotive|auto repair|dealerships?)\b/i],
+          ["Aerospace and defense", /\b(aerospace|aviation|defen[cs]e)\b/i]
+        ];
+        var WHY_RULES = [
+          ["ai", /\bAI\b|artificial intelligence|machine learning|\bLLMs?\b|large language models?/],
+          ["sensors", /\b(sensors?|IoT|internet of things|hardware costs?|cheaper hardware|hardware prices?)\b/i],
+          ["rule", /\b(regulations?|regulatory|rules?|laws?|mandates?|mandated)\b/i],
+          ["labor", /\b(labou?r|staff(?:ing)?|workers?|workforce)\s+shortages?\b|\bshortages?\s+of\s+(?:\w+\s)?(?:workers|staff|labou?r|nurses|drivers|technicians|teachers)\b/i],
+          ["platform", /\b(platforms?|marketplaces?)\b[^.]{0,40}\b(shift\w*|chang\w*|mov\w*|grow\w*|ris\w*)\b|\b(shift\w*|mov\w*)\b[^.]{0,30}\b(platforms?|marketplaces?)\b/i]
+        ];
+        var splitS = function (x) { return cl(x).split(/(?<=[.!?])\s+(?=[A-Z0-9"“($])|\s+[•▪●]\s+/); };
+        var noBullet = function (x) { return cl(String(x || "").replace(/^[•\-–*·▪●]\s*/, "")); };
+        var isTitleLine = function (l) { var n = nWords(l); return n <= 12 && l.length <= 100 && TITLE.test(l) && !VERBS.test(l) && (!/[.!?]$/.test(l) || n <= 8); };
+        var isResume = function (lines) {
+          var d = 0, h = 0, ti = 0;
+          lines.forEach(function (l) { if (DATES.test(l)) d++; if (HEADS.test(l)) h++; if (isTitleLine(l)) ti++; });
+          return Math.min(d, 3) * 2 + Math.min(h, 3) * 2 + Math.min(ti, 3) >= 4;
+        };
+        var whoOf = function (s) {
+          var m, all = []; WHO.lastIndex = 0;
+          while ((m = WHO.exec(s))) all.push((m[1] && !STOPW.test(m[1]) ? m[1] + " " : "") + m[2]);
+          var pick = all.filter(function (w) { return !GENERIC_WHO.test(w.split(" ").pop()); })[0] || all[0] || "";
+          return pick ? pick.charAt(0).toUpperCase() + pick.slice(1) : "";
+        };
+        var pickProblems = function (sents, needCue) {
+          return uniq(sents).map(function (s, i) {
+            CUE.lastIndex = 0; var cues = (s.match(CUE) || []).length, meas = MEASURE.test(s);
+            return { s: s, i: i, cues: cues, ok: needCue ? cues > 0 : cues > 0 || meas, sc: cues * 2 + (meas ? 2 : 0) + (cues && /\d/.test(s) ? 4 : 0) };
+          }).filter(function (x) { var n = nWords(x.s); return x.ok && n >= 6 && n <= 90; })
+            .sort(function (a, b) { return b.sc - a.sc || a.i - b.i; }).slice(0, 3)
+            .map(function (x) { var c = x.s.match(COST); return { prob: cut(x.s, 240), who: whoOf(x.s), cost: c ? cl(c[0]) : "" }; })
+            .map(function (p) { if (!p.who) delete p.who; if (!p.cost) delete p.cost; return p; });
+        };
+        var analyze = function (segs, from) {
+          var lines = [].concat.apply([], segs).map(noBullet).filter(Boolean);
+          var resume = from === "text" || isResume(lines);
+          var all = lines.join(" ");
+          var sents = (resume ? [].concat.apply([], lines.map(splitS))
+            : [].concat.apply([], segs.map(function (s) { return splitS(s.join(" ").replace(/(\w)-\s+([a-z])/g, "$1$2")); }))).map(noBullet).filter(Boolean);
+          var r = { resume: resume, ind: [], roles: [], flows: [], probs: [], why: [] };
+          if (resume) {
+            var work = lines.filter(function (l) { return !HEADS.test(l) && !/\b(bachelor|master|mba|bsn|ph\.?d|degree|diploma|university|college|b\.s\.|b\.a\.)\b/i.test(l); }).join(" ");
+            r.ind = INDUSTRIES.filter(function (x) { return x[1].test(work); }).map(function (x) { return x[0]; }).slice(0, 4);
+            var said = sents.map(function (s) { var m = s.match(/\b(?:I was|I'm|I am|worked as|work as|served as)\s+(?:an?\s+|the\s+)?([^,.;]{3,60})/i); return m && TITLE.test(m[1]) ? cl(m[1].replace(/\s+(?:for|since|from)\s+\d.*$/i, "")) : ""; });
+            r.roles = uniq(lines.filter(isTitleLine).map(function (l) { return cut(l, 100); }).concat(said)).slice(0, 5);
+            r.flows = uniq(sents.filter(function (s) { return VERBS.test(s) && r.roles.indexOf(s) < 0; }).map(function (s) { return cut(s, 240); })).slice(0, 6);
+          }
+          r.probs = pickProblems(sents, resume);
+          r.why = WHY_RULES.filter(function (w) { return w[1].test(all); }).map(function (w) { return w[0]; });
+          return r;
+        };
+        var addList = function (cur, items, sep) {
+          var have = cl(cur), low = have.toLowerCase();
+          var add = items.filter(function (x) { return low.indexOf(x.toLowerCase()) < 0; });
+          return !add.length ? cur : (have ? String(cur).replace(/\s+$/, "") + sep : "") + add.join(sep);
+        };
+        var say = function (msg, ok) { var m = $("fp-msg"); if (!m) return; m.textContent = msg || ""; m.hidden = !msg; if (ok) m.setAttribute("data-ok", ""); else m.removeAttribute("data-ok"); };
+        var plural = function (n, one, many) { return n + " " + (n === 1 ? one : many); };
+        var apply = function (r) {
+          if (!r.ind.length && !r.roles.length && !r.flows.length && !r.probs.length) { say("Couldn't spot clear problems. Try the Describe box or fill in the steps."); return; }
+          st.exp.ind = addList(st.exp.ind, r.ind, ", ");
+          st.exp.roles = addList(st.exp.roles, r.roles, "; ");
+          st.exp.flows = addList(st.exp.flows, r.flows, "\n");
+          r.probs.forEach(function (p) {
+            if (st.probs.some(function (q) { return t(q && q.prob) === p.prob; })) return;
+            var slot = -1;
+            for (var i = 0; i < st.probs.length; i++) if (!filled(st.probs[i])) { slot = i; break; }
+            if (slot < 0) { if (st.probs.length >= 3) return; st.probs.push({}); slot = st.probs.length - 1; }
+            st.probs[slot] = Object.assign(st.probs[slot] || {}, p);
+          });
+          if (r.why.length) st.why = st.why.filter(function (y) { return y !== "none"; }).concat(r.why.filter(function (w) { return st.why.indexOf(w) < 0; }));
+          st.src = r.resume ? st.src || "experience" : "research";
+          st.step = r.resume ? 1 : 2;
+          save(); render();
+          var parts = [];
+          if (r.ind.length) parts.push(plural(r.ind.length, "industry", "industries"));
+          if (r.roles.length) parts.push(plural(r.roles.length, "role", "roles"));
+          if (r.flows.length) parts.push(plural(r.flows.length, "workflow", "workflows"));
+          if (r.probs.length) parts.push(plural(r.probs.length, "possible problem", "possible problems"));
+          var list = parts.length > 1 ? parts.slice(0, -1).join(", ") + " and " + parts[parts.length - 1] : parts[0];
+          say("Found " + list + ". " + (r.probs.length ? "Check them, add how often each happens and what people do today." : "Check them, then add problems you've seen in step 2."), true);
+          var m = $("fp-msg"); if (m) m.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+
+        var check = $("check");
+        check.addEventListener("input", function (ev) {
+          var x = ev.target, k = x.getAttribute("data-fp");
+          if (k) {
+            var parts = k.split(".");
+            if (parts[0] === "exp") st.exp[parts[1]] = x.value;
+            else if (parts[0] === "t") { st.trends[+parts[1]] = st.trends[+parts[1]] || {}; st.trends[+parts[1]][parts[2]] = x.value; }
+            else { st.probs[+parts[1]] = st.probs[+parts[1]] || {}; st.probs[+parts[1]][parts[2]] = x.value; }
+            save();
+          }
+        });
+        check.addEventListener("change", function (ev) {
+          var x = ev.target, w = x.getAttribute("data-fp-why"), pit = x.getAttribute("data-fp-pit");
+          if (pit) { st.pits[pit] = !!x.checked; save(); return; }
+          if (!w) return;
+          if (x.checked) st.why = w === "none" ? ["none"] : st.why.filter(function (y) { return y !== "none" && y !== w; }).concat([w]);
+          else st.why = st.why.filter(function (y) { return y !== w; });
+          save();
+          [].slice.call(check.querySelectorAll("[data-fp-why]")).forEach(function (b) { b.checked = st.why.indexOf(b.getAttribute("data-fp-why")) > -1; });
+        });
+        check.addEventListener("click", function (ev) {
+          var b = ev.target.closest("button"); if (!b) return;
+          if (b.hasAttribute("data-start-mode")) {
+            var sm = b.getAttribute("data-start-mode");
+            var tab = sm === "find" ? $("x-mode-find") : sm === "check" ? $("x-mode-check") : sm === "diligence" ? check.querySelector('.x-fp-switch [data-mode="diligence"]') : check.querySelector('.x-fp-switch [data-mode="investors"]');
+            if (tab) tab.click();
+            return;
+          }
+          if (b.id === "x-mode-find") setMode("find");
+          else if (b.id === "x-mode-check") setMode("check");
+          else if (b.getAttribute("data-mode") === "investors") setMode("investors");
+          else if (b.hasAttribute("data-fp-go")) go(b.getAttribute("data-fp-go"), !!b.closest(".x-wiznav"));
+          else if (b.id === "fp-add") { if (st.probs.length < 3) { st.probs.push({}); save(); render(); var f = $("fp-p" + (st.probs.length - 1) + "-prob"); if (f) f.focus(); } }
+          else if (b.id === "fp-tadd") { if (st.trends.length < TMAX) { st.trends.push({}); save(); render(); var tf = $("fp-t" + (st.trends.length - 1) + "-trend"); if (tf) tf.focus(); } }
+          else if (b.hasAttribute("data-fp-trm")) {
+            var ti = +b.getAttribute("data-fp-trm");
+            if (st.trends.length > 1 && (!tFilled(st.trends[ti]) || confirm("Remove this trend?"))) {
+              st.trends.splice(ti, 1); save(); render();
+              var nf = $("fp-t" + Math.min(ti, st.trends.length - 1) + "-trend"); if (nf) nf.focus();
+            }
+          }
+          else if (b.hasAttribute("data-fp-crush")) {
+            var ci = +b.getAttribute("data-fp-crush"), cp = st.probs[ci];
+            if (cp) { if (cp.crush) delete cp.crush; else cp.crush = new Date().toISOString(); save(); render(); var nb = check.querySelector('[data-fp-crush="' + ci + '"]'); if (nb) nb.focus(); }
+          }
+          else if (b.id === "fp-reset") { if (confirm("Clear every Find a problem answer?")) { st = blank(); save(); render(); } }
+          else if (b.id === "fp-text-go") {
+            var txt = ($("fp-text") || {}).value || "";
+            if (!cl(txt)) { say("Write a few sentences about your work first."); return; }
+            apply(analyze(txt.split(/\n/).map(cl).filter(Boolean).map(function (l) { return [l]; }), "text"));
+          }
+          else if (b.id === "fp-file-go") {
+            var inp = $("fp-file"), fl = inp && inp.files && inp.files[0];
+            var PASTE = "Paste the text into Describe your experience instead.";
+            if (!fl) { say("Choose a file first."); return; }
+            if (!window.__nsimp) { say("Couldn't read this file. " + PASTE); return; }
+            say("Reading " + fl.name + "…", true);
+            b.disabled = true;
+            window.__nsimp.readFile(fl).then(function (segs) { apply(analyze(segs, "file")); })
+              .catch(function (x) {
+                say(x && x.tooBig ? "That file is over 25 MB. Try a smaller export, or paste the text into Describe your experience instead."
+                  : x && x.badType ? "Use a .pdf, .pptx, .txt or .md file."
+                  : x && x.images ? "This file is saved as images, so there's no text to read. " + PASTE
+                  : "Couldn't read this file. " + PASTE);
+                if (window.console) console.warn("Find a problem import:", x);
+              })
+              .then(function () { b.disabled = false; });
+          }
+          else if (b.hasAttribute("data-fp-check")) {
+            var p = st.probs[+b.getAttribute("data-fp-check")];
+            if (!p || !window.__nsic || !window.__nsic.prefill) return;
+            setMode("check");
+            window.__nsic.prefill(cardText(p));
+          }
+        });
+        // A mode switch swaps content in place: hold the tab bar where it was on screen.
+        check.addEventListener("click", function (ev) {
+          var b = ev.target.closest(".x-fp-switch button, [data-start-mode], [data-fp-check], [data-inv-idea]");
+          var sw = check.querySelector(".x-fp-switch");
+          if (!b || !sw || check.__nsHold) return;
+          check.__nsHold = true;
+          var y0 = sw.getBoundingClientRect().top;
+          requestAnimationFrame(function () {
+            check.__nsHold = false;
+            var d = sw.getBoundingClientRect().top - y0;
+            if (Math.abs(d) > 0.5) window.scrollBy({ top: d, left: 0, behavior: "instant" });
+          });
+        }, true);
+        // Keep the "Start here" path in step with the mode tabs.
+        var markPath = function () {
+          var on = check.querySelector('.x-fp-switch button[aria-pressed="true"]');
+          var m = !on ? "" : on.id === "x-mode-find" ? "find" : on.id === "x-mode-check" ? "check" : on.getAttribute("data-mode") === "diligence" ? "diligence" : "investors";
+          [].slice.call(check.querySelectorAll("[data-start-mode]")).forEach(function (p) { if (p.getAttribute("data-start-mode") === m) p.setAttribute("aria-current", "true"); else p.removeAttribute("aria-current"); });
+          var fd = $("fp-fine-default"); if (fd) fd.hidden = m === "find" || m === "diligence";
+        };
+        check.addEventListener("click", function () { setTimeout(markPath, 0); });
+        markPath();
+      })();
+    </script>
+    <script src="investor-find.js"></script>
+    <script src="programs-find.js"></script>
+    <script src="diligence.js"></script>
+    <script>
+      (function () {
+        var stops = ["s1", "s7", "s2", "s3", "s4", "s6", "s10"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+        var links = [].slice.call(document.querySelectorAll(".x-jump a"));
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var lastIdx = -1, lastAt = 0;
+
+        function top(el) { return el.getBoundingClientRect().top + window.scrollY; }
+        function current() {
+          var y = window.scrollY + 48, i = 0;
+          stops.forEach(function (s, k) { if (top(s) - (k ? 0 : 24) <= y) i = k; });
+          return i;
+        }
+        function goTo(i) {
+          i = Math.max(0, Math.min(stops.length - 1, i));
+          lastIdx = i; lastAt = Date.now();
+          var y = i === 0 ? 0 : top(stops[i]);
+          window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
+          mark(i);
+        }
+        function mark(i) { links.forEach(function (a, k) { if (k === i) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }); }
+
+        function typing(t) {
+          if (!t || t === document.body) return false;
+          if (t.isContentEditable) return true;
+          return /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName);
+        }
+        document.addEventListener("keydown", function (e) {
+          if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+          var t = e.target;
+          if (typing(t)) return;
+          var k = e.key, dir = 0;
+          if (k === " " || k === "Spacebar") {
+            if (t.closest && t.closest("button, a, summary")) return;
+            dir = e.shiftKey ? -1 : 1;
+          } else if (k === "PageDown" || k === "ArrowRight" || k === "ArrowDown") dir = 1;
+          else if (k === "PageUp" || k === "ArrowLeft" || k === "ArrowUp") dir = -1;
+          if (!dir) return;
+          var more = document.getElementById("more");
+          var inMore = more && more.getBoundingClientRect().top < window.innerHeight * 0.5;
+          if (inMore && k !== "ArrowLeft") return;
+          e.preventDefault();
+          var i = Date.now() - lastAt < 700 && lastIdx > -1 ? lastIdx : current();
+          if (inMore) return goTo(stops.length - 1);
+          if (dir < 0 && Date.now() - lastAt >= 700 && i > 0 && stops[i].getBoundingClientRect().top < -48) return goTo(i);
+          goTo(i + dir);
+        });
+
+        var ticking = false;
+        window.addEventListener("scroll", function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () { ticking = false; mark(current()); });
+        }, { passive: true });
+        mark(current());
+
+        // Presentation mode: large text for a projector. Starts in Standard; ?present=1 or #present starts large.
+        var pbtn = document.getElementById("x-present");
+        var root = document.documentElement;
+        function setPresent(on, keepPlace) {
+          var i = current(), off = stops[i] ? stops[i].getBoundingClientRect().top : 0;
+          var atStop = keepPlace && Math.abs(off) < 64;
+          root.classList.toggle("present", on);
+          if (pbtn) {
+            pbtn.setAttribute("aria-pressed", on ? "true" : "false");
+            pbtn.querySelector("span").textContent = on ? "Standard text" : "Large text";
+          }
+          if (atStop) window.scrollTo({ top: i === 0 ? 0 : top(stops[i]), behavior: "auto" });
+          mark(current());
+        }
+        if (pbtn) pbtn.addEventListener("click", function () { setPresent(!root.classList.contains("present"), true); });
+        document.addEventListener("keydown", function (e) {
+          if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || typing(e.target)) return;
+          if (e.key !== "p" && e.key !== "P") return;
+          e.preventDefault();
+          setPresent(!root.classList.contains("present"), true);
+        });
+        if (/[?&]present=(1|true|on)\b/.test(location.search) || /^#present$/.test(location.hash)) setPresent(true, false);
+
+        // Founder interest form → mailto
+        var form = document.getElementById("interest");
+        var send = document.getElementById("interest-send");
+        function compose() {
+          var f = form.elements;
+          var times = Array.prototype.slice.call(form.querySelectorAll("input[name=times]:checked")).map(function (i) { return i.value; });
+          var body = [
+            "Name: " + f.name.value,
+            "Email: " + f.email.value,
+            "City: " + f.city.value,
+            "What I know better than most people: " + f.know.value,
+            "Where I am on the path: " + (f.stage.value || "Not sure yet"),
+            "Best times: " + (times.join(", ") || "Either")
+          ].join("\n");
+          send.href = "mailto:?subject=" + encodeURIComponent("Night Shift: Founder interest") + "&body=" + encodeURIComponent(body);
+        }
+        if (form && send) {
+          form.addEventListener("input", compose);
+          form.addEventListener("change", compose);
+          form.addEventListener("submit", function (e) { e.preventDefault(); compose(); send.click(); });
+          compose();
+        }
+
+        // Load the picked example (idea-check.js does the loading), then show its gaps and next steps.
+        var load = document.getElementById("load-ex");
+        if (load) load.addEventListener("click", function () {
+          var pick = document.getElementById("ex-pick");
+          if (!pick || pick.value === "") return;
+          setTimeout(function () {
+            // Open the scorecard by its position in the step order.
+            var stepper = document.getElementById("stepper");
+            var scIdx = window.__nsic && window.__nsic.steps ? window.__nsic.steps.SC : -1;
+            var scBtn = stepper && scIdx > -1 ? stepper.querySelector('[data-go="' + scIdx + '"]') : null;
+            if (scBtn) scBtn.click();
+          }, 0);
+          setTimeout(function () {
+            var heads = [].slice.call(document.querySelectorAll("#stage h3"));
+            var h = heads.filter(function (x) { return /Open gaps/.test(x.textContent); })[0];
+            var target = h ? h.closest(".pair") || h : document.getElementById("stage");
+            window.scrollTo({ top: top(target) - 24, behavior: reduce ? "auto" : "smooth" });
+          }, 60);
+        });
+      })();
+    </script>
+  </body>
+</html>
