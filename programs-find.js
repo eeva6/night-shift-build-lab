@@ -189,4 +189,140 @@
     else if (btn) btn.setAttribute("aria-pressed", "false");
   });
   paint();
+
+  // ---- Accelerator directory: a separate list from the accelerators-directory.csv data block.
+  // Programs list stays first and is the default; the directory is a second choice under "List".
+  var listsBox = $("prog-lists"), main = $("prog-main"), view = $("acc-view"), accForm = $("acc-form"), accOut = $("acc-out");
+  if (!listsBox || !main || !view || !accForm || !accOut) return;
+  var parseCSV = function (txt) {
+    var rows = [], row = [], f = "", q = false, i, c;
+    for (i = 0; i < txt.length; i++) {
+      c = txt[i];
+      if (q) {
+        if (c === '"') { if (txt[i + 1] === '"') { f += '"'; i++; } else q = false; }
+        else f += c;
+      } else if (c === '"') q = true;
+      else if (c === ",") { row.push(f); f = ""; }
+      else if (c === "\n" || c === "\r") {
+        if (c === "\r" && txt[i + 1] === "\n") i++;
+        row.push(f); rows.push(row); row = []; f = "";
+      } else f += c;
+    }
+    row.push(f); rows.push(row);
+    var head = rows.shift() || [];
+    return rows.filter(function (r) { return r.length === head.length && r.join("").trim(); }).map(function (r) {
+      var o = {}; head.forEach(function (h, j) { o[h.trim()] = (r[j] || "").trim(); }); return o;
+    });
+  };
+  var DIR = null;
+  var dir = function () {
+    if (DIR && DIR.length) return DIR;
+    var blk = $("acc-dir"), txt = blk && blk.textContent ? blk.textContent.trim() : "";
+    var num = function (x) { var n = parseInt(String(x).replace(/[^\d]/g, ""), 10); return isNaN(n) ? null : n; };
+    DIR = txt ? parseCSV(txt).map(function (r, i) { r.inv = num(r.investments); r.ex = num(r.exits); r.i = i; return r; }) : [];
+    return DIR;
+  };
+
+  var AKEY = "nsacc-v1";
+  var as = { list: "programs", q: "", country: "all", ind: "", sort: "inv" };
+  var ASORTS = [["inv", "Investments, most first"], ["inv-asc", "Investments, fewest first"], ["name", "Name A–Z"]];
+  try {
+    var av = JSON.parse(localStorage.getItem(AKEY));
+    if (av && typeof av === "object") {
+      if (av.list === "dir") as.list = "dir";
+      if (typeof av.q === "string") as.q = av.q.slice(0, 80);
+      if (typeof av.country === "string") as.country = av.country;
+      if (typeof av.ind === "string") as.ind = av.ind.slice(0, 80);
+      if (has(ASORTS, av.sort)) as.sort = av.sort;
+    }
+  } catch (x) {}
+  var asave = function () { try { localStorage.setItem(AKEY, JSON.stringify(as)); } catch (x) {} };
+
+  var countries = function () {
+    var n = {};
+    dir().forEach(function (r) { if (r.country) n[r.country] = (n[r.country] || 0) + 1; });
+    return Object.keys(n).sort(function (a, b) { return (b === "United States") - (a === "United States") || a.localeCompare(b); }).map(function (c) { return [c, n[c]]; });
+  };
+  var low = function (x) { return String(x || "").toLowerCase(); };
+  var rows = function () {
+    var q = low(as.q).trim(), ind = low(as.ind).trim();
+    return dir().filter(function (r) {
+      if (as.country !== "all" && r.country !== as.country) return false;
+      if (ind && low(r.industries).indexOf(ind) < 0) return false;
+      if (q && (low(r.name) + " " + low(r.city) + " " + low(r.country) + " " + low(r.industries)).indexOf(q) < 0) return false;
+      return true;
+    }).sort(as.sort === "name"
+      ? function (a, b) { return a.name.localeCompare(b.name, "en", { sensitivity: "base" }) || a.i - b.i; }
+      : function (a, b) {
+        var x = a.inv == null ? -1 : a.inv, y = b.inv == null ? -1 : b.inv;
+        return (as.sort === "inv-asc" ? x - y : y - x) || a.i - b.i;
+      });
+  };
+  var fmt = function (n) { return n == null ? "" : n.toLocaleString("en-US"); };
+  var cell = function (label, html, cls) {
+    var empty = !String(html).replace(/<[^>]*>/g, "").trim();
+    return "<td" + (cls || empty ? ' class="' + [cls, empty ? "is-empty" : ""].filter(Boolean).join(" ") + '"' : "") + (empty ? "" : ' data-label="' + label + '"') + ">" + html + "</td>";
+  };
+  var safeUrl = function (u) { return /^https?:\/\//i.test(u) ? u : ""; };
+  var paintDir = function () {
+    var l = rows(), all = dir().length;
+    if (!all) { accOut.innerHTML = '<p class="x-inv-empty">The directory could not be loaded.</p>'; return; }
+    if (!l.length) { accOut.innerHTML = '<p class="x-inv-empty">No accelerators match. Clear the search or pick All countries.</p>'; return; }
+    accOut.innerHTML = '<div class="x-inv-group"><p class="x-hint">' + l.length + " of " + all + (all === 1 ? " accelerator" : " accelerators") + ".</p>" +
+      '<div class="table-wrap"><table class="x-acc-table"><thead><tr><th scope="col">Name</th><th scope="col">Location</th><th scope="col">Industries</th><th scope="col" class="num">Founded</th><th scope="col" class="num">Investments</th><th scope="col" class="num">Exits</th></tr></thead><tbody>' +
+      l.map(function (r) {
+        var u = safeUrl(r.website);
+        return "<tr><th scope=\"row\">" + (u ? '<a class="link" href="' + e(u) + '" target="_blank" rel="noopener">' + e(r.name) + "</a>" : e(r.name)) + "</th>" +
+          cell("Location", e([r.city, r.country].filter(Boolean).join(", "))) +
+          cell("Industries", e(r.industries), "x-acc-ind") +
+          cell("Founded", e(r.founded), "num") +
+          cell("Investments", fmt(r.inv), "num") +
+          cell("Exits", fmt(r.ex), "num") + "</tr>";
+      }).join("") + "</tbody></table></div></div>";
+  };
+
+  var dirForm = function () {
+    var cs = countries();
+    if (as.country !== "all" && !cs.some(function (c) { return c[0] === as.country; })) as.country = "all";
+    accForm.innerHTML =
+      '<div class="x-acc-fields">' +
+      '<div class="x-field"><label for="acc-q">Search</label><input class="x-in" id="acc-q" type="search" placeholder="Name, city or industry" value="' + e(as.q) + '" /></div>' +
+      '<div class="x-field"><label for="acc-country">Country</label><select class="x-in" id="acc-country"><option value="all">All countries (' + dir().length + ")</option>" +
+      cs.map(function (c) { return '<option value="' + e(c[0]) + '"' + (as.country === c[0] ? " selected" : "") + ">" + e(c[0]) + " (" + c[1] + ")</option>"; }).join("") + "</select></div>" +
+      '<div class="x-field"><label for="acc-ind">Industry</label><input class="x-in" id="acc-ind" type="search" placeholder="e.g. FinTech, HealthTech" value="' + e(as.ind) + '" /></div>' +
+      "</div>" +
+      '<fieldset class="x-inv-opts"><legend>Sort by</legend>' + ASORTS.map(function (s) { return pill("radio", "acc-sort", s[0], s[1], as.sort === s[0]); }).join("") + "</fieldset>";
+  };
+
+  var paintLists = function () {
+    var n = dir().length;
+    listsBox.innerHTML = "<legend>List</legend>" +
+      pill("radio", "prog-list", "programs", "Nebraska and US programs (" + PROGRAMS.length + ")", as.list === "programs") +
+      (n ? pill("radio", "prog-list", "dir", "Accelerator directory (" + n + ")", as.list === "dir") : "");
+    if (!n) as.list = "programs";
+    main.hidden = as.list === "dir";
+    view.hidden = as.list !== "dir";
+    if (as.list === "dir") { if (!accForm.firstChild) dirForm(); paintDir(); }
+  };
+
+  listsBox.addEventListener("change", function (ev) {
+    if (ev.target.name !== "prog-list") return;
+    as.list = ev.target.value === "dir" ? "dir" : "programs";
+    asave(); paintLists();
+  });
+  accForm.addEventListener("input", function (ev) {
+    var t = ev.target;
+    if (t.id === "acc-q") as.q = t.value;
+    else if (t.id === "acc-ind") as.ind = t.value;
+    else return;
+    asave(); paintDir();
+  });
+  accForm.addEventListener("change", function (ev) {
+    var t = ev.target;
+    if (t.id === "acc-country") as.country = t.value;
+    else if (t.name === "acc-sort") as.sort = t.value;
+    else return;
+    asave(); paintDir();
+  });
+  paintLists();
 })();

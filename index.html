@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Night Shift Talk Track</title>
+    <title>Night Shift</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -274,6 +274,14 @@
       .x-pg-only[hidden] { display: none !important; }
       .x-inv-res > .x-pg-closed { background: transparent; box-shadow: inset 0 0 0 1px var(--stroke-secondary); }
       .x-pg-closed h3, .x-pg-muted { color: var(--text-secondary); }
+      .x-pg-lists { margin-bottom: 24px; }
+      #acc-view[hidden], #prog-main[hidden] { display: none; }
+      .x-acc-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+      .x-acc-fields .x-field label { font: var(--type-label); }
+      .x-acc-table td.num, .x-acc-table th.num { text-align: right; }
+      .x-acc-table .x-acc-ind { max-width: 32ch; color: var(--text-secondary); }
+      html.present .x-acc-fields .x-field label { font-size: 28px; }
+      html.present .x-acc-fields .x-in { font-size: 24px; min-height: 56px; }
       /* Founder interest form (restored), scoped so the Idea Check's own .x-form is untouched */
       #interest { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 720px; padding: 22px 24px; border-radius: var(--r-m); background: var(--fill-tertiary); }
       #interest .x-wide { grid-column: 1 / -1; }
@@ -405,9 +413,9 @@
     </style>
   </head>
   <body>
-    <button type="button" class="x-present" id="x-present" aria-pressed="false" title="Presentation mode (P)"><b aria-hidden="true">Aa</b><span>Large text</span></button>
+    <button type="button" class="x-present" id="x-present" aria-pressed="false" title="Large text (P)"><b aria-hidden="true">Aa</b><span>Large text</span></button>
     <div class="x-jumpzone">
-      <nav class="x-jump glass" aria-label="Talk stops">
+      <nav class="x-jump glass" aria-label="Sections">
         <ol>
           <li><a href="#s1"><b>1</b>Night Shift</a></li>
           <li><a href="#s3"><b>2</b>Women-founded startups</a></li>
@@ -416,8 +424,8 @@
           <li><a href="#s7"><b>5</b>Idea Check</a></li>
           <li><a href="#investors"><b aria-hidden="true">·</b>Investors</a></li>
           <li><a href="#s10"><b>6</b>Join</a></li>
+          <li><a href="pilot.html"><b aria-hidden="true">·</b>Pilot details</a></li>
         </ol>
-        <p>Space or arrows to move · P for large text</p>
       </nav>
     </div>
     <div class="page" id="top">
@@ -426,7 +434,7 @@
         <section class="hero x-hero" id="s1">
           <img class="hero__img" src="buildlab-hero.png" alt="Women at an evening build night in a brick coworking loft, laptops and a small robot arm on the table" />
           <div class="hero__copy">
-            <p class="hero__eyebrow">A Nebraska pilot · 2026 StartupLNK JumpStart Challenge</p>
+            <p class="hero__eyebrow">A Nebraska pilot</p>
             <h1>Night Shift</h1>
             <p class="x-tag">A pre-accelerator for Nebraska women</p>
             <ul class="x-three" aria-label="What founders get">
@@ -436,7 +444,7 @@
             </ul>
             <p class="hero__meta">All three serve one goal: <strong>momentum</strong>. Idea to first evidence in two weeks, then steady execution.</p>
             <p class="hero__sub">A nights-and-weekends pre-accelerator that helps Nebraska women turn industry problems into evidence-backed businesses.</p>
-            <p class="x-tag x-tag--line">Every founder gets help testing an idea. Founders with venture-scale evidence get referred to investors.</p>
+            <p class="x-tag x-tag--line">Night Shift helps women validate any evidence-backed business. Then right-sized next steps: build a profitable local business with Nebraska ecosystem partners, or, if your evidence proves venture scale, get warm, consented introductions to aligned investors.</p>
             <div class="x-entry">
               <div>
                 <h2>I'm exploring an idea</h2>
@@ -482,7 +490,7 @@
         <!-- 2 -->
         <section class="section x-stop" id="s3">
           <div class="head">
-            <p class="head__eyebrow">02 / 5 · How women-founded startups perform</p>
+            <p class="head__eyebrow">How women-founded startups perform</p>
             <h2>Women-founded startups do more with less.</h2>
           </div>
           <div class="x-figs">
@@ -502,7 +510,6 @@
         <!-- 4 -->
         <section class="section x-stop" id="s4">
           <div class="head">
-            <p class="head__eyebrow">03 / 5</p>
             <h2>This program is for</h2>
           </div>
           <p class="x-line">Nebraska women who know an industry or customer group <strong>firsthand</strong>.</p>
@@ -510,6 +517,7 @@
             <li><span class="checklist__item">A recurring problem in mind <small>Or wants help choosing one</small></span></li>
             <li><span class="checklist__item">4 hours a week to start, up to 20 <small>Flexible around work and family</small></span></li>
             <li><span class="checklist__item">No cofounder, product or pitch needed to apply</span></li>
+            <li><span class="checklist__item">Two paths out, any industry <small>Small businesses: routed to NBDC and GROW Nebraska WBC (proposed). Venture-scale, thesis-matched founders: routed to investors.</small></span></li>
           </ul>
           <details class="x-more">
             <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
@@ -526,7 +534,6 @@
         <!-- 6 -->
         <section class="section x-stop" id="s6">
           <div class="head">
-            <p class="head__eyebrow">04 / 5</p>
             <h2>Micro-grants cover the cost of testing.</h2>
           </div>
           <p class="x-big">$2K<small>Up to, per founder, equity-free. Covers real costs like interview incentives, prototype tools and a first pilot, released at each milestone.</small></p>
@@ -573,7 +580,6 @@
         <!-- 7 -->
         <section class="section x-stop" id="s7">
           <div class="head">
-            <p class="head__eyebrow">05 / 5</p>
             <h2>Idea Check</h2>
           </div>
 
@@ -597,7 +603,7 @@
               <p class="x-ic__dek" data-fp-mode="find" hidden>Spot the startup ideas hiding in work you know.</p>
               <p class="x-ic__sub" data-fp-mode="find" hidden>Start from your experience or from research about a problem. You'll list the problems you've seen, what they cost and why now, then get an idea card for each, with the ones worth testing first flagged and the investor themes they overlap.</p>
               <p class="x-ic__dek" data-fp-mode="check">Find the holes in your idea before an investor does.</p>
-              <p class="x-ic__sub" data-fp-mode="check">Idea Check helps you pressure-test your idea, see where it's weak and decide what to do next. It checks your idea against Thiel's seven questions, the Lean Canvas, Techstars' team-first criteria, Y Combinator and a16z requests for startups, and 24 current VC theses, then gives you a test to run, adjacent markets to explore, and investors who back ideas like yours.</p>
+              <p class="x-ic__sub" data-fp-mode="check">Idea Check puts your idea through three validation gates first, then Thiel's seven questions, the Lean Canvas, Techstars' team-first criteria and YC and a16z requests for startups, and gives you a next test, adjacent markets, and investors who back ideas like yours.</p>
               <div class="x-fp-only" data-fp-mode="check">
                 <div class="x-imp x-noprint">
                   <div class="x-imp__opt">
@@ -642,6 +648,7 @@
               </div>
               <div class="x-fp-only x-inv-only" data-fp-mode="investors" hidden>
                 <p>Who might fund this, and when? A starting list of Nebraska, Midwest and women-focused investors, family offices and grants.</p>
+                <p class="fineprint">Investor matching is for founders whose evidence points to venture scale. Founders building a small business are pointed to NBDC and GROW Nebraska WBC (proposed).</p>
               </div>
               <div class="x-fp-only" data-fp-mode="programs" hidden>
                 <p>Fellowships, grants, accelerators and pitch competitions open to Nebraska founders, soonest deadline first.</p>
@@ -669,7 +676,7 @@
               <p class="fineprint">Based on Paul Graham's advice: don't think up ideas, look for problems, preferably ones you have yourself (<a class="link" href="https://paulgraham.com/startupideas.html" target="_blank" rel="noopener">How to Get Startup Ideas</a>, 2012). Start from problems, then use themes as a lens. Trend steps from Kevin Ryan (MongoDB, AlleyCorp) on <a class="link" href="https://tim.blog/2026/09/24/kevin-ryan/" target="_blank" rel="noopener">The Tim Ferriss Show #884</a>, Sept 2026. Kevin Ryan co-founded MongoDB, Business Insider, Gilt and Zola, was CEO of DoubleClick, and founded AlleyCorp; see also <a class="link" href="https://www.steelatlas.vc/gaining-momentum" target="_blank" rel="noopener">Lessons Working for Kevin Ryan</a> (Steel Atlas, Aug 2023). Not affiliated with either.</p>
             </div>
             <div class="x-inv-only x-inv" data-fp-mode="investors" id="inv-panel" hidden>
-              <div class="head"><p class="head__eyebrow">Find investors</p><h2>Who might fund this, and when?</h2></div>
+              <div class="head"><p class="head__eyebrow">Find investors</p><h2>Who might fund this, and when?</h2><p class="head__sub">For founders whose evidence points to venture scale. Building a small business? Start with NBDC and GROW Nebraska WBC (proposed).</p></div>
               <div class="x-inv-out" id="inv-out" aria-live="polite"></div>
               <p class="fineprint">Public info checked November 17, 2026. Check sizes and criteria change. Confirm on each investor's site. Not financial or legal advice.</p>
             </div>
@@ -681,9 +688,18 @@
             </div>
             <div class="x-inv x-pg-only" data-fp-mode="programs" id="prog-panel" hidden>
               <div class="head"><p class="head__eyebrow">Find programs</p><h2>What can you apply to, and by when?</h2><p class="head__sub">Pick a type, or see them all.</p></div>
-              <div class="x-form x-inv-form" id="prog-form"></div>
-              <div class="x-inv-out" id="prog-out" aria-live="polite"></div>
-              <p class="fineprint">Deadlines checked Nov 22, 2026. Confirm on each program's site.</p>
+              <fieldset class="x-inv-opts x-pg-lists" id="prog-lists"><legend>List</legend></fieldset>
+              <div id="prog-main">
+                <div class="x-form x-inv-form" id="prog-form"></div>
+                <div class="x-inv-out" id="prog-out" aria-live="polite"></div>
+                <p class="fineprint">Deadlines checked Nov 22, 2026. Confirm on each program's site.</p>
+              </div>
+              <div id="acc-view" hidden>
+                <div class="x-form x-inv-form" id="acc-form"></div>
+                <div class="x-inv-out" id="acc-out" aria-live="polite"></div>
+                <p class="fineprint">Directory from a public accelerators and incubators list. Investment and exit counts are as listed there and not verified; check each site for current status and how to apply.</p>
+              </div>
+              <script type="text/csv" id="acc-dir" src="accelerators-directory.csv"></script>
             </div>
             <script type="text/csv" id="investors-page" src="investors-page.csv"></script>
           </div>
@@ -702,34 +718,9 @@
           </div>
 
           <div class="x-inv-block">
-            <h3>How founders are evaluated</h3>
-            <div class="pair">
-              <div>
-                <ol class="x-ladder" aria-label="Evidence ladder, level 5 at the top">
-                  <li><b>5</b><span>Paying customers and repeat usage</span></li>
-                  <li><b>4</b><span>Paid pilots or concrete commitments</span></li>
-                  <li><b>3</b><span>Observed behavior and documented costs</span></li>
-                  <li><b>2</b><span>Structured customer discovery</span></li>
-                  <li><b>1</b><span>Secondary research and market signals</span></li>
-                  <li><b>0</b><span>Untested founder hypothesis</span></li>
-                </ol>
-                <p class="fineprint">The same evidence ladder founders see in Idea Check. Illustrative framework, not an empirically validated scoring model.</p>
-              </div>
-              <ul class="checklist">
-                <li><span class="checklist__item">Opportunity <small>Problem severity, market size, scalability and differentiation</small></span></li>
-                <li><span class="checklist__item">Evidence <small>The founder's level on the evidence ladder</small></span></li>
-                <li><span class="checklist__item">Founder-market fit <small>Experience, insight, access and execution</small></span></li>
-                <li><span class="checklist__item">Investment readiness <small>Milestones reached, remaining risks and financing needs</small></span></li>
-              </ul>
-            </div>
-            <p class="fineprint">Each read is a label (Not started, Early, Developing or Strong) with a one-line reason.</p>
-          </div>
-
-          <div class="x-inv-block">
-            <h3>Two channels</h3>
+            <h3>Thesis Partners</h3>
             <div class="cards">
-              <div><h3>Early talent</h3><p>A periodic digest of founders still exploring, shared only with each founder's consent.</p></div>
-              <div><h3>Qualified referrals</h3><p>Founders at evidence level 4 or higher, with a one-page founder profile and consent on file.</p></div>
+              <div><p>No fees, ever. Thesis Partners get free access to consented briefs from founders with paid pilots or firm commitments whose evidence matches their thesis. In return, they help with research alignment, occasional office hours, or cohort sponsorship.</p></div>
             </div>
           </div>
 
@@ -738,7 +729,7 @@
             <div class="cards">
               <div><h3>Mentor</h3><p>Be one of a founder's two mentors.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Mentor%20interest">Become a mentor</a></p></div>
               <div><h3>Host office hours</h3><p>Give founders time to talk through their evidence and next steps.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Investor%20office%20hours">Offer office hours</a></p></div>
-              <div><h3>Receive referrals</h3><p>Tell us what you invest in, and pick one channel or both.</p><p class="x-act"><a class="btn" href="#inv-prefs">Share what you invest in</a></p></div>
+              <div><h3>Become a Thesis Partner</h3><p>Tell us your thesis.</p><p class="x-act"><a class="btn" href="#inv-prefs">Share what you invest in</a></p></div>
             </div>
             <form class="x-form" id="inv-prefs" aria-label="Investor preferences">
               <h4>What do you invest in?</h4>
@@ -748,9 +739,6 @@
               <label class="x-field">Check size<input name="check" placeholder="For example, $25K to $100K" /></label>
               <label class="x-field">Geography<input name="geo" placeholder="Nebraska, Midwest, US" /></label>
               <label class="x-field x-wide">Industries<input name="ind" placeholder="Agriculture, healthcare, any" /></label>
-              <fieldset class="x-wide"><legend>Channels</legend>
-                <div class="x-opts"><label><input type="checkbox" name="channel" value="Early talent digest" />Early talent digest</label><label><input type="checkbox" name="channel" value="Qualified referrals" />Qualified referrals</label></div>
-              </fieldset>
               <div class="x-wide x-foot">
                 <a class="btn" id="inv-prefs-send" href="mailto:?subject=Night%20Shift%20investor%20preferences">Send</a>
               </div>
@@ -783,85 +771,9 @@
             </form>
           </div>
         </section>
-
-        <!-- MORE DETAIL -->
-        <section class="section" id="more">
-          <div class="head">
-            <p class="head__eyebrow">For questions</p>
-            <h2>More detail</h2>
-            <p class="head__sub">Not part of the talk. Everything behind the five stops, in one place.</p>
-          </div>
-
-          <div class="x-detail" id="handoff">
-            <h3>The hand-off: every founder leaves with a next step</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr><th scope="col">Where the founder is</th><th scope="col">Next step</th></tr>
-                </thead>
-                <tbody>
-                  <tr><th scope="row">Ready for an accelerator</th><td>NMotion, Techstars Founder Catalyst, gener8tor <small>Proposed</small></td></tr>
-                  <tr><th scope="row">Ready for capital</th><td>Invest Nebraska, Nebraska Angels, AQi <small>Proposed</small></td></tr>
-                  <tr><th scope="row">Ready to bootstrap</th><td>NBDC, GROW Nebraska WBC <small>Proposed</small></td></tr>
-                  <tr><th scope="row">Evidence says stop, or not ready</th><td class="muted">Rejoin the next cohort</td></tr>
-                  <tr class="is-highlight"><th scope="row">Everyone</th><td>Follow-up at 6 and 12 months</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="fineprint">Each hand-off package holds an evidence and milestone file, a financing-pathway assessment, matched intros, and a feedback meeting with the partner. All partners are proposed, none confirmed.</p>
-          </div>
-
-          <div class="x-detail" id="budget">
-            <h3>Pilot budget and targets</h3>
-            <div class="pair">
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr><th scope="col">Item</th><th scope="col">Estimate</th><th scope="col">Status</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr class="is-highlight"><th scope="row">Founder grants <small>Cohort of 15</small></th><td class="num">~$14,000</td><td>This award</td></tr>
-                    <tr><th scope="row">Facilitation and admin</th><td class="muted">TBD</td><td>In-kind sought</td></tr>
-                    <tr><th scope="row">Technical and specialist review</th><td class="muted">TBD</td><td>In-kind sought</td></tr>
-                    <tr><th scope="row">Follow-up at 6 and 12 months</th><td class="muted">TBD</td><td>Lead's role</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="fineprint">Pilot targets: 15 founders admitted and 5 customer commitments. These are assumptions, not established conversion rates. Returned deposits are refunds, not cost.</p>
-            </div>
-            <p class="fineprint">The award amount is unconfirmed ($15K per the packet, against LaunchLNK's $20K plus about $23K in-kind).</p>
-          </div>
-
-          <div class="x-detail" id="results">
-            <h3>Other programs' results</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr><th scope="col">Program</th><th scope="col">Reported result</th><th scope="col">Caveat</th></tr>
-                </thead>
-                <tbody>
-                  <tr><th scope="row">NSF I-Corps</th><td>52% of National teams linked to startups <small>1,696 of 3,231 teams; $7.01B follow-on, FY2012-24</small></td><td class="muted">National teams, not regional</td></tr>
-                  <tr><th scope="row">MIT delta v</th><td>63% raised money <small>181 teams, ten-year study, 2022</small></td><td class="muted">MIT students and alumni</td></tr>
-                  <tr><th scope="row">Doyenne Group</th><td>~70% still open after a year <small>$500 deposit and $2,500 grant model</small></td><td class="muted">Self-reported</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="fineprint">Sources: NSF I-Corps biennial report (2025); MIT delta v ten-year study (2022); Doyenne Group, Madison. These are not forecasts for Night Shift.</p>
-          </div>
-
-          <div class="x-detail" id="ways-in">
-            <h3>Four ways in</h3>
-            <div class="cards">
-              <div><h3>Founders</h3><p>Join the first cohort.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Founder%20interest">Join the first cohort</a></p></div>
-              <div><h3>Mentors</h3><p>Be one of a founder's two mentors, operator or investor.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Mentor%20interest">Become a mentor</a></p></div>
-              <div><h3>Investors</h3><p>Take the hand-off: meet founders who already have an MVP and first traction.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Investor%20interest">Take the hand-off</a></p></div>
-              <div><h3>Partners</h3><p>Take founders after first traction, fund a cohort, or host a Build Night.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Partner%20interest">Partner with us</a></p></div>
-            </div>
-          </div>
-        </section>
       </main>
       <footer class="foot">
-        <p>Night Shift is a working name. Pilot proposed for the 2026 JumpStart Challenge. All amounts, dates, targets and partners are proposals.</p>
+        <p>Night Shift is a working name. Amounts, targets and partners are proposals. <a class="link" href="pilot.html">Pilot details</a></p>
         <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
       </footer>
     </div>
@@ -1406,12 +1318,8 @@
           } else if (k === "PageDown" || k === "ArrowRight" || k === "ArrowDown") dir = 1;
           else if (k === "PageUp" || k === "ArrowLeft" || k === "ArrowUp") dir = -1;
           if (!dir) return;
-          var more = document.getElementById("more");
-          var inMore = more && more.getBoundingClientRect().top < window.innerHeight * 0.5;
-          if (inMore && k !== "ArrowLeft") return;
           e.preventDefault();
           var i = Date.now() - lastAt < 700 && lastIdx > -1 ? lastIdx : current();
-          if (inMore) return goTo(stops.length - 1);
           if (dir < 0 && Date.now() - lastAt >= 700 && i > 0 && stops[i].getBoundingClientRect().top < -48) return goTo(i);
           goTo(i + dir);
         });
@@ -1480,8 +1388,7 @@
             "Stages: " + (picked("stage") || "Not specified"),
             "Check size: " + (f.check.value || "Not specified"),
             "Industries: " + (f.ind.value || "Not specified"),
-            "Geography: " + (f.geo.value || "Not specified"),
-            "Channels: " + (picked("channel") || "Not specified")
+            "Geography: " + (f.geo.value || "Not specified")
           ].join("\n");
           psend.href = "mailto:?subject=Night%20Shift%20investor%20preferences&body=" + encodeURIComponent(body);
         }
