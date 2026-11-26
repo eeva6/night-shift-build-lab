@@ -60,6 +60,48 @@
       .x-three li { display: grid; align-content: start; gap: 4px; padding: 12px 14px; border-radius: var(--r-m); background: var(--hero-glass); border: 1px solid var(--hero-glass-stroke); -webkit-backdrop-filter: var(--hark-blur); backdrop-filter: var(--hark-blur); font: var(--type-small); color: var(--hero-text); }
       .x-three b { font: var(--type-label); font-weight: var(--weight-bold); }
       @media (max-width: 760px) { .x-three { grid-template-columns: minmax(0, 1fr); } }
+      /* Hero: one line under the subhead, then two entry cards that open Idea Check */
+      .x-tag.x-tag--line { font-size: clamp(16px, 1.6vw, 20px); max-width: 52ch; }
+      .x-entry { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 980px; margin: 4px 0 8px; }
+      .x-entry > div { display: grid; align-content: start; gap: 8px; padding: 16px 18px; border-radius: var(--r-m); background: var(--hero-glass); border: 1px solid var(--hero-glass-stroke); -webkit-backdrop-filter: var(--hark-blur); backdrop-filter: var(--hark-blur); color: var(--hero-text); }
+      .x-entry > div > * { margin: 0; }
+      .x-entry h2 { font: var(--type-heading); }
+      .x-entry p { font: var(--type-small); }
+      .x-entry .btn { justify-self: start; }
+      .x-hero .hero__meta a.link { color: var(--hero-text); text-decoration-color: currentColor; }
+      @media (max-width: 760px) { .x-entry { grid-template-columns: minmax(0, 1fr); } }
+      html.present .x-entry { max-width: none; }
+      html.present .x-entry h2 { font-size: 32px; line-height: 1.2; }
+      html.present .x-entry p { font-size: 24px; line-height: 1.3; }
+      html.present .x-entry .btn { font-size: 24px; min-height: 56px; padding: 0 24px; }
+      /* For investors */
+      .x-inv-block { margin-top: clamp(28px, 4vw, 44px); }
+      .x-inv-block > h3 { font: var(--type-heading); margin-bottom: 12px; }
+      .x-inv-block > p { font: var(--type-body); max-width: 70ch; }
+      .x-inv-block .x-ladder { max-width: 560px; }
+      #inv-prefs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 720px; margin-top: 18px; padding: 22px 24px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      #inv-prefs > h4 { grid-column: 1 / -1; font: var(--type-heading); margin: 0; }
+      #inv-prefs .x-wide { grid-column: 1 / -1; }
+      #inv-prefs .x-field { display: grid; gap: 6px; font: var(--type-label); min-width: 0; }
+      #inv-prefs .x-field input { font: var(--type-body); color: var(--text-primary); background: var(--fill-primary-on); border: 1px solid var(--stroke-primary); border-radius: var(--r-s); padding: 10px 12px; min-height: var(--tap); width: 100%; }
+      #inv-prefs fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+      #inv-prefs legend { font: var(--type-label); padding: 0; margin-bottom: 8px; }
+      #inv-prefs .x-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+      #inv-prefs .x-opts label { position: relative; display: inline-flex; align-items: center; min-height: var(--tap); padding: 8px 14px; border-radius: var(--r-pill); border: 1px solid var(--stroke-primary); background: var(--fill-primary-on); font: var(--type-small); cursor: pointer; }
+      #inv-prefs .x-opts label:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      #inv-prefs .x-opts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      #inv-prefs .x-opts label:has(input:checked) { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-primary); }
+      #inv-prefs .x-opts label:has(input:focus-visible) { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+      #inv-prefs .x-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+      #inv-prefs .x-foot .fineprint { margin: 0; }
+      @media (max-width: 599px) { #inv-prefs { grid-template-columns: 1fr; padding: 18px; } }
+      html.present .x-inv-block > h3 { font-size: 40px; line-height: 1.15; }
+      html.present .x-inv-block > p { font-size: 32px; line-height: 1.3; max-width: none; }
+      html.present #inv-prefs { max-width: 1100px; gap: 28px; padding: 32px 36px; }
+      html.present #inv-prefs .x-field, html.present #inv-prefs legend { font-size: 28px; }
+      html.present #inv-prefs .x-field input { font-size: 30px; min-height: 64px; }
+      html.present #inv-prefs .x-opts label { font-size: 28px; min-height: 64px; padding: 10px 22px; }
+      html.present #inv-prefs .btn { font-size: 28px; min-height: 64px; padding: 0 28px; }
       /* Read more */
       .x-more > summary { list-style: none; cursor: pointer; width: max-content; }
       .x-more > summary::-webkit-details-marker { display: none; }
@@ -318,6 +360,48 @@
       html.present .x-inv-q .x-in, html.present .x-inv-sharef .x-in { font-size: 24px; }
       html.present .x-inv-share input { width: 28px; height: 28px; }
       html.present .x-inv .x-inv-q .fineprint, html.present .x-inv .x-inv-sharef .fineprint { display: block; font-size: 22px; line-height: 1.35; }
+      /* Women are already building: four big stats in a 2×2 grid, stacking on phones */
+      .x-figs.x-figs--three { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 3vw, 40px); }
+      .x-figs--three > div { display: grid; align-content: start; gap: 12px; min-width: 0; }
+      .x-figs--three > div > * { margin: 0; }
+      .x-figs.x-figs--three .x-big { font-size: clamp(56px, 7vw, 104px); }
+      .x-figs--three .x-big small { font-size: clamp(17px, 1.6vw, 22px); max-width: none; }
+      .x-figs--three .fineprint a { overflow-wrap: anywhere; }
+      .x-builders-line { font: var(--weight-medium) clamp(20px, 2.2vw, 28px)/1.3 var(--sans); max-width: 40ch; text-wrap: balance; }
+      @media (max-width: 760px) { .x-figs.x-figs--three { grid-template-columns: minmax(0, 1fr); } }
+      html.present .x-figs--three .x-big small { font-size: 28px; line-height: 1.3; }
+      html.present .x-builders-line { font-size: 36px; }
+      /* Idea Check: research-backed markets (market-research.js) */
+      .x-mr { display: grid; gap: 14px; margin-top: 28px; min-width: 0; }
+      .x-mr[hidden] { display: none; }
+      .x-mr > * { margin: 0; }
+      .x-mr > h3 { font: var(--type-heading); }
+      .x-mr > p:not(.fineprint):not(.x-hint) { font: var(--type-body); max-width: 70ch; }
+      .x-mr-intro { font: var(--type-body); color: var(--text-secondary); max-width: 70ch; }
+      .x-mr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+      .x-mr-browse > summary { list-style: none; cursor: pointer; width: max-content; max-width: 100%; }
+      .x-mr-browse > summary::-webkit-details-marker { display: none; }
+      .x-mr-browse > summary::after { content: "+"; color: var(--text-secondary); }
+      .x-mr-browse[open] > summary::after { content: "\2212"; }
+      .x-mr-browse > .x-mr-grid { margin-top: 16px; }
+      .x-mr-card { display: grid; align-content: start; gap: 10px; padding: 18px 20px; border-radius: var(--r-m); background: var(--fill-tertiary); min-width: 0; scroll-margin-top: 24px; }
+      .x-mr-card > * { margin: 0; }
+      .x-mr-card h3 { font: var(--type-heading); }
+      .x-mr-card h4 { font: var(--type-label); color: var(--text-secondary); margin-top: 6px; }
+      .x-mr-card p, .x-mr-card li { font: var(--type-small); }
+      .x-mr-card p.x-mr-stat { font: var(--type-body); font-weight: var(--weight-medium); }
+      .x-mr-card p.x-mr-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font: var(--type-caption); color: var(--text-secondary); }
+      .x-mr-card ul, .x-mr-card ol { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+      .x-mr-card ul.x-mr-chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+      .x-mr-card li small { display: block; font: var(--type-caption); color: var(--text-secondary); }
+      .x-mr-card a.link { overflow-wrap: anywhere; }
+      .x-mr-card .btn { justify-self: start; }
+      @media (max-width: 599px) { .x-mr-card { padding: 16px; } }
+      @media print { .x-mr-card { break-inside: avoid; } }
+      html.present .x-mr > h3, html.present .x-mr-card h3 { font-size: 36px; line-height: 1.15; }
+      html.present .x-mr-intro, html.present .x-mr > p:not(.fineprint), html.present .x-mr-card p.x-mr-stat { font-size: 28px; line-height: 1.3; }
+      html.present .x-mr-card p, html.present .x-mr-card li, html.present .x-mr-card h4 { font-size: 24px; line-height: 1.35; }
+      html.present .x-mr-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 560px), 1fr)); }
     </style>
   </head>
   <body>
@@ -326,12 +410,12 @@
       <nav class="x-jump glass" aria-label="Talk stops">
         <ol>
           <li><a href="#s1"><b>1</b>Night Shift</a></li>
-          <li><a href="#s7"><b>2</b>Idea Check</a></li>
-          <li><a href="#s2"><b>3</b>The gap starts upstream</a></li>
-          <li><a href="#s3"><b>4</b>Women-founded startups</a></li>
-          <li><a href="#s4"><b>5</b>Who it's for</a></li>
-          <li><a href="#s6"><b>6</b>Micro-grants</a></li>
-          <li><a href="#s10"><b>7</b>Join</a></li>
+          <li><a href="#s3"><b>2</b>Women-founded startups</a></li>
+          <li><a href="#s4"><b>3</b>This program is for</a></li>
+          <li><a href="#s6"><b>4</b>Micro-grants</a></li>
+          <li><a href="#s7"><b>5</b>Idea Check</a></li>
+          <li><a href="#investors"><b aria-hidden="true">·</b>Investors</a></li>
+          <li><a href="#s10"><b>6</b>Join</a></li>
         </ol>
         <p>Space or arrows to move · P for large text</p>
       </nav>
@@ -352,14 +436,144 @@
             </ul>
             <p class="hero__meta">All three serve one goal: <strong>momentum</strong>. Idea to first evidence in two weeks, then steady execution.</p>
             <p class="hero__sub">A nights-and-weekends pre-accelerator that helps Nebraska women turn industry problems into evidence-backed businesses.</p>
+            <p class="x-tag x-tag--line">Every founder gets help testing an idea. Founders with venture-scale evidence get referred to investors.</p>
+            <div class="x-entry">
+              <div>
+                <h2>I'm exploring an idea</h2>
+                <p>Find problems worth solving, test your assumptions and figure out where to start.</p>
+                <button type="button" class="btn" data-hero-mode="find">Explore my idea →</button>
+              </div>
+              <div>
+                <h2>I'm already building</h2>
+                <p>Strengthen your evidence, find growth opportunities and explore funding.</p>
+                <button type="button" class="btn" data-hero-mode="check">Advance my startup →</button>
+              </div>
+            </div>
             <p class="hero__meta">From idea to first traction, building with flexibility around work and life.</p>
+            <p class="hero__meta"><a class="link" href="#investors">For investors →</a></p>
           </div>
+        </section>
+
+        <section class="section" id="builders">
+          <div class="head">
+            <h2>Women are already building.</h2>
+          </div>
+          <div class="x-figs x-figs--three">
+            <div>
+              <p class="x-big">44%<small>of new US businesses in 2025 were started by women, up from 29% in 2019.</small></p>
+              <p class="fineprint"><a class="link" href="https://gusto.com/resources/gusto-insights/women-entrepreneurship-2026" target="_blank" rel="noopener">Gusto founder survey</a>, 1,051 owners of businesses started in 2025 (July 16, 2026).</p>
+            </div>
+            <div>
+              <p class="x-big">15.7M<small>women-owned US businesses in 2025. Their number grew 12.1% from 2022, nearly twice the 6.3% for men-owned firms.</small></p>
+              <p class="fineprint"><a class="link" href="https://smallbusinessresources.wf.com/wp-content/uploads/2026/01/IWOB-2026-Report_Concept_Concept-17_Final.pdf" target="_blank" rel="noopener">Wells Fargo, The Impact of Women-Owned Businesses</a>, Jan 2026. 2023–2025 figures are modeled.</p>
+            </div>
+            <div>
+              <p class="x-big">1.1%<small>of US venture capital went to all-women founding teams in 2025.</small></p>
+              <p class="fineprint"><a class="link" href="https://nvca.org/wp-content/uploads/2026/01/q4-2025-pitchbook-nvca-venture-monitor.pdf" target="_blank" rel="noopener">PitchBook-NVCA Venture Monitor, Q4 2025 (Jan 15, 2026)</a></p>
+            </div>
+            <div>
+              <p class="x-big">~25%<small>of US venture-backed exits in 2025 had at least one female founder.</small></p>
+              <p class="fineprint"><a class="link" href="https://pitchbook.com/news/reports/2025-us-all-in-female-founders-in-the-vc-ecosystem" target="_blank" rel="noopener">PitchBook, 2025 US All In: Female Founders in the VC Ecosystem</a></p>
+            </div>
+          </div>
+          <p class="x-builders-line">Night Shift turns more of these builders into venture-ready founders.</p>
+        </section>
+
+        <!-- 2 -->
+        <section class="section x-stop" id="s3">
+          <div class="head">
+            <p class="head__eyebrow">02 / 5 · How women-founded startups perform</p>
+            <h2>Women-founded startups do more with less.</h2>
+          </div>
+          <div class="x-figs">
+            <p class="x-big">78¢ vs 31¢<small>Revenue per dollar invested: startups founded or cofounded by women vs those founded by men (BCG and MassChallenge, 2018).</small></p>
+            <p class="x-big">63%<small>How much better First Round Capital's investments with a female founder performed than its all-male teams, over 10 years (2015).</small></p>
+          </div>
+          <details class="x-more">
+            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
+            <div class="aside">
+              <p>In BCG's MassChallenge data, women-founded startups raised $935,000 on average, less than half the $2.1 million raised by startups founded by men, yet earned 10% more revenue over five years ($730,000 vs. $662,000). In 2025, companies with at least one female founder were 25% of US venture-backed exits (PitchBook, March 2026).</p>
+              <p>Some of Nebraska's best startup ideas are sitting inside someone's day job. Night Shift helps women test theirs and start building, without quitting their day (or night) job.</p>
+              <p class="fineprint">BCG, 'Why Women-Owned Startups Are a Better Bet,' June 6, 2018; First Round Capital, 10 Year Project, 2015 (value growth from First Round's investment to exit or 2014 fair value, Uber excluded); PitchBook, 2025 US All In: Female Founders in the VC Ecosystem.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- 4 -->
+        <section class="section x-stop" id="s4">
+          <div class="head">
+            <p class="head__eyebrow">03 / 5</p>
+            <h2>This program is for</h2>
+          </div>
+          <p class="x-line">Nebraska women who know an industry or customer group <strong>firsthand</strong>.</p>
+          <ul class="checklist">
+            <li><span class="checklist__item">A recurring problem in mind <small>Or wants help choosing one</small></span></li>
+            <li><span class="checklist__item">4 hours a week to start, up to 20 <small>Flexible around work and family</small></span></li>
+            <li><span class="checklist__item">No cofounder, product or pitch needed to apply</span></li>
+          </ul>
+          <details class="x-more">
+            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
+            <div class="aside">
+              <ul>
+                <li><strong>Admission:</strong> a short application plus a 15-minute commitment conversation.</li>
+                <li><strong>Time:</strong> start at 4 hours a week, scaling to 10, or 20 for founders going all in.</li>
+                <li>Best for founders ready to build a business.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 6 -->
+        <section class="section x-stop" id="s6">
+          <div class="head">
+            <p class="head__eyebrow">04 / 5</p>
+            <h2>Micro-grants cover the cost of testing.</h2>
+          </div>
+          <p class="x-big">$2K<small>Up to, per founder, equity-free. Covers real costs like interview incentives, prototype tools and a first pilot, released at each milestone.</small></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Stage</th><th scope="col">By week</th><th scope="col">Released when</th><th scope="col">Grant</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Commit</th><td>Week 1</td><td>Shows up to Week 1</td><td class="num">$100 deposit back <small>Waived for hardship</small></td></tr>
+                <tr><th scope="row">Learn</th><td>By week 6</td><td>Finishes I-Corps or 20 reviewed interviews</td><td class="num">$250</td></tr>
+                <tr><th scope="row">Test</th><td>By week 9</td><td>Runs a cheap test of their riskiest assumption</td><td class="num">$250</td></tr>
+                <tr><th scope="row">Execute</th><td>By week 13</td><td>Builds a first version with our help</td><td class="num">$500</td></tr>
+                <tr class="is-highlight"><th scope="row">Commit a customer</th><td>By week 17</td><td>Has a qualified customer and a scoped pilot</td><td class="num">$1,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="x-weeks">About 4 months (17 weeks) at 4 to 10 hours a week. Founders putting in 20 hours a week can move faster; nobody waits on the calendar.</p>
+          <div class="x-perks">
+            <span class="chip">Partners in progress</span>
+            <h3>Free tools while you build</h3>
+            <p>Accelerators like Techstars, Y Combinator and gener8tor give founders free cloud, AI and software credits through partner programs. Night Shift is lining up the same kind of perks for each cohort.</p>
+            <div class="cards">
+              <div><h3>Cloud and AI credits</h3><p>Credits for hosting and AI tools, so founders can build a prototype without paying out of pocket.</p></div>
+              <div><h3>Software for running the business</h3><p>Free or discounted CRM, docs, design and accounting tools during the program.</p></div>
+              <div><h3>Expert office hours</h3><p>Time with legal, finance and technical experts from partner firms.</p></div>
+            </div>
+            <p class="fineprint">Perk partners are being lined up. None are confirmed yet. Interested in offering a perk? <a class="link" href="mailto:?subject=Night%20Shift%3A%20Perk%20partner">Email us</a>.</p>
+          </div>
+          <details class="x-more">
+            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
+            <div class="aside">
+              <ul>
+                <li>Founders in an I-Corps cohort reach Learn when I-Corps ends, then keep the same order.</li>
+                <li>Each admitted founder has up to $2,000 set aside from day one.</li>
+                <li>Two mentors review monthly against a published rubric. Unused funds are reassigned at review dates set before recruiting starts.</li>
+                <li>Test and Execute grants are paid up front against a plan, so founders don't pay out of pocket. Later grants follow evidence.</li>
+                <li>They pay for interview gift cards and travel, time and data during discovery, prototype tools and hosting, and pilot costs.</li>
+              </ul>
+            </div>
+          </details>
         </section>
 
         <!-- 7 -->
         <section class="section x-stop" id="s7">
           <div class="head">
-            <p class="head__eyebrow">02 / 6</p>
+            <p class="head__eyebrow">05 / 5</p>
             <h2>Idea Check</h2>
           </div>
 
@@ -443,6 +657,15 @@
             <div class="x-fp-only" data-fp-mode="find" hidden>
               <ol class="x-stepper" id="fp-stepper" aria-label="Find a problem steps"></ol>
               <div id="fp-stage"></div>
+              <div class="x-mr x-noprint" id="mr-browse-wrap">
+                <p class="x-mr-intro">Markets anyone can build for. What matters is the problem you know, not who the customer is.</p>
+                <details class="x-mr-browse" id="mr-browse">
+                  <summary class="btn">Browse research-backed markets</summary>
+                  <div class="x-mr-grid" id="mr-browse-list"></div>
+                </details>
+                <p class="fineprint">Market research drawn from <a class="link" href="https://www.ingeborginvestments.com/research" target="_blank" rel="noopener">Ingeborg Investments' published reports</a>, traced to original sources and checked Nov 25, 2026. Not affiliated with Ingeborg.</p>
+              </div>
+              <script type="application/json" id="market-cards" src="opportunity-cards.json"></script>
               <p class="fineprint">Based on Paul Graham's advice: don't think up ideas, look for problems, preferably ones you have yourself (<a class="link" href="https://paulgraham.com/startupideas.html" target="_blank" rel="noopener">How to Get Startup Ideas</a>, 2012). Start from problems, then use themes as a lens. Trend steps from Kevin Ryan (MongoDB, AlleyCorp) on <a class="link" href="https://tim.blog/2026/09/24/kevin-ryan/" target="_blank" rel="noopener">The Tim Ferriss Show #884</a>, Sept 2026. Kevin Ryan co-founded MongoDB, Business Insider, Gilt and Zola, was CEO of DoubleClick, and founded AlleyCorp; see also <a class="link" href="https://www.steelatlas.vc/gaining-momentum" target="_blank" rel="noopener">Lessons Working for Kevin Ryan</a> (Steel Atlas, Aug 2023). Not affiliated with either.</p>
             </div>
             <div class="x-inv-only x-inv" data-fp-mode="investors" id="inv-panel" hidden>
@@ -466,116 +689,73 @@
           </div>
         </section>
 
-        <!-- 2 -->
-        <section class="section x-stop" id="s2">
+        <!-- For investors -->
+        <section class="section" id="investors" data-nav="Investors">
           <div class="head">
-            <p class="head__eyebrow">03 / 6</p>
-            <h2>The gap starts upstream.</h2>
+            <p class="head__eyebrow">For investors</p>
+            <h2>Deal flow from industries you invest in, vetted by evidence.</h2>
           </div>
-          <p class="x-big">1.1%<small>of US venture dollars went to all-women founding teams in 2025. That's the downstream gap.</small></p>
-          <div class="cards">
-            <div><h3>Upstream</h3><p>Too few women reach the stage of testing a scalable business.</p></div>
-            <div><h3>Night Shift</h3><p>Helps more women test early, then builds stronger paths to the next support.</p></div>
-          </div>
-          <details class="x-more">
-            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
-            <div class="aside">
-              <p>Too few women get to the point of testing a business that could scale, and those who do still face barriers to capital. Night Shift focuses on that early stage.</p>
-              <p><strong>Nebraska context:</strong> 11% of women-owned firms have employees, against 22.5% of men-owned (SBA Office of Advocacy, 2025).</p>
-              <p class="fineprint">1.1%: PitchBook-NVCA Venture Monitor, 2025 data. Guzman &amp; Kacperczyk (Research Policy, 2019) linked about 65% of the funding disparity to growth orientation at founding, in California and Massachusetts registrations from 1995 to 2011.</p>
-            </div>
-          </details>
-        </section>
 
-        <!-- 3 -->
-        <section class="section x-stop" id="s3">
-          <div class="head">
-            <p class="head__eyebrow">04 / 6 · How women-founded startups perform</p>
-            <h2>Women-founded startups do more with less.</h2>
+          <div class="x-inv-block">
+            <h3>Who we source</h3>
+            <p>Nebraska women turning firsthand industry knowledge into businesses, including agriculture, healthcare, insurance, logistics, manufacturing and financial services, and any industry where they know the problem.</p>
           </div>
-          <div class="x-figs">
-            <p class="x-big">78¢ vs 31¢<small>Revenue per dollar invested: startups founded or cofounded by women vs those founded by men (BCG and MassChallenge, 2018).</small></p>
-            <p class="x-big">63%<small>How much better First Round Capital's investments with a female founder performed than its all-male teams, over 10 years (2015).</small></p>
-          </div>
-          <details class="x-more">
-            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
-            <div class="aside">
-              <p>In BCG's MassChallenge data, women-founded startups raised $935,000 on average, less than half the $2.1 million raised by startups founded by men, yet earned 10% more revenue over five years ($730,000 vs. $662,000). In 2025, companies with at least one female founder were 25% of US venture-backed exits (PitchBook, March 2026).</p>
-              <p>Nebraska has thousands of women like that: claims managers, nurses, engineers, ops leads who know exactly what's broken. They can't quit to find out if it's a business. Night Shift lets them test and build it first, without quitting their day (or night) job.</p>
-              <p class="fineprint">BCG, 'Why Women-Owned Startups Are a Better Bet,' June 6, 2018; First Round Capital, 10 Year Project, 2015 (value growth from First Round's investment to exit or 2014 fair value, Uber excluded); PitchBook, 2025 US All In: Female Founders in the VC Ecosystem.</p>
-            </div>
-          </details>
-        </section>
 
-        <!-- 4 -->
-        <section class="section x-stop" id="s4">
-          <div class="head">
-            <p class="head__eyebrow">05 / 6</p>
-            <h2>Who it's for</h2>
-          </div>
-          <p class="x-line">Nebraska women who know an industry or customer group <strong>firsthand</strong>.</p>
-          <ul class="checklist">
-            <li><span class="checklist__item">A recurring problem in mind <small>Or wants help choosing one</small></span></li>
-            <li><span class="checklist__item">4 hours a week to start, up to 20 <small>Flexible around work and family</small></span></li>
-            <li><span class="checklist__item">No cofounder, product or pitch needed to apply</span></li>
-          </ul>
-          <details class="x-more">
-            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
-            <div class="aside">
-              <ul>
-                <li><strong>Admission:</strong> a short application plus a 15-minute commitment conversation.</li>
-                <li><strong>Time:</strong> start at 4 hours a week, scaling to 10, or 20 for founders going all in.</li>
-                <li>Best for founders ready to build a business.</li>
+          <div class="x-inv-block">
+            <h3>How founders are evaluated</h3>
+            <div class="pair">
+              <div>
+                <ol class="x-ladder" aria-label="Evidence ladder, level 5 at the top">
+                  <li><b>5</b><span>Paying customers and repeat usage</span></li>
+                  <li><b>4</b><span>Paid pilots or concrete commitments</span></li>
+                  <li><b>3</b><span>Observed behavior and documented costs</span></li>
+                  <li><b>2</b><span>Structured customer discovery</span></li>
+                  <li><b>1</b><span>Secondary research and market signals</span></li>
+                  <li><b>0</b><span>Untested founder hypothesis</span></li>
+                </ol>
+                <p class="fineprint">The same evidence ladder founders see in Idea Check. Illustrative framework, not an empirically validated scoring model.</p>
+              </div>
+              <ul class="checklist">
+                <li><span class="checklist__item">Opportunity <small>Problem severity, market size, scalability and differentiation</small></span></li>
+                <li><span class="checklist__item">Evidence <small>The founder's level on the evidence ladder</small></span></li>
+                <li><span class="checklist__item">Founder-market fit <small>Experience, insight, access and execution</small></span></li>
+                <li><span class="checklist__item">Investment readiness <small>Milestones reached, remaining risks and financing needs</small></span></li>
               </ul>
             </div>
-          </details>
-        </section>
+            <p class="fineprint">Each read is a label (Not started, Early, Developing or Strong) with a one-line reason.</p>
+          </div>
 
-        <!-- 6 -->
-        <section class="section x-stop" id="s6">
-          <div class="head">
-            <p class="head__eyebrow">06 / 6</p>
-            <h2>Micro-grants cover the cost of testing.</h2>
-          </div>
-          <p class="x-big">$2K<small>Up to, per founder, equity-free. Covers real costs like interview incentives, prototype tools and a first pilot, released at each milestone.</small></p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th scope="col">Stage</th><th scope="col">By week</th><th scope="col">Released when</th><th scope="col">Grant</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">Commit</th><td>Week 1</td><td>Shows up to Week 1</td><td class="num">$100 deposit back <small>Waived for hardship</small></td></tr>
-                <tr><th scope="row">Learn</th><td>By week 8</td><td>Finishes I-Corps or 20 reviewed interviews</td><td class="num">$250</td></tr>
-                <tr><th scope="row">Test</th><td>By week 12</td><td>Runs a cheap test of their riskiest assumption</td><td class="num">$250</td></tr>
-                <tr><th scope="row">Execute</th><td>By week 20</td><td>Builds a first version with our help</td><td class="num">$500</td></tr>
-                <tr class="is-highlight"><th scope="row">Commit a customer</th><td>By week 26</td><td>Has a qualified customer and a scoped pilot</td><td class="num">$1,000</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="x-weeks">About 26 weeks at 4 to 10 hours a week. Founders putting in 20 hours a week can move faster; nobody waits on the calendar.</p>
-          <div class="x-perks">
-            <span class="chip">Partners in progress</span>
-            <h3>Free tools while you build</h3>
-            <p>Accelerators like Techstars, Y Combinator and gener8tor give founders free cloud, AI and software credits through partner programs. Night Shift is lining up the same kind of perks for each cohort.</p>
+          <div class="x-inv-block">
+            <h3>Two channels</h3>
             <div class="cards">
-              <div><h3>Cloud and AI credits</h3><p>Credits for hosting and AI tools, so founders can build a prototype without paying out of pocket.</p></div>
-              <div><h3>Software for running the business</h3><p>Free or discounted CRM, docs, design and accounting tools during the program.</p></div>
-              <div><h3>Expert office hours</h3><p>Time with legal, finance and technical experts from partner firms.</p></div>
+              <div><h3>Early talent</h3><p>A periodic digest of founders still exploring, shared only with each founder's consent.</p></div>
+              <div><h3>Qualified referrals</h3><p>Founders at evidence level 4 or higher, with a one-page founder profile and consent on file.</p></div>
             </div>
-            <p class="fineprint">Perk partners are being lined up. None are confirmed yet. Interested in offering a perk? <a class="link" href="mailto:?subject=Night%20Shift%3A%20Perk%20partner">Email us</a>.</p>
           </div>
-          <details class="x-more">
-            <summary class="btn"><span class="x-closed">Read more</span><span class="x-opened">Show less</span></summary>
-            <div class="aside">
-              <ul>
-                <li>Founders in an I-Corps cohort reach Learn when I-Corps ends, then keep the same order.</li>
-                <li>Each admitted founder has up to $2,000 set aside from day one.</li>
-                <li>Two mentors review monthly against a published rubric. Unused funds are reassigned at review dates set before recruiting starts.</li>
-                <li>Test and Execute grants are paid up front against a plan, so founders don't pay out of pocket. Later grants follow evidence.</li>
-                <li>They pay for interview gift cards and travel, time and data during discovery, prototype tools and hosting, and pilot costs.</li>
-              </ul>
+
+          <div class="x-inv-block">
+            <h3>How to take part</h3>
+            <div class="cards">
+              <div><h3>Mentor</h3><p>Be one of a founder's two mentors.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Mentor%20interest">Become a mentor</a></p></div>
+              <div><h3>Host office hours</h3><p>Give founders time to talk through their evidence and next steps.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Investor%20office%20hours">Offer office hours</a></p></div>
+              <div><h3>Receive referrals</h3><p>Tell us what you invest in, and pick one channel or both.</p><p class="x-act"><a class="btn" href="#inv-prefs">Share what you invest in</a></p></div>
             </div>
-          </details>
+            <form class="x-form" id="inv-prefs" aria-label="Investor preferences">
+              <h4>What do you invest in?</h4>
+              <fieldset class="x-wide"><legend>Stages</legend>
+                <div class="x-opts"><label><input type="checkbox" name="stage" value="Idea" />Idea</label><label><input type="checkbox" name="stage" value="Pre-seed" />Pre-seed</label><label><input type="checkbox" name="stage" value="Seed" />Seed</label><label><input type="checkbox" name="stage" value="Series A and later" />Series A and later</label></div>
+              </fieldset>
+              <label class="x-field">Check size<input name="check" placeholder="For example, $25K to $100K" /></label>
+              <label class="x-field">Geography<input name="geo" placeholder="Nebraska, Midwest, US" /></label>
+              <label class="x-field x-wide">Industries<input name="ind" placeholder="Agriculture, healthcare, any" /></label>
+              <fieldset class="x-wide"><legend>Channels</legend>
+                <div class="x-opts"><label><input type="checkbox" name="channel" value="Early talent digest" />Early talent digest</label><label><input type="checkbox" name="channel" value="Qualified referrals" />Qualified referrals</label></div>
+              </fieldset>
+              <div class="x-wide x-foot">
+                <a class="btn" id="inv-prefs-send" href="mailto:?subject=Night%20Shift%20investor%20preferences">Send</a>
+              </div>
+            </form>
+          </div>
         </section>
 
         <!-- 10: founder interest form -->
@@ -585,7 +765,6 @@
             <h2>Join the first cohort</h2>
           </div>
           <div id="founder-form">
-            <p class="x-sub">Fill this in and your email app opens with it ready to send.</p>
             <form class="x-form" id="interest">
               <label class="x-field">Name<input name="name" autocomplete="name" required /></label>
               <label class="x-field">Email<input name="email" type="email" autocomplete="email" required /></label>
@@ -593,7 +772,7 @@
               <label class="x-field">Where are you on the path?
                 <select name="stage"><option value="">Choose one</option><option>Just a hunch</option><option>Picked a problem</option><option>Done customer discovery or I-Corps</option><option>Have an MVP or first users</option></select>
               </label>
-              <label class="x-field x-wide">What do you know better than most people?<textarea name="know"></textarea></label>
+              <label class="x-field x-wide">What problem have you seen up close, at work or in life?<textarea name="know"></textarea></label>
               <fieldset class="x-wide"><legend>Best times</legend>
                 <div class="x-opts"><label><input type="checkbox" name="times" value="Weeknights" />Weeknights</label><label><input type="checkbox" name="times" value="Weekend mornings" />Weekend mornings</label></div>
               </fieldset>
@@ -610,7 +789,7 @@
           <div class="head">
             <p class="head__eyebrow">For questions</p>
             <h2>More detail</h2>
-            <p class="head__sub">Not part of the talk. Everything behind the six stops, in one place.</p>
+            <p class="head__sub">Not part of the talk. Everything behind the five stops, in one place.</p>
           </div>
 
           <div class="x-detail" id="handoff">
@@ -673,7 +852,7 @@
           <div class="x-detail" id="ways-in">
             <h3>Four ways in</h3>
             <div class="cards">
-              <div><h3>Founders</h3><p>Join the first cohort, starting January 2027.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Founder%20interest">Join the first cohort</a></p></div>
+              <div><h3>Founders</h3><p>Join the first cohort.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Founder%20interest">Join the first cohort</a></p></div>
               <div><h3>Mentors</h3><p>Be one of a founder's two mentors, operator or investor.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Mentor%20interest">Become a mentor</a></p></div>
               <div><h3>Investors</h3><p>Take the hand-off: meet founders who already have an MVP and first traction.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Investor%20interest">Take the hand-off</a></p></div>
               <div><h3>Partners</h3><p>Take founders after first traction, fund a cohort, or host a Build Night.</p><p class="x-act"><a class="btn" href="mailto:?subject=Night%20Shift%3A%20Partner%20interest">Partner with us</a></p></div>
@@ -692,8 +871,9 @@
     <script src="pdf.worker.min.js"></script>
     <script src="jszip.min.js"></script>
     <script src="idea-import.js"></script>
+    <script src="market-research.js"></script>
     <script>
-      // Idea Check, Find a problem mode. Answers are saved in localStorage.
+      // Idea Check, Find a problem mode. Saves answers to localStorage.
       (function () {
         var $ = function (id) { return document.getElementById(id); };
         var e = function (x) { return String(x == null ? "" : x).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
@@ -809,8 +989,17 @@
         var dot = function (x) { x = t(x); return !x ? "" : /[.!?]$/.test(x) ? x : x + "."; };
         var cardText = function (p) {
           var w = whyLabel().filter(function (x) { return x !== "None yet"; });
-          return [dot(p.prob), t(p.who) ? "Who has it: " + dot(p.who) : "", t(p.how) ? "Today: " + dot(p.how) : "", t(p.cost) ? "Cost: " + dot(p.cost) : "", p.freq ? "Happens " + freqLabel(p.freq).toLowerCase() + "." : "", w.length ? "Why now: " + dot(w.join(", ")) : "", trendLine(p), p.crush ? "Business crush check: " + dot(crushText(p)) : "", pitLine()].filter(Boolean).join(" ");
+          return [dot(p.prob), t(p.who) ? "Who has it: " + dot(p.who) : "", t(p.how) ? "Today: " + dot(p.how) : "", t(p.cost) ? "Cost: " + dot(p.cost) : "", p.freq ? "Happens " + freqLabel(p.freq).toLowerCase() + "." : "", w.length ? "Why now: " + dot(w.join(", ")) : "", trendLine(p), p.crush ? "Business crush check: " + dot(crushText(p)) : "", pitLine(), marketLine()].filter(Boolean).join(" ");
         };
+        // Research-backed markets (market-research.js): matched on everything the founder has told Find a problem.
+        var fpText = function () {
+          return [st.exp.ind, st.exp.roles, st.exp.flows, st.raw, ($("fp-text") || {}).value].concat(st.probs.map(function (p) { return p ? [p.prob, p.who, p.how, p.cost].join(" ") : ""; })).join(" \n ");
+        };
+        var marketLine = function () {
+          var m = window.__nsmr ? window.__nsmr.titles(fpText()) : [];
+          return m.length ? "Research-backed markets it touches: " + dot(m.join(", ")) : "";
+        };
+        var marketsCard = function () { return window.__nsmr && window.__nsmr.cards.length ? window.__nsmr.matchedHTML(fpText(), "fp") : ""; };
         var trendLine = function (p) {
           var tr = trendsFor(p);
           return tr.length ? "Trends behind it: " + dot(tr.map(function (r) { var c = crossLabel(r.cross); return (t(r.trend) || cut(r.exists, 60)) + (c ? " (" + c.toLowerCase() + ")" : ""); }).join("; ")) : "";
@@ -873,7 +1062,7 @@
           5: function () {
             var ps = st.probs.filter(filled);
             var why = whyLabel();
-            if (!ps.length) return head(5, "One idea card per problem.") + '<p class="x-hint">Add at least one problem in step 2 to see its idea card.</p>' + pitsCard() + nav(5);
+            if (!ps.length) return head(5, "One idea card per problem.") + '<p class="x-hint">Add at least one problem in step 2 to see its idea card.</p>' + marketsCard() + pitsCard() + nav(5);
             var cards = ps.map(function (p) {
               var ok = worth(p), m = themes(p), k = st.probs.indexOf(p), tr = trendsFor(p), cd = crushDay(p);
               return "<div>" +
@@ -902,7 +1091,7 @@
                 '<button type="button" class="btn" data-fp-check="' + k + '">Check this idea</button>' +
                 "</div>";
             }).join("");
-            return head(5, "One idea card per problem. Frequent problems with a stated cost are worth testing first.") + '<div class="cards x-fp-res">' + cards + "</div>" + pitsCard() + nav(5);
+            return head(5, "One idea card per problem. Frequent problems with a stated cost are worth testing first.") + '<div class="cards x-fp-res">' + cards + "</div>" + marketsCard() + pitsCard() + nav(5);
           }
         };
         var pitsCard = function () {
@@ -1107,6 +1296,7 @@
           else if (b.id === "fp-text-go") {
             var txt = ($("fp-text") || {}).value || "";
             if (!cl(txt)) { say("Write a few sentences about your work first."); return; }
+            st.raw = String(txt).slice(0, 20000);
             apply(analyze(txt.split(/\n/).map(cl).filter(Boolean).map(function (l) { return [l]; }), "text"));
           }
           else if (b.id === "fp-file-go") {
@@ -1116,7 +1306,7 @@
             if (!window.__nsimp) { say("Couldn't read this file. " + PASTE); return; }
             say("Reading " + fl.name + "…", true);
             b.disabled = true;
-            window.__nsimp.readFile(fl).then(function (segs) { apply(analyze(segs, "file")); })
+            window.__nsimp.readFile(fl).then(function (segs) { st.raw = [].concat.apply([], segs).join("\n").slice(0, 20000); apply(analyze(segs, "file")); })
               .catch(function (x) {
                 say(x && x.tooBig ? "That file is over 25 MB. Try a smaller export, or paste the text into Describe your experience instead."
                   : x && x.badType ? "Use a .pdf, .pptx, .txt or .md file."
@@ -1155,6 +1345,24 @@
         };
         check.addEventListener("click", function () { setTimeout(markPath, 0); });
         markPath();
+        // "Use this market": add the market's problem as a new row in step 2, reusing an empty row first.
+        window.__nsfp = {
+          useMarket: function (txt, name) {
+            txt = t(txt); if (!txt) return;
+            if ($("x-mode-find").getAttribute("aria-pressed") !== "true") $("x-mode-find").click();
+            var at = -1;
+            for (var i = 0; i < st.probs.length; i++) if (st.probs[i] && t(st.probs[i].prob) === txt) at = i;
+            if (at < 0) for (var j = 0; j < st.probs.length; j++) if (!filled(st.probs[j])) { at = j; break; }
+            if (at < 0 && st.probs.length < 3) { st.probs.push({}); at = st.probs.length - 1; }
+            if (at < 0) { go(2); say("You already have three problems. Clear one in step 2 to add the " + (name || "market") + " problem.", false); markPath(); return; }
+            st.probs[at] = Object.assign(st.probs[at] || {}, { prob: txt });
+            go(2); save();
+            say("Added the " + (name || "market") + " problem as Problem " + (at + 1) + ". Add who has it, how often and what it costs.", true);
+            markPath();
+            var f = $("fp-p" + at + "-prob");
+            if (f) { f.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" }); f.focus({ preventScroll: true }); }
+          }
+        };
       })();
     </script>
     <script src="investor-find.js"></script>
@@ -1162,7 +1370,7 @@
     <script src="diligence.js"></script>
     <script>
       (function () {
-        var stops = ["s1", "s7", "s2", "s3", "s4", "s6", "s10"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+        var stops = ["s1", "s3", "s4", "s6", "s7", "investors", "s10"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
         var links = [].slice.call(document.querySelectorAll(".x-jump a"));
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var lastIdx = -1, lastAt = 0;
@@ -1249,7 +1457,7 @@
             "Name: " + f.name.value,
             "Email: " + f.email.value,
             "City: " + f.city.value,
-            "What I know better than most people: " + f.know.value,
+            "A problem I've seen up close: " + f.know.value,
             "Where I am on the path: " + (f.stage.value || "Not sure yet"),
             "Best times: " + (times.join(", ") || "Either")
           ].join("\n");
@@ -1262,13 +1470,45 @@
           compose();
         }
 
+        // Investor preference form → mailto
+        var pf = document.getElementById("inv-prefs");
+        var psend = document.getElementById("inv-prefs-send");
+        function composePrefs() {
+          var f = pf.elements;
+          var picked = function (n) { return [].slice.call(pf.querySelectorAll("input[name=" + n + "]:checked")).map(function (i) { return i.value; }).join(", "); };
+          var body = [
+            "Stages: " + (picked("stage") || "Not specified"),
+            "Check size: " + (f.check.value || "Not specified"),
+            "Industries: " + (f.ind.value || "Not specified"),
+            "Geography: " + (f.geo.value || "Not specified"),
+            "Channels: " + (picked("channel") || "Not specified")
+          ].join("\n");
+          psend.href = "mailto:?subject=Night%20Shift%20investor%20preferences&body=" + encodeURIComponent(body);
+        }
+        if (pf && psend) {
+          pf.addEventListener("input", composePrefs);
+          pf.addEventListener("change", composePrefs);
+          pf.addEventListener("submit", function (e) { e.preventDefault(); composePrefs(); psend.click(); });
+          composePrefs();
+        }
+
+        // Hero entry cards: open Idea Check in the matching mode, then scroll to it.
+        [].slice.call(document.querySelectorAll("[data-hero-mode]")).forEach(function (b) {
+          b.addEventListener("click", function () {
+            var tab = document.getElementById(b.getAttribute("data-hero-mode") === "find" ? "x-mode-find" : "x-mode-check");
+            if (tab) tab.click();
+            var target = document.getElementById("check") || document.getElementById("s7");
+            setTimeout(function () { if (target) window.scrollTo({ top: top(target) - 24, behavior: reduce ? "auto" : "smooth" }); }, 30);
+          });
+        });
+
         // Load the picked example (idea-check.js does the loading), then show its gaps and next steps.
         var load = document.getElementById("load-ex");
         if (load) load.addEventListener("click", function () {
           var pick = document.getElementById("ex-pick");
           if (!pick || pick.value === "") return;
           setTimeout(function () {
-            // Open the scorecard by its position in the step order.
+            // Open the Idea Check summary by its position in the step order.
             var stepper = document.getElementById("stepper");
             var scIdx = window.__nsic && window.__nsic.steps ? window.__nsic.steps.SC : -1;
             var scBtn = stepper && scIdx > -1 ? stepper.querySelector('[data-go="' + scIdx + '"]') : null;

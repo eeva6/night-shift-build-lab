@@ -1,0 +1,780 @@
+{
+ "schema_version": "1.0",
+ "generated": "2026-11-25",
+ "purpose": "Market-opportunity cards for Night Shift's Idea Check / Find a problem tool. Industry-agnostic: anyone can build for these markets; the founder's professional background, not gender, is what matters.",
+ "attribution": "Built from Ingeborg Investments' public research reports, with each statistic checked against its original source. Ingeborg Investments is not affiliated with and does not endorse Night Shift. Ingeborg market (TAM) figures are investor estimates: not additive across cards and not any startup's addressable market.",
+ "cards": [
+  {
+   "id": "healthcare",
+   "title": "Healthcare: the missing front door to primary care",
+   "stat": {
+    "text": "More than 30% of U.S. adults lacked a usual source of care in 2022, the highest level in a decade of measurement.",
+    "period": "2022",
+    "geography": "United States",
+    "type": "measured",
+    "ingeborg_citation": "Healthcare report p.32, citation 106 (AAFP, '2025 Primary Care Scorecard weighs Cost of Neglect')",
+    "verified": "Matches the original source wording ('more than 30%').",
+    "source": {
+     "publisher": "American Academy of Family Physicians (AAFP News), reporting the Robert Graham Center's 2025 Primary Care Scorecard (co-funded by Milbank Memorial Fund and The Physicians Foundation)",
+     "title": "2025 Primary Care Scorecard Weighs 'Cost of Neglect'",
+     "url": "https://www.aafp.org/news/government-medicine/cost-of-neglect.html",
+     "pub_date": "2025-03-20"
+    }
+   },
+   "problem": "Many adults have no regular clinician, so care defaults to urgent care and ERs, leaving patients, employers and health plans paying for fragmented, late care.",
+   "backgrounds": [
+    "nurse or nurse practitioner",
+    "clinic or practice manager",
+    "medical billing and coding specialist",
+    "health plan care coordinator",
+    "benefits or HR manager",
+    "pharmacist"
+   ],
+   "questions": [
+    "Who loses money when a patient has no regular clinician: plans, employers, hospitals or patients?",
+    "What do adults without a usual source of care do first when something feels wrong?",
+    "Which local clinics have open panels, and why aren't new patients finding them?"
+   ],
+   "next_steps": [
+    "Interview 10 adults who used urgent care in the last year about how they chose where to go.",
+    "Interview 5 clinic managers and 5 employer benefits leads about unfilled appointments and avoidable ER costs.",
+    "Concierge test: manually match 10 people to a primary-care clinic and track who books a visit."
+   ],
+   "keywords": [
+    "primary care",
+    "usual source of care",
+    "urgent care",
+    "emergency room",
+    "clinic",
+    "nurse",
+    "nurse practitioner",
+    "patient access",
+    "care navigation",
+    "care coordination",
+    "health plan",
+    "employer benefits",
+    "direct primary care",
+    "telehealth",
+    "scheduling",
+    "rural health"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Investing in Healthcare's Power Users (Ingeborg Investments, 2025)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/6908cc9e0dc34d074b001ee1_Investing%20in%20Healthcare%27s%20Power%20Users.pdf"
+    },
+    {
+     "label": "Original source: 2025 Primary Care Scorecard Weighs 'Cost of Neglect'",
+     "url": "https://www.aafp.org/news/government-medicine/cost-of-neglect.html"
+    }
+   ],
+   "ingeborg_report": "Investing in Healthcare's Power Users (Ingeborg Investments, 2025)",
+   "ingeborg_context": [
+    {
+     "figure": "$2.1T estimated 2025 U.S. healthcare spending on women's health (women ~60% of spend)",
+     "type": "market estimate",
+     "note": "Ingeborg's own market estimate; not additive with other Ingeborg TAMs and not a startup's addressable market."
+    }
+   ],
+   "limitations": [
+    "Fetched page is an AAFP news summary of the Scorecard, not the full Scorecard; the underlying survey dataset and the exact definition of 'usual source of care' were not opened (inferred to come from a federal household survey, unverified).",
+    "Ingeborg dates this citation May 10, 2025; the AAFP page is dated March 20, 2025.",
+    "National figure; no Nebraska or rural breakdown checked.",
+    "Does not say whether lacking a usual source is by choice (healthy adults) or by barrier."
+   ]
+  },
+  {
+   "id": "financial-security",
+   "title": "Financial security: half of people near retirement have no personal savings",
+   "stat": {
+    "text": "About 50% of women and 47% of men ages 55 to 66 had no personal retirement savings (49% of all adults that age) in 2017.",
+    "period": "2017 (2018 SIPP data)",
+    "geography": "United States",
+    "type": "survey (nationally representative federal survey, SIPP)",
+    "ingeborg_citation": "Wealthspan report p.14, citation 95 (U.S. Census Bureau, 2022)",
+    "verified": "Matches Ingeborg's '50% of women ages 55-66 have no personal retirement savings'.",
+    "source": {
+     "publisher": "U.S. Census Bureau (America Counts story by Brittany King)",
+     "title": "Women More Likely Than Men to Have No Retirement Savings",
+     "url": "https://www.census.gov/library/stories/2022/01/women-more-likely-than-men-to-have-no-retirement-savings.html",
+     "pub_date": "2022-01-13"
+    }
+   },
+   "problem": "Many people near retirement have no savings of their own, and the advisers, apps and employer plans that exist aren't reaching them in time.",
+   "backgrounds": [
+    "financial planner or adviser",
+    "bank or credit union branch staff",
+    "HR benefits or 401(k) administrator",
+    "tax preparer",
+    "divorce or estate paralegal",
+    "social worker or aging-services case manager"
+   ],
+   "questions": [
+    "Why do people in their 50s and 60s with income still have no retirement account?",
+    "Who do they trust about money today, and what does that adviser charge?",
+    "Which life events (divorce, widowhood, caregiving) trigger the search for financial help?"
+   ],
+   "next_steps": [
+    "Interview 10 people aged 50-66 without a retirement account about their last money decision.",
+    "Interview 5 small-employer owners about why they do or don't offer a retirement plan.",
+    "Run a free 'retirement check-up' clinic at a library or credit union and count sign-ups and follow-ups."
+   ],
+   "keywords": [
+    "retirement",
+    "retirement savings",
+    "401k",
+    "ira",
+    "pension",
+    "financial planning",
+    "financial advisor",
+    "wealth management",
+    "financial literacy",
+    "divorce",
+    "widowhood",
+    "social security",
+    "employee benefits",
+    "credit union",
+    "bank",
+    "aging",
+    "personal finance"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Women & Wealth: The Wealthspan (Ingeborg Investments, c. 2024)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/66edf7d2aa7b57e8fbf536d2_The%20Wealthspan%20Ingeborg%20Investments%20Research%20Report.pdf"
+    },
+    {
+     "label": "Ingeborg report web page",
+     "url": "https://www.ingeborginvestments.com/wealthspan"
+    },
+    {
+     "label": "Original source: Women More Likely Than Men to Have No Retirement Savings",
+     "url": "https://www.census.gov/library/stories/2022/01/women-more-likely-than-men-to-have-no-retirement-savings.html"
+    }
+   ],
+   "ingeborg_report": "Women & Wealth: The Wealthspan (Ingeborg Investments, c. 2024)",
+   "ingeborg_context": [
+    {
+     "figure": "$10T Wealthspan opportunity; women projected to control ~$30T in U.S. financial assets by 2030",
+     "type": "market estimate / projection",
+     "note": "Ingeborg market estimates and a third-party projection as reported by Ingeborg; not verified here, not additive, not a startup's addressable market."
+    }
+   ],
+   "limitations": [
+    "Data are from 2017; older than other cards.",
+    "'Personal' savings excludes a spouse's accounts; Census notes the gap narrows when couples' savings are combined.",
+    "Measures retirement accounts only, not home equity, pensions or Social Security.",
+    "Survey estimates carry sampling error; national only."
+   ]
+  },
+  {
+   "id": "motherhood-caregiving",
+   "title": "Motherhood and caregiving: most families eligible for child care help don't get it",
+   "stat": {
+    "text": "Of 12.5 million children potentially eligible for federal child care subsidies, 16% received them (23% of the 8.7 million eligible under stricter state rules).",
+    "period": "Fiscal year 2019",
+    "geography": "United States",
+    "type": "measured (modeled estimate from TRIM microsimulation on CPS data plus administrative data)",
+    "ingeborg_citation": "Motherhood report p.6, citation 10 (ASPE, 2022)",
+    "verified": "Matches Ingeborg's '12.5 million children ... 16% received subsidies'.",
+    "source": {
+     "publisher": "U.S. Dept. of Health and Human Services, Office of the Assistant Secretary for Planning and Evaluation (ASPE), Nina Chien",
+     "title": "Factsheet: Estimates of Child Care Eligibility & Receipt for Fiscal Year 2019",
+     "url": "https://aspe.hhs.gov/reports/child-care-eligibility-fy2019",
+     "pub_date": "2022-09-12"
+    }
+   },
+   "problem": "Most families eligible for child care help never receive it, so parents cut hours or quit and employers lose staff they trained.",
+   "backgrounds": [
+    "child care center director",
+    "home child care provider",
+    "early childhood teacher",
+    "social worker or caseworker",
+    "HR or shift-scheduling manager",
+    "hospital nurse manager"
+   ],
+   "questions": [
+    "Where do eligible parents drop out: not knowing, paperwork, waitlists, or no open slots?",
+    "What does a parent's lost shift or resignation cost their employer?",
+    "Which local providers have open slots but struggle to fill or staff them?"
+   ],
+   "next_steps": [
+    "Interview 10 working parents of children under 6 about their last child care search.",
+    "Interview 5 child care directors about waitlists, subsidy paperwork and staffing.",
+    "Concierge test: help 5 families apply for subsidies by hand and log every blocker."
+   ],
+   "keywords": [
+    "child care",
+    "childcare",
+    "daycare",
+    "caregiving",
+    "working parents",
+    "parental leave",
+    "subsidy",
+    "early childhood",
+    "preschool",
+    "nanny",
+    "shift work",
+    "employer benefits",
+    "caseworker",
+    "family support",
+    "elder care",
+    "care economy"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Investing in Motherhood (Ingeborg Investments, c. 2023)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/65825a525f055092ffed8ae9_Investing%20In%20Motherhood.pdf"
+    },
+    {
+     "label": "Original source: Factsheet: Estimates of Child Care Eligibility & Receipt for Fiscal Year 2019",
+     "url": "https://aspe.hhs.gov/reports/child-care-eligibility-fy2019"
+    }
+   ],
+   "ingeborg_report": "Investing in Motherhood (Ingeborg Investments, c. 2023)",
+   "ingeborg_context": [
+    {
+     "figure": "~$2T U.S. motherhood market ($1.8T of it in 'Care')",
+     "type": "market estimate",
+     "note": "Ingeborg market estimate built from third-party market reports; not verified here, not additive, not a startup's addressable market."
+    }
+   ],
+   "limitations": [
+    "FY2019 data, before pandemic-era child care funding and its 2023 expiry.",
+    "Eligibility is modeled (TRIM microsimulation), not a head count.",
+    "Covers CCDF-type subsidies only; doesn't measure unmet demand among families above income limits.",
+    "National only; Nebraska rates not checked."
+   ]
+  },
+  {
+   "id": "ai-governance",
+   "title": "AI governance: someone has to answer for what the AI agents do",
+   "stat": {
+    "text": "77% of senior women leaders surveyed said they had worked on AI agent accountability, evaluation or reporting lines in the past 12 months.",
+    "period": "Fielded Feb 25 - Mar 10, 2026",
+    "geography": "United States",
+    "type": "survey (online, unweighted; n=1,005 senior women leaders, VP+ experience)",
+    "ingeborg_citation": "Careers report p.32 ('How can compliance become a competitive advantage?'), citation 34 (Chief & Harris Poll, 2026)",
+    "verified": "Figure read from the original survey PDF; Ingeborg cites this survey for the compliance section but does not quote this exact figure.",
+    "source": {
+     "publisher": "Chief and The Harris Poll",
+     "title": "Beyond Speed: How Women Leaders Are Defining the Human-Agentic Workforce",
+     "url": "https://assets.chief.com/marketing/Beyond%20Speed_How%20Women%20Leaders%20Are%20Defining%20the%20Human%20Agentic%20Workforce.pdf",
+     "pub_date": "2026-04-07"
+    }
+   },
+   "problem": "Companies are deploying AI agents faster than they can monitor, permission and audit them, leaving unclear accountability when an agent's output fails or causes harm.",
+   "backgrounds": [
+    "compliance analyst",
+    "risk or internal audit manager",
+    "IT administrator",
+    "quality assurance lead",
+    "privacy or legal operations specialist",
+    "operations manager"
+   ],
+   "questions": [
+    "Who in a mid-size company gets blamed today when an AI tool makes a costly mistake?",
+    "How do teams currently track which AI agents can access which data and systems?",
+    "What would a regulator, auditor or customer ask to see about AI use?"
+   ],
+   "next_steps": [
+    "Interview 10 compliance, audit or IT leads at Midwest firms (banks, insurers, manufacturers) about AI oversight today.",
+    "Collect 5 real AI-use policies or incident write-ups and map the manual steps.",
+    "Concierge test: run a manual AI-use audit for 2 small businesses and see if they'd pay to repeat it."
+   ],
+   "keywords": [
+    "ai governance",
+    "compliance",
+    "risk management",
+    "internal audit",
+    "ai agents",
+    "responsible ai",
+    "ai policy",
+    "model risk",
+    "data privacy",
+    "security",
+    "permissions",
+    "audit trail",
+    "quality assurance",
+    "regulation",
+    "legal operations",
+    "it administration"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/6a3b821d6b75b7909ee91b0d_f9ced2989b4f767e7263468c79efb361_Building%20Enduring%20Careers%20in%20the%20Age%20of%20AI.pdf"
+    },
+    {
+     "label": "Ingeborg report web page",
+     "url": "https://www.ingeborginvestments.com/research/careers/report"
+    },
+    {
+     "label": "Original source: Beyond Speed: How Women Leaders Are Defining the Human-Agentic Workforce",
+     "url": "https://assets.chief.com/marketing/Beyond%20Speed_How%20Women%20Leaders%20Are%20Defining%20the%20Human%20Agentic%20Workforce.pdf"
+    }
+   ],
+   "ingeborg_report": "Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+   "ingeborg_context": [
+    {
+     "figure": "Governance work (finance, legal, compliance, risk) is ~9.9% of a $7.37T U.S. labor TAM but ~0.4% of observed Claude.ai usage ('25x underexposed')",
+     "type": "investment hypothesis / market estimate",
+     "note": "Ingeborg's own analysis combining BLS wages with Anthropic usage data; a thesis, not a measured gap, and not a startup's addressable market."
+    }
+   ],
+   "limitations": [
+    "Commissioned by Chief (a leadership network for women); unweighted online sample, so not representative of all leaders or companies.",
+    "Sample is senior women leaders only (n=1,005 of 1,768 total respondents); shows activity among respondents, not market size or spend.",
+    "Self-reported activity, not observed practice.",
+    "PDF text was extracted from a designed layout; the 77% label pairing should be spot-checked against the page visually."
+   ]
+  },
+  {
+   "id": "future-of-work",
+   "title": "Future of work: AI adoption is uneven across the workforce",
+   "stat": {
+    "text": "Across 318,924 respondents in 76 sources, 47.8% of men vs 39.3% of women used generative AI, a 22% relative gap (about 16% since early 2025).",
+    "period": "Studies pooled through early 2026 (paper revised May 2026)",
+    "geography": "Global (100+ countries)",
+    "type": "survey (synthesis of 76 survey sources plus web-traffic data)",
+    "ingeborg_citation": "Careers report p.13, citation 15 (Otis, Delecourt, Cranney & Koning, HBS Working Paper 25-023)",
+    "verified": "Updated version confirms the 22% relative gap; Ingeborg cites an earlier version ('140K+ workers'); the current version uses 318,924 respondents and says the gap stabilized near 16%.",
+    "source": {
+     "publisher": "Harvard Business School (Working Paper No. 25-023; Cranney, Delecourt & Koning)",
+     "title": "Global Evidence on Gender Gaps and Generative AI Over Time",
+     "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=66548",
+     "pub_date": "2024-10 (revised 2026-05)"
+    }
+   },
+   "problem": "Employers buy AI tools but many workers don't use them, so promised productivity stalls and some groups fall behind on skills that now affect pay and promotion.",
+   "backgrounds": [
+    "learning and development or corporate trainer",
+    "HR business partner",
+    "IT change-management lead",
+    "operations supervisor",
+    "community college instructor",
+    "workforce development program manager"
+   ],
+   "questions": [
+    "Which roles at local employers have AI tools but low actual usage, and why?",
+    "What stops a frontline or admin worker from using AI tools they already have?",
+    "Who owns AI training budgets in a 100-1,000 person company?"
+   ],
+   "next_steps": [
+    "Interview 10 non-technical employees about the last time they tried, or avoided, an AI tool at work.",
+    "Interview 5 HR or L&D leads about AI rollout results and training spend.",
+    "Pilot a 2-week AI coaching cohort for one team and measure usage before and after."
+   ],
+   "keywords": [
+    "future of work",
+    "ai adoption",
+    "generative ai",
+    "upskilling",
+    "reskilling",
+    "training",
+    "learning and development",
+    "change management",
+    "productivity",
+    "workforce development",
+    "frontline workers",
+    "hr",
+    "automation",
+    "digital skills",
+    "community college"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/6a3b821d6b75b7909ee91b0d_f9ced2989b4f767e7263468c79efb361_Building%20Enduring%20Careers%20in%20the%20Age%20of%20AI.pdf"
+    },
+    {
+     "label": "Ingeborg report web page",
+     "url": "https://www.ingeborginvestments.com/research/careers/report"
+    },
+    {
+     "label": "Original source: Global Evidence on Gender Gaps and Generative AI Over Time",
+     "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=66548"
+    }
+   ],
+   "ingeborg_report": "Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+   "ingeborg_context": [
+    {
+     "figure": "$9.11T 'Modern Enterprise' (1,000+ employees) and $7.54T 'Solopreneur Renaissance' segments",
+     "type": "market estimate",
+     "note": "Ingeborg labor-spend TAMs; not additive, not a startup's addressable market."
+    }
+   ],
+   "limitations": [
+    "Working paper, not yet peer-reviewed.",
+    "Pools surveys with different methods, samples and dates; global, not U.S.- or Nebraska-specific.",
+    "Measures whether people use AI, not how well or for what work.",
+    "Gender gap is one lens; the market is uneven AI adoption across any worker group."
+   ]
+  },
+  {
+   "id": "career-development",
+   "title": "Career development: 'potential' ratings shape who gets promoted",
+   "stat": {
+    "text": "At a large retail chain (29,809 management-track employees), women got higher performance but lower 'potential' ratings; the potential gap explained about half the promotion gap.",
+    "period": "Firm personnel records (years not stated on the fetched abstract page)",
+    "geography": "United States (one large retail chain)",
+    "type": "measured (firm administrative data; peer-reviewed, American Economic Review)",
+    "ingeborg_citation": "Careers report p.14, citation 16 (Benson, Li & Shue, AER 2026)",
+    "verified": "Abstract confirms the direction and the 'about half' finding; Ingeborg's specific figures (7.4% more likely top performance, 28% less likely top potential) were not checked against the full paper.",
+    "source": {
+     "publisher": "American Economic Association, American Economic Review vol. 116, no. 2 (Benson, Li & Shue)",
+     "title": "\"Potential\" and the Gender Promotion Gap",
+     "url": "https://doi.org/10.1257/aer.20220831",
+     "pub_date": "2026-02"
+    }
+   },
+   "problem": "Promotions often hinge on subjective 'potential' judgments that misjudge future performance, so employers lose strong performers and promote on weak signals.",
+   "backgrounds": [
+    "HR business partner",
+    "talent or performance management specialist",
+    "people analytics analyst",
+    "recruiter",
+    "retail or operations district manager",
+    "executive coach"
+   ],
+   "questions": [
+    "How do mid-size employers rate 'potential' today, and who decides?",
+    "Do promotion decisions track later performance, and does anyone check?",
+    "What evidence would a manager trust over gut feel when promoting someone?"
+   ],
+   "next_steps": [
+    "Interview 10 HR or people-analytics leads about how they run talent reviews.",
+    "Interview 10 managers about their last promotion decision and what data they used.",
+    "Offer 2 employers a free back-test of past potential ratings against later performance."
+   ],
+   "keywords": [
+    "career development",
+    "promotion",
+    "performance review",
+    "talent review",
+    "potential rating",
+    "succession planning",
+    "people analytics",
+    "hr",
+    "management",
+    "bias",
+    "retention",
+    "coaching",
+    "mentorship",
+    "internal mobility",
+    "leadership development"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/6a3b821d6b75b7909ee91b0d_f9ced2989b4f767e7263468c79efb361_Building%20Enduring%20Careers%20in%20the%20Age%20of%20AI.pdf"
+    },
+    {
+     "label": "Ingeborg report web page",
+     "url": "https://www.ingeborginvestments.com/research/careers/report"
+    },
+    {
+     "label": "Original source: \"Potential\" and the Gender Promotion Gap",
+     "url": "https://doi.org/10.1257/aer.20220831"
+    }
+   ],
+   "ingeborg_report": "Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+   "limitations": [
+    "Single employer (a large retail chain); may not generalize to other industries.",
+    "Only the abstract page was read; detailed percentages and study years not verified.",
+    "Shows a mechanism, not a market size or willingness to pay."
+   ]
+  },
+  {
+   "id": "independent-work",
+   "title": "Independent work and entrepreneurship: tens of millions of one-person businesses",
+   "stat": {
+    "text": "29.8 million U.S. businesses with no paid employees brought in $1.7 trillion in 2022, about 6.8% of the economy.",
+    "period": "2022",
+    "geography": "United States",
+    "type": "measured (Census Nonemployer Statistics, from federal tax records)",
+    "ingeborg_citation": "Careers report p.25, citation 20 (Census Nonemployer Statistics 2022)",
+    "verified": "Matches Ingeborg's '29.8M non-employer firms'. Ingeborg's '$60K average revenue' is roughly consistent ($1.7T / 29.8M is about $57K, derived here, not a published figure).",
+    "source": {
+     "publisher": "U.S. Census Bureau (America Counts story by Travis Shoemaker)",
+     "title": "Census Bureau Statistics Shed Light on Self-Employment by Sector and State During Small Business Week",
+     "url": "https://www.census.gov/library/stories/2025/05/smallest-businesses.html",
+     "pub_date": "2025-05-06"
+    }
+   },
+   "problem": "Millions of one-person businesses run on thin margins and do their own admin (bookkeeping, sales, compliance) with tools built for bigger companies.",
+   "backgrounds": [
+    "bookkeeper or accountant",
+    "tax preparer",
+    "freelancer or independent consultant",
+    "small business development center adviser",
+    "insurance agent",
+    "banker or credit union small-business lender"
+   ],
+   "questions": [
+    "Which back-office task eats the most unpaid hours for solo business owners?",
+    "What do solo owners already pay for software, and what did they cancel?",
+    "Which solo trades or services are growing fastest in Nebraska?"
+   ],
+   "next_steps": [
+    "Interview 10 solo business owners in one trade about their last month of admin work.",
+    "Interview 5 bookkeepers or tax preparers about what clients struggle with most.",
+    "Concierge test: do one admin task by hand for 5 solo owners for a fee."
+   ],
+   "keywords": [
+    "solopreneur",
+    "freelancer",
+    "self-employed",
+    "sole proprietor",
+    "small business",
+    "independent contractor",
+    "gig work",
+    "bookkeeping",
+    "invoicing",
+    "taxes",
+    "back office",
+    "entrepreneurship",
+    "consulting",
+    "side business",
+    "small business lending",
+    "ai tools"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/6a3b821d6b75b7909ee91b0d_f9ced2989b4f767e7263468c79efb361_Building%20Enduring%20Careers%20in%20the%20Age%20of%20AI.pdf"
+    },
+    {
+     "label": "Ingeborg report web page",
+     "url": "https://www.ingeborginvestments.com/research/careers/report"
+    },
+    {
+     "label": "Original source: Census Bureau Statistics Shed Light on Self-Employment by Sector and State During Small Business Week",
+     "url": "https://www.census.gov/library/stories/2025/05/smallest-businesses.html"
+    }
+   ],
+   "ingeborg_report": "Building Enduring Careers in the Age of AI (Ingeborg Investments, 2026)",
+   "ingeborg_context": [
+    {
+     "figure": "$7.54T 'Solopreneur Renaissance' segment (0-19 employees)",
+     "type": "market estimate",
+     "note": "Ingeborg market estimate; not additive, not a startup's addressable market."
+    }
+   ],
+   "limitations": [
+    "Counts businesses (tax filings with receipts of $1,000+), not people; one person can file several, and many are side income.",
+    "2022 data; the average-revenue figure is derived and hides a very skewed distribution.",
+    "Nebraska count not pulled (available in NES state tables).",
+    "Related check: BLS/CPS self-employed unincorporated workers were 8.743M in Oct 2026 (FRED LNS12032192, fetched), a different measure from NES business counts."
+   ]
+  },
+  {
+   "id": "household-buying",
+   "title": "Household buying: groceries and family meals",
+   "stat": {
+    "text": "In US two-parent households with kids under 18, 80% of mothers say they're the primary grocery shopper, and 71% handle both shopping and meal prep.",
+    "period": "2014–2016 (ATUS Eating & Health Module)",
+    "geography": "United States",
+    "type": "survey (nationally representative federal time-use survey)",
+    "ingeborg_citation": "Motherhood report p.14 headline '80% of women are both the usual meal prepper and food shopper' overstates this: it applies to mothers in two-parent households, and 71% do both.",
+    "verified": "Matches Pew wording, fetched 2026-11-25.",
+    "source": {
+     "publisher": "Pew Research Center (Katherine Schaeffer), analysis of BLS American Time Use Survey",
+     "title": "Among U.S. couples, women do more cooking and grocery shopping than men",
+     "url": "https://www.pewresearch.org/short-reads/2019/09/24/among-u-s-couples-women-do-more-cooking-and-grocery-shopping-than-men/",
+     "pub_date": "2019-09-24"
+    }
+   },
+   "problem": "The person who plans, buys and cooks for a household carries a daily, repeated load of decisions, and the tools built for it still leave most of the planning manual.",
+   "backgrounds": [
+    "dietitian or nutritionist",
+    "grocery or retail operations manager",
+    "food service or school nutrition manager",
+    "consumer packaged goods brand or category manager",
+    "supply chain or logistics analyst",
+    "care coordinator for families or seniors"
+   ],
+   "questions": [
+    "Which part of feeding a household costs the most time: planning, buying or cooking?",
+    "When do families abandon meal kits or grocery apps, and why?",
+    "Who pays today to save that time: households, employers, health plans or grocers?"
+   ],
+   "next_steps": [
+    "Interview 10 parents who do most of their household's grocery shopping about last week's planning, trips and spend.",
+    "Ask 5 grocers or food brands what they pay to reach the household's primary shopper.",
+    "Concierge test: plan and order a week of meals for 5 households and track who pays to repeat it."
+   ],
+   "keywords": [
+    "grocery",
+    "groceries",
+    "meal planning",
+    "meal prep",
+    "food",
+    "nutrition",
+    "dietitian",
+    "retail",
+    "consumer packaged goods",
+    "cpg",
+    "household",
+    "family meals",
+    "shopping",
+    "supply chain",
+    "school nutrition",
+    "food service",
+    "recipes",
+    "pantry"
+   ],
+   "links": [
+    {
+     "label": "Ingeborg report: Investing in Motherhood (Ingeborg Investments)",
+     "url": "https://cdn.prod.website-files.com/64304c551493bf36e87ad1cc/65825a525f055092ffed8ae9_Investing%20In%20Motherhood.pdf"
+    },
+    {
+     "label": "Original source: Pew Research Center, Sep 24, 2019",
+     "url": "https://www.pewresearch.org/short-reads/2019/09/24/among-u-s-couples-women-do-more-cooking-and-grocery-shopping-than-men/"
+    }
+   ]
+  }
+ ],
+ "audit": [
+  {
+   "card_id": "healthcare",
+   "stat": "More than 30% of U.S. adults lacked a usual source of care in 2022, the highest level in a decade of measurement.",
+   "source": "American Academy of Family Physicians (AAFP News), reporting the Robert Graham Center's 2025 Primary Care Scorecard (co-funded by Milbank Memorial Fund and The Physicians Foundation) - 2025 Primary Care Scorecard Weighs 'Cost of Neglect'",
+   "url": "https://www.aafp.org/news/government-medicine/cost-of-neglect.html",
+   "pub_date": "2025-03-20",
+   "period": "2022",
+   "geography": "United States",
+   "type": "measured",
+   "ingeborg_citation": "Healthcare report p.32, citation 106 (AAFP, '2025 Primary Care Scorecard weighs Cost of Neglect')",
+   "verified": "Matches the original source wording ('more than 30%').",
+   "limitations": [
+    "Fetched page is an AAFP news summary of the Scorecard, not the full Scorecard; the underlying survey dataset and the exact definition of 'usual source of care' were not opened (inferred to come from a federal household survey, unverified).",
+    "Ingeborg dates this citation May 10, 2025; the AAFP page is dated March 20, 2025.",
+    "National figure; no Nebraska or rural breakdown checked.",
+    "Does not say whether lacking a usual source is by choice (healthy adults) or by barrier."
+   ]
+  },
+  {
+   "card_id": "financial-security",
+   "stat": "About 50% of women and 47% of men ages 55 to 66 had no personal retirement savings (49% of all adults that age) in 2017.",
+   "source": "U.S. Census Bureau (America Counts story by Brittany King) - Women More Likely Than Men to Have No Retirement Savings",
+   "url": "https://www.census.gov/library/stories/2022/01/women-more-likely-than-men-to-have-no-retirement-savings.html",
+   "pub_date": "2022-01-13",
+   "period": "2017 (2018 SIPP data)",
+   "geography": "United States",
+   "type": "survey (nationally representative federal survey, SIPP)",
+   "ingeborg_citation": "Wealthspan report p.14, citation 95 (U.S. Census Bureau, 2022)",
+   "verified": "Matches Ingeborg's '50% of women ages 55-66 have no personal retirement savings'.",
+   "limitations": [
+    "Data are from 2017; older than other cards.",
+    "'Personal' savings excludes a spouse's accounts; Census notes the gap narrows when couples' savings are combined.",
+    "Measures retirement accounts only, not home equity, pensions or Social Security.",
+    "Survey estimates carry sampling error; national only."
+   ]
+  },
+  {
+   "card_id": "motherhood-caregiving",
+   "stat": "Of 12.5 million children potentially eligible for federal child care subsidies, 16% received them (23% of the 8.7 million eligible under stricter state rules).",
+   "source": "U.S. Dept. of Health and Human Services, Office of the Assistant Secretary for Planning and Evaluation (ASPE), Nina Chien - Factsheet: Estimates of Child Care Eligibility & Receipt for Fiscal Year 2019",
+   "url": "https://aspe.hhs.gov/reports/child-care-eligibility-fy2019",
+   "pub_date": "2022-09-12",
+   "period": "Fiscal year 2019",
+   "geography": "United States",
+   "type": "measured (modeled estimate from TRIM microsimulation on CPS data plus administrative data)",
+   "ingeborg_citation": "Motherhood report p.6, citation 10 (ASPE, 2022)",
+   "verified": "Matches Ingeborg's '12.5 million children ... 16% received subsidies'.",
+   "limitations": [
+    "FY2019 data, before pandemic-era child care funding and its 2023 expiry.",
+    "Eligibility is modeled (TRIM microsimulation), not a head count.",
+    "Covers CCDF-type subsidies only; doesn't measure unmet demand among families above income limits.",
+    "National only; Nebraska rates not checked."
+   ]
+  },
+  {
+   "card_id": "ai-governance",
+   "stat": "77% of senior women leaders surveyed said they had worked on AI agent accountability, evaluation or reporting lines in the past 12 months.",
+   "source": "Chief and The Harris Poll - Beyond Speed: How Women Leaders Are Defining the Human-Agentic Workforce",
+   "url": "https://assets.chief.com/marketing/Beyond%20Speed_How%20Women%20Leaders%20Are%20Defining%20the%20Human%20Agentic%20Workforce.pdf",
+   "pub_date": "2026-04-07",
+   "period": "Fielded Feb 25 - Mar 10, 2026",
+   "geography": "United States",
+   "type": "survey (online, unweighted; n=1,005 senior women leaders, VP+ experience)",
+   "ingeborg_citation": "Careers report p.32 ('How can compliance become a competitive advantage?'), citation 34 (Chief & Harris Poll, 2026)",
+   "verified": "Figure read from the original survey PDF; Ingeborg cites this survey for the compliance section but does not quote this exact figure.",
+   "limitations": [
+    "Commissioned by Chief (a leadership network for women); unweighted online sample, so not representative of all leaders or companies.",
+    "Sample is senior women leaders only (n=1,005 of 1,768 total respondents); shows activity among respondents, not market size or spend.",
+    "Self-reported activity, not observed practice.",
+    "PDF text was extracted from a designed layout; the 77% label pairing should be spot-checked against the page visually."
+   ]
+  },
+  {
+   "card_id": "future-of-work",
+   "stat": "Across 318,924 respondents in 76 sources, 47.8% of men vs 39.3% of women used generative AI, a 22% relative gap (about 16% since early 2025).",
+   "source": "Harvard Business School (Working Paper No. 25-023; Cranney, Delecourt & Koning) - Global Evidence on Gender Gaps and Generative AI Over Time",
+   "url": "https://www.hbs.edu/faculty/Pages/item.aspx?num=66548",
+   "pub_date": "2024-10 (revised 2026-05)",
+   "period": "Studies pooled through early 2026 (paper revised May 2026)",
+   "geography": "Global (100+ countries)",
+   "type": "survey (synthesis of 76 survey sources plus web-traffic data)",
+   "ingeborg_citation": "Careers report p.13, citation 15 (Otis, Delecourt, Cranney & Koning, HBS Working Paper 25-023)",
+   "verified": "Updated version confirms the 22% relative gap; Ingeborg cites an earlier version ('140K+ workers'); the current version uses 318,924 respondents and says the gap stabilized near 16%.",
+   "limitations": [
+    "Working paper, not yet peer-reviewed.",
+    "Pools surveys with different methods, samples and dates; global, not U.S.- or Nebraska-specific.",
+    "Measures whether people use AI, not how well or for what work.",
+    "Gender gap is one lens; the market is uneven AI adoption across any worker group."
+   ]
+  },
+  {
+   "card_id": "career-development",
+   "stat": "At a large retail chain (29,809 management-track employees), women got higher performance but lower 'potential' ratings; the potential gap explained about half the promotion gap.",
+   "source": "American Economic Association, American Economic Review vol. 116, no. 2 (Benson, Li & Shue) - \"Potential\" and the Gender Promotion Gap",
+   "url": "https://doi.org/10.1257/aer.20220831",
+   "pub_date": "2026-02",
+   "period": "Firm personnel records (years not stated on the fetched abstract page)",
+   "geography": "United States (one large retail chain)",
+   "type": "measured (firm administrative data; peer-reviewed, American Economic Review)",
+   "ingeborg_citation": "Careers report p.14, citation 16 (Benson, Li & Shue, AER 2026)",
+   "verified": "Abstract confirms the direction and the 'about half' finding; Ingeborg's specific figures (7.4% more likely top performance, 28% less likely top potential) were not checked against the full paper.",
+   "limitations": [
+    "Single employer (a large retail chain); may not generalize to other industries.",
+    "Only the abstract page was read; detailed percentages and study years not verified.",
+    "Shows a mechanism, not a market size or willingness to pay."
+   ]
+  },
+  {
+   "card_id": "independent-work",
+   "stat": "29.8 million U.S. businesses with no paid employees brought in $1.7 trillion in 2022, about 6.8% of the economy.",
+   "source": "U.S. Census Bureau (America Counts story by Travis Shoemaker) - Census Bureau Statistics Shed Light on Self-Employment by Sector and State During Small Business Week",
+   "url": "https://www.census.gov/library/stories/2025/05/smallest-businesses.html",
+   "pub_date": "2025-05-06",
+   "period": "2022",
+   "geography": "United States",
+   "type": "measured (Census Nonemployer Statistics, from federal tax records)",
+   "ingeborg_citation": "Careers report p.25, citation 20 (Census Nonemployer Statistics 2022)",
+   "verified": "Matches Ingeborg's '29.8M non-employer firms'. Ingeborg's '$60K average revenue' is roughly consistent ($1.7T / 29.8M is about $57K, derived here, not a published figure).",
+   "limitations": [
+    "Counts businesses (tax filings with receipts of $1,000+), not people; one person can file several, and many are side income.",
+    "2022 data; the average-revenue figure is derived and hides a very skewed distribution.",
+    "Nebraska count not pulled (available in NES state tables).",
+    "Related check: BLS/CPS self-employed unincorporated workers were 8.743M in Oct 2026 (FRED LNS12032192, fetched), a different measure from NES business counts."
+   ]
+  },
+  {
+   "card_id": "household-buying",
+   "stat": "In US two-parent households with kids under 18, 80% of mothers say they're the primary grocery shopper, and 71% handle both shopping and meal prep.",
+   "source": "Pew Research Center (Katherine Schaeffer), analysis of BLS American Time Use Survey",
+   "url": "https://www.pewresearch.org/short-reads/2019/09/24/among-u-s-couples-women-do-more-cooking-and-grocery-shopping-than-men/",
+   "pub_date": "2019-09-24",
+   "period": "2014-2016",
+   "geography": "United States",
+   "type": "survey",
+   "limitations": [
+    "Data is 2014-2016; applies to mothers in two-parent households, not all women.",
+    "Ingeborg's '85% of household purchases' is unsupported and not used."
+   ]
+  }
+ ]
+}

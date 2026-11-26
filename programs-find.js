@@ -1,6 +1,6 @@
 /* Idea Check, Find programs mode. Fourth option in the Idea Check switch
    (#check .x-fp-switch [data-mode="programs"]), panel #prog-panel.
-   Deadline status is worked out against today's date.
+   Runs in the browser. Deadline status is worked out against today's date.
    Styles: idea-check.css (.x-inv-*) plus .x-pg-* in index.html. */
 (function () {
   "use strict";

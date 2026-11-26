@@ -112,7 +112,7 @@
       { id: "t_coach", l: "Feedback you got and what you changed because of it", t: "t", min: 20 }] };
   var INV = { name: "Investors", fw: "Investor theses", sub: "Who is already asking for this." };
   var VAL = { name: "Validate", fw: "Validate online", sub: "Search for proof, then log what you find." };
-  var SCO = { name: "Scorecard", fw: "Your scorecard", sub: "The score, the gaps, and what to do next." };
+  var SCO = { name: "Summary", fw: "Your Idea Check summary", sub: "Your next steps this week, where your evidence stands, and the gaps to close." };
   var WHY = { name: "Why you", fw: "Founder fit and pitch", sub: "Fit is earned, not credentialed. Turn your experience, access and learning into a story investors remember." };
   // Step order. Every step number below is derived from this order.
   var ALL = F.concat([INV, VAL, TECH, SCO, WHY]);
@@ -120,7 +120,7 @@
   var S_YC = at("YC idea evaluation"), S_THIEL = at("Thiel's 7 questions"), S_BEACH = at("Beachhead & TAM"), S_BMC = at("Business Model Canvas");
   var S_LEAN = at("Lean Canvas"), S_MAZE = at("Who's tried this"), S_VIRAL = at("VIRAL Levels 1-2"), S_TECH = ALL.indexOf(TECH);
   var S_INV = ALL.indexOf(INV), S_VAL = ALL.indexOf(VAL), S_SC = ALL.indexOf(SCO), S_WHY = ALL.indexOf(WHY), LAST = ALL.length - 1;
-  // Scored framework steps (every step with questions, after step 0), in step order.
+  // Framework steps (every step with questions, after step 0), in step order.
   var FW = ALL.map(function (f, i) { return i && f.qs ? i : -1; }).filter(function (i) { return i > 0; });
   var isForm = function (i) { return !!(ALL[i] && ALL[i].qs); };
   var WQ = [
@@ -194,19 +194,91 @@
     if (q.t === "s") { var o = q.o.filter(function (p) { return p[0] === x; })[0]; return o && o.length > 2 ? o[2] : 1; }
     return x.length >= (q.min || 20) ? 1 : 0.5;
   };
-  var stepScore = function (i) {
+  // Internal weights only. They pick the verdict wording; no number is shown.
+  var stepPts = function (i) {
     var qs = ALL[i].qs, x = i === S_MAZE ? 2 : 0, b = (qs.reduce(function (a, q) { return a + credit(q); }, 0) + (x ? x * compCredit() : 0)) / (qs.length + x) * 100;
     var r = b - open(i).reduce(function (a, g) { return a + PEN[g.sev]; }, 0) + gaps(i).filter(resolved).length * 3;
     return Math.max(0, Math.min(100, Math.round(r)));
   };
-  var evScore = function () {
+  var evPts = function () {
     var sup = s.ev.filter(function (x) { return x.k === "s"; }).length, con = s.ev.length - sup;
     if (!s.ev.length) return 0;
     return Math.round(100 * (sup / (sup + con)) * Math.min(1, s.ev.length / 5));
   };
-  var overall = function () {
-    var t = FW.reduce(function (a, i) { return a + ALL[i].w * stepScore(i); }, 0) + 0.1 * evScore();
+  var sumPts = function () {
+    var t = FW.reduce(function (a, i) { return a + ALL[i].w * stepPts(i); }, 0) + 0.1 * evPts();
     return Math.round(t);
+  };
+  // Learning progress: framework questions answered, counting the company list as one.
+  var progress = function () {
+    var tot = 0, got = 0;
+    FW.forEach(function (i) { ALL[i].qs.forEach(function (q) { tot++; if (v(q.id) !== "") got++; }); });
+    tot++; if (attempts()) got++;
+    return { got: got, tot: tot };
+  };
+  var stepProgress = function (i) {
+    var qs = ALL[i].qs, got = qs.filter(function (q) { return v(q.id) !== ""; }).length, tot = qs.length;
+    if (i === S_MAZE) { tot++; if (attempts()) got++; }
+    return { got: got, tot: tot };
+  };
+
+  // Evidence ladder: the highest rung the founder's evidence inputs reach.
+  var LADDER = [
+    "Untested founder hypothesis",
+    "Secondary research and market signals",
+    "Structured customer discovery",
+    "Observed behavior and documented costs",
+    "Paid pilots or concrete commitments",
+    "Paying customers and repeat usage"
+  ];
+  var LADDER_NEXT = [
+    "Log one market signal in Validate, or list who's tried this, to reach level 1.",
+    "Hold five structured interviews about past behavior, and log the count in Why you, to reach level 2.",
+    "Document what the problem costs (time, money, errors) from what you observed, across ten or more conversations, to reach level 3.",
+    "Get a paid pilot or a concrete commitment (a deposit, a signed pilot or a letter of intent), then mark a canvas box Validated with money, to reach level 4.",
+    "Turn pilots into paying customers who come back, and track repeat usage, to reach level 5.",
+    "You're at the top rung. Keep tracking renewals and repeat usage."
+  ];
+  var COSTRE = /\$\s?\d|\d+\s?(%|percent|hours?|hrs|days?|weeks?)\b|\b(cost|costs|costing|spend|spends|paid|pay|pays|lost|losing|wasted?)\b/i;
+  var level = function () {
+    var st = ["s_seg", "s_vp", "s_rev"].map(v), convo = n("w_convo");
+    var money = st.filter(function (x) { return x === "money"; }).length, intv = st.some(function (x) { return x === "int" || x === "money"; });
+    var costDoc = COSTRE.test([v("problem"), v("l_alt"), v("w_learn")].concat(Object.keys(s.fu).map(function (k) { return s.fu[k]; })).join(" "));
+    if (v("s_rev") === "money" && money >= 2) return 5;
+    if (money) return 4;
+    if ((convo >= 10 || intv) && costDoc) return 3;
+    if (convo >= 5 || intv) return 2;
+    if (s.ev.length || attempts()) return 1;
+    return 0;
+  };
+
+  // Four reads, shown as labels only.
+  var READS = ["Not started", "Early", "Developing", "Strong"];
+  var QIDX = {}; F.concat([TECH]).forEach(function (f) { f.qs.forEach(function (q) { QIDX[q.id] = q; }); }); WQ.forEach(function (q) { QIDX[q.id] = q; });
+  var optLab = function (id) { var q = QIDX[id], x = v(id); if (!q || !q.o || !x) return ""; var o = q.o.filter(function (p) { return p[0] === x; })[0]; return o ? o[1] : ""; };
+  var reads = function () {
+    var out = [];
+    // Opportunity potential: severity, market size, scalability, differentiation.
+    var oq = ["acute", "size", "eng", "mono", "dur", "comp"].filter(function (id) { return v(id) !== ""; });
+    var oAvg = oq.length ? oq.reduce(function (a, id) { return a + credit(QIDX[id]); }, 0) / oq.length : 0;
+    var oLv = !oq.length && !tam() ? 0 : oAvg >= 0.75 && tam() >= 2e7 ? 3 : oAvg >= 0.5 ? 2 : 1;
+    var oWhy = [v("acute") ? "Severity: " + optLab("acute").toLowerCase() : "", v("size") ? "market: " + optLab("size").toLowerCase() : "", tam() ? "beachhead " + money(tam()) : "", v("eng") ? "edge: " + optLab("eng").toLowerCase() : ""].filter(Boolean);
+    out.push(["Opportunity potential", oLv, oWhy.length ? sent(oWhy.join("; ")) : "Answer the YC, Thiel and Beachhead questions on severity, market size and what makes you different."]);
+    // Evidence strength: from the ladder.
+    var lv = level();
+    out.push(["Evidence strength", lv === 0 ? (s.ev.length || n("w_convo") ? 1 : 0) : lv <= 2 ? 1 : lv === 3 ? 2 : 3, "Level " + lv + " on the evidence ladder: " + LADDER[lv].toLowerCase() + "."]);
+    // Founder-market fit: experience, insight, access, execution.
+    var f = fit(), exe = v("people") === "both" || v("t_team") === "Both covered" ? 2 : v("people") === "one" || /only/.test(v("t_team")) || v("v_build") === "yes" ? 1 : 0;
+    var any = ["fmf", "yrs", "people", "t_team", "v_build", "w_story", "w_skills", "w_insight", "secret", "w_access", "w_ins", "w_convo", "w_learn"].some(function (id) { return v(id) !== ""; });
+    var fSum = f.sig[0][1] + f.sig[1][1] + f.sig[2][1] + exe;
+    var word = ["not yet", "building", "strong"];
+    out.push(["Founder-market fit", !any ? 0 : fSum >= 6 ? 3 : fSum >= 3 ? 2 : 1, any ? sent("Experience " + word[f.sig[0][1]] + ", insight " + word[f.sig[1][1]] + ", access " + word[f.sig[2][1]] + ", execution " + word[exe]) : "Answer the founder-market fit question in YC and the Why you step."]);
+    // Investment readiness: milestones reached, remaining risks, financing needs.
+    var hi = open().filter(function (g) { return g.sev === "high"; }).length, vl = viralLevel();
+    var started = progress().got > 0;
+    var rPts = (lv >= 4 ? 2 : lv >= 2 ? 1 : 0) + vl + (hi === 0 ? 2 : hi <= 2 ? 1 : 0) + (v("w_ask") ? 1 : 0) + (tam() >= 2e7 ? 1 : 0);
+    out.push(["Investment readiness", !started ? 0 : rPts >= 6 ? 3 : rPts >= 3 ? 2 : 1, started ? sent("VIRAL level " + vl + " of 2, " + hi + " high-severity gap" + (hi === 1 ? "" : "s") + " open, financing ask " + (v("w_ask") ? "stated" : "not stated yet")) : "Work through the steps to see milestones, open risks and your ask."]);
+    return out;
   };
   var answered = function () {
     var a = [];
@@ -250,7 +322,7 @@
     else inp = '<input class="x-in" id="' + id + '" data-k="' + q.id + '" ' + (q.t === "n" ? 'inputmode="decimal"' : 'type="text"') + ' value="' + val + '" />';
     return '<div class="x-field"><label for="' + id + '">' + e(q.l) + "</label>" + h + inp + (q.after ? "<small>" + e(q.after) + "</small>" : "") + "</div>";
   };
-  // Who's tried this: prefilled searches, built in the browser; nothing is fetched.
+  // Who's tried this: prefilled search links built from the founder's keywords.
   var compPhrase = function () {
     if (s.cphrase != null) return s.cphrase;
     var k = v("kw").split(/[,;\n]/).map(function (x) { return x.trim(); }).filter(Boolean).slice(0, 3).join(" ");
@@ -299,10 +371,10 @@
     var notes = v("past") && !filled().length ? '<div class="aside x-comp-notes"><h3>Your earlier notes</h3><p class="x-hint">From the old free-text field. Move each company into a row below.</p><p class="x-comp-past">' + e(v("past")) + "</p></div>" : "";
     return '<div class="x-comp">' +
       '<div class="x-comp-part"><h3>Find them</h3><div class="x-field"><label for="cphrase">Search phrase</label><small>Built from your keywords. Edit it; every search opens in a new tab.</small><input class="x-in" id="cphrase" type="text" value="' + e(compPhrase()) + '" /></div><div class="x-comp-groups" id="clinks">' + compLinks(compPhrase()) + "</div></div>" +
-      '<div class="x-comp-part"><h3>List them</h3><p class="x-hint">Up to ' + CMAX + ' companies, workarounds included. These print on your scorecard.</p>' + notes + '<div class="x-crows" id="c-rows">' + compRowsHTML() + "</div></div>" +
+      '<div class="x-comp-part"><h3>List them</h3><p class="x-hint">Up to ' + CMAX + ' companies, workarounds included. These print on your Idea Check summary.</p>' + notes + '<div class="x-crows" id="c-rows">' + compRowsHTML() + "</div></div>" +
       "<h3>Your path through</h3></div>";
   };
-  // The scorecard's Competitive landscape block.
+  // The summary's Competitive landscape block.
   var landscape = function () {
     var R = filled().slice().sort(function (a, b) { return (CORDER[a.type] != null ? CORDER[a.type] : 4) - (CORDER[b.type] != null ? CORDER[b.type] : 4); });
     var out = '<div class="x-comp-sc" id="landscape" style="margin-top:28px"><h3 style="font:var(--type-heading);margin-bottom:10px">Competitive landscape</h3>';
@@ -323,10 +395,10 @@
       return '<div class="x-gap' + (ok ? " is-ok" : "") + '" id="gap-' + g.id + '"><span class="chip' + (ok ? "" : g.sev === "high" ? " chip--solid" : "") + '">' + (ok ? "Resolved" : SEV[g.sev] + " severity") + "</span><p>" + e(g.m) + "</p><p>" + e(g.q) + '</p><textarea class="x-in" aria-label="Your answer: ' + e(g.q) + '" data-fu="' + g.id + '" placeholder="Answer in a sentence or two to resolve this gap">' + e(s.fu[g.id] || "") + "</textarea></div>";
     }).join("");
   };
-  var meter = function (sc, label) { return '<div class="x-meter" id="meter">' + label + " " + sc + "/100<span><i style=\"width:" + sc + '%"></i></span></div>'; };
+  var meter = function (p, label) { var w = p.tot ? Math.round(100 * p.got / p.tot) : 0; return '<div class="x-meter" id="meter">' + label + ": " + p.got + " of " + p.tot + ' answered<span><i style="width:' + w + '%"></i></span></div>'; };
   var stepper = function () {
     $("stepper").innerHTML = ALL.map(function (f, i) {
-      var sc = FW.indexOf(i) > -1 ? " <b>" + (touched(i) ? stepScore(i) : "–") + "</b>" : i === S_VAL ? " <b>" + evScore() + "</b>" : i === S_SC ? " <b>" + overall() + "</b>" : "";
+      var sc = FW.indexOf(i) > -1 && touched(i) ? (function (p) { return p.got === p.tot ? ' <b aria-label="all answered">✓</b>' : ""; })(stepProgress(i)) : "";
       return '<li><button type="button" data-go="' + i + '"' + (s.step === i ? ' aria-current="step"' : "") + ">" + i + " · " + e(f.name) + sc + "</button></li>";
     }).join("");
   };
@@ -337,7 +409,7 @@
 
   var views = {
     form: function (i) {
-      var top = i === 0 ? "" : meter(touched(i) ? stepScore(i) : 0, "Step score");
+      var top = i === 0 ? "" : meter(stepProgress(i), "Questions in this step");
       var tamLine = i === S_BEACH ? '<p class="x-hint" id="tam">Bottom-up TAM: ' + money(tam()) + "</p>" : "";
       return head(i, top) + (i === S_MAZE ? compBlock() : "") + '<div class="x-form">' + ALL[i].qs.map(field).join("") + tamLine + "</div>" + (i ? '<div class="x-gaps" id="gaps">' + gapHTML(i) + "</div>" : "");
     },
@@ -351,31 +423,118 @@
     },
     val: function () {
       var ph = s.phrase != null ? s.phrase : (v("kw") || v("one").split(/\s+/).slice(0, 5).join(" "));
-      var log = s.ev.length ? '<div class="table-wrap"><table><thead><tr><th scope="col">Source</th><th scope="col">Note</th><th scope="col">Says</th><th scope="col"></th></tr></thead><tbody>' + s.ev.map(function (x, i) { return '<tr><th scope="row">' + e(x.src) + '</th><td data-label="Note">' + e(x.note) + '</td><td data-label="Says"><span class="chip' + (x.k === "s" ? " chip--solid" : "") + '">' + (x.k === "s" ? "Supports" : "Contradicts") + '</span></td><td><button type="button" class="btn" data-del="' + i + '">Remove</button></td></tr>'; }).join("") + "</tbody></table></div>" : '<p class="x-hint">No evidence logged yet. Five or more entries give full weight.</p>';
-      return head(S_VAL, meter(evScore(), "Evidence score")) +
+      var log = s.ev.length ? '<div class="table-wrap"><table><thead><tr><th scope="col">Source</th><th scope="col">Note</th><th scope="col">Says</th><th scope="col"></th></tr></thead><tbody>' + s.ev.map(function (x, i) { return '<tr><th scope="row">' + e(x.src) + '</th><td data-label="Note">' + e(x.note) + '</td><td data-label="Says"><span class="chip' + (x.k === "s" ? " chip--solid" : "") + '">' + (x.k === "s" ? "Supports" : "Contradicts") + '</span></td><td><button type="button" class="btn" data-del="' + i + '">Remove</button></td></tr>'; }).join("") + "</tbody></table></div>" : '<p class="x-hint">No evidence logged yet. Aim for five or more entries.</p>';
+      var lvNow = level();
+      return head(S_VAL, '<p class="x-meter" id="meter">Evidence ladder: level ' + lvNow + " · " + e(LADDER[lvNow]) + "</p>") +
         '<div class="x-form"><div class="x-field"><label for="phrase">Search phrase</label><small>Edit it, then open each search in a new tab.</small><input class="x-in" id="phrase" type="text" value="' + e(ph) + '" /></div><div class="links" id="slinks">' + links(ph) + "</div></div>" +
         '<div class="x-gaps"><h3>Evidence log</h3><div class="x-ev"><div class="x-field"><label for="ev-src">Source</label><input class="x-in" id="ev-src" type="text" placeholder="r/medicalbilling thread" /></div><div class="x-field"><label for="ev-note">What it says</label><input class="x-in" id="ev-note" type="text" /></div><div class="x-field"><label for="ev-k">Verdict</label><select class="x-in" id="ev-k"><option value="s">Supports</option><option value="c">Contradicts</option></select></div><button type="button" class="btn" id="ev-add">Add</button></div></div><div id="evlog" style="margin-top:20px">' + log + "</div>";
     },
     sc: function () {
-      var o = overall(), vd = verdict(o), og = open(), m = matches().slice(0, 5), lv = viralLevel(), adj = adjacent();
-      var W = 600, rows = FW.map(function (i) { return [ALL[i].name, stepScore(i)]; }).concat([["Evidence", evScore()]]);
-      var svg = '<svg class="x-bars" viewBox="0 0 ' + W + " " + rows.length * 34 + '" width="100%" role="img" aria-label="Scores by framework: ' + e(rows.map(function (r) { return r[0] + " " + r[1]; }).join(", ")) + '">' + rows.map(function (r, k) { var y = k * 34; return '<text x="0" y="' + (y + 20) + '">' + e(r[0]) + '</text><rect class="x-tr" x="190" y="' + (y + 8) + '" width="350" height="16" rx="4"/><rect class="x-b" x="190" y="' + (y + 8) + '" width="' + 3.5 * r[1] + '" height="16" rx="4"/><text class="x-v" x="' + W + '" y="' + (y + 20) + '" text-anchor="end">' + r[1] + "</text>"; }).join("") + "</svg>";
+      var vd = verdict(sumPts()), og = open(), m = matches().slice(0, 5), lv = viralLevel(), adj = adjacent(), el = level(), pg = progress();
       var gl = og.length ? '<ul class="checklist">' + og.sort(function (a, b) { return PEN[b.sev] - PEN[a.sev]; }).map(function (g) { return '<li><span class="checklist__item">' + e(g.m) + "<small>" + e(ALL[g.st].name) + '</small></span><span class="chip' + (g.sev === "high" ? " chip--solid" : "") + '">' + SEV[g.sev] + "</span></li>"; }).join("") + "</ul>" : '<p class="x-hint">No open gaps.</p>';
       var untouched = FW.filter(function (i) { return !touched(i); }).map(function (i) { return ALL[i].name; });
       var next = og.filter(function (g) { return g.sev !== "low"; }).slice(0, 4).map(function (g) { return g.q; });
       if (untouched.length) next.unshift("Answer the steps you skipped: " + untouched.join(", ") + ".");
       if (s.ev.length < 5) next.push("Log at least " + (5 - s.ev.length) + " more pieces of evidence from the step " + S_VAL + " searches.");
       if (m.length) next.push("Read the " + m[0].t.title + " thesis (" + m[0].t.src + ") and shape your pitch to it.");
-      next.push("Book five Mom Test interviews this week and ask about the last time the problem happened.");
       next.push("Go to step " + S_WHY + ", Why you, to draft your founder story and 30-second pitch.");
+      var rd = reads();
+      var readsHTML = '<div style="margin-top:28px" id="reads"><h3 style="font:var(--type-heading);margin-bottom:6px">Four reads on where you stand</h3><p class="x-hint" style="margin-bottom:16px">Built from your answers. Each moves as you work through the steps.</p><div class="cards">' +
+        rd.map(function (r) { return "<div><h3>" + e(r[0]) + '</h3><p><span class="chip' + (r[1] === 3 ? " chip--solid" : "") + '">' + READS[r[1]] + "</span></p><p>" + e(r[2]) + "</p></div>"; }).join("") + "</div></div>";
+      var ladderHTML = '<div class="x-ladder-wrap"><h3 style="font:var(--type-heading);margin-bottom:10px">Evidence ladder</h3><ol class="x-ladder" aria-label="Evidence ladder, level 5 at the top">' +
+        [5, 4, 3, 2, 1, 0].map(function (k) { return "<li" + (k === el ? ' class="is-current" aria-current="step"' : k < el ? ' class="is-done"' : "") + "><b>" + k + "</b><span>" + e(LADDER[k]) + "</span>" + (k === el ? '<span class="chip chip--solid">You are here</span>' : "") + "</li>"; }).join("") +
+        '</ol><p class="x-ladder__next"><strong>Next level:</strong> ' + e(LADDER_NEXT[el]) + '</p><p class="fineprint">Illustrative framework, not an empirically validated scoring model.</p></div>';
+      var progHTML = '<div style="margin-top:28px" id="progress"><div class="x-meter" style="margin-bottom:8px">Learning progress: ' + pg.got + " of " + pg.tot + ' framework questions answered<span><i style="width:' + (pg.tot ? Math.round(100 * pg.got / pg.tot) : 0) + '%"></i></span></div><p class="fineprint">Tracks what you\'ve worked through, not investment potential.</p></div>';
       return head(S_SC, s.exNote ? '<p class="fineprint" style="margin-bottom:20px">' + e(s.exNote) + (s.exSrc ? ' <a class="link" href="' + e(s.exSrc) + '" target="_blank" rel="noopener">Source</a>' : '') + '</p>' : '') +
-        '<section class="stats"><div class="stat"><span class="stat__fig">' + o + '</span><span class="stat__label">Overall score of 100</span></div><div class="stat"><span class="stat__fig">' + answered() + '</span><span class="stat__label">Quality of answers given · ' + coverage() + '% of questions answered</span></div><div class="stat"><span class="stat__fig">' + money(tam()) + '</span><span class="stat__label">Beachhead TAM</span></div><div class="stat"><span class="stat__fig">' + lv + "/2" + '</span><span class="stat__label">VIRAL level</span></div><div class="stat"><span class="stat__fig">' + og.length + '</span><span class="stat__label">Open gaps</span></div></section>' +
-        '<div class="pair" style="margin-top:28px"><figure class="chart"><figcaption class="chart__cap">Scores by framework<small>Out of 100; overall weights YC 15%, Thiel 10%, Beachhead &amp; TAM 15%, Business Model Canvas, Lean Canvas, Techstars, Who\'s tried this, VIRAL and Evidence 10% each</small></figcaption>' + svg + "</figure>" +
-        '<aside class="callout" aria-label="Verdict"><p class="callout__head">Verdict' + (v("name") ? " · " + e(v("name")) : "") + '</p><p class="callout__lead"><strong>' + vd[0] + "</strong> " + vd[1] + '</p><p class="fineprint">' + e(VIRALTXT[lv]) + ". " + "Evidence score " + evScore() + '/100.</p><div class="links x-noprint"><button type="button" class="btn" id="print">Print</button><button type="button" class="btn" data-go="' + (S_SC + 1) + '">Next: ' + e(ALL[S_SC + 1].name) + '</button><button type="button" class="btn" id="copy">Copy prompt for an AI coach</button></div><textarea class="x-in" id="prompt-out" readonly hidden aria-label="Prompt for an AI coach" style="min-height:160px"></textarea></aside></div>' +
+        next3HTML(el) + readsHTML +
+        '<section class="stats" style="margin-top:28px"><div class="stat"><span class="stat__fig">' + money(tam()) + '</span><span class="stat__label">Beachhead TAM</span></div><div class="stat"><span class="stat__fig">' + lv + " of 2" + '</span><span class="stat__label">VIRAL level</span></div><div class="stat"><span class="stat__fig">' + og.length + '</span><span class="stat__label">Open gaps</span></div></section>' +
+        '<div class="pair" style="margin-top:28px">' + ladderHTML +
+        '<aside class="callout" aria-label="Verdict"><p class="callout__head">Verdict' + (v("name") ? " · " + e(v("name")) : "") + '</p><p class="callout__lead"><strong>' + vd[0] + "</strong> " + vd[1] + '</p><p class="fineprint">' + e(VIRALTXT[lv]) + ". Evidence ladder level " + el + '.</p><div class="links x-noprint"><button type="button" class="btn" id="print">Print</button><button type="button" class="btn" data-go="' + (S_SC + 1) + '">Next: ' + e(ALL[S_SC + 1].name) + '</button><button type="button" class="btn" id="copy">Copy prompt for an AI coach</button></div><textarea class="x-in" id="prompt-out" readonly hidden aria-label="Prompt for an AI coach" style="min-height:160px"></textarea></aside></div>' + progHTML +
         '<div style="margin-top:28px" id="adjacent"><h3 style="font:var(--type-heading);margin-bottom:6px">Adjacent markets to explore</h3><p class="x-hint" style="margin-bottom:16px">Built from your answers' + (tam() ? ", starting from a " + money(tam()) + " beachhead" : "") + '. Use them as interview questions, not conclusions.</p><div class="cards">' + adj.map(function (x) { return "<div><h3>" + e(x[0]) + "</h3><p>" + e(x[1]) + "</p></div>"; }).join("") + "</div></div>" +
-        '<div class="pair" style="margin-top:28px"><div><h3 style="font:var(--type-heading);margin-bottom:10px">Open gaps</h3>' + gl + '</div><div><h3 style="font:var(--type-heading);margin-bottom:10px">Matching investor theses</h3>' + (m.length ? '<ul class="checklist">' + m.map(function (x) { return '<li><span class="checklist__item"><a class="link" href="' + e(x.t.url) + '" target="_blank" rel="noopener">' + e(x.t.title) + "</a><small>" + e(x.t.src) + "</small></span></li>"; }).join("") + "</ul>" : '<p class="x-hint">No matches yet.</p>') + "</div></div>" + landscape() +
-        '<div class="prose" style="margin-top:28px"><h3 style="font:var(--type-heading);margin-bottom:10px">Next steps</h3><ol>' + next.map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ol></div>";
+        '<div class="pair" style="margin-top:28px"><div><h3 style="font:var(--type-heading);margin-bottom:10px">Open gaps</h3>' + gl + '</div><div><h3 style="font:var(--type-heading);margin-bottom:10px">Matching investor theses</h3>' + (m.length ? '<ul class="checklist">' + m.map(function (x) { return '<li><span class="checklist__item"><a class="link" href="' + e(x.t.url) + '" target="_blank" rel="noopener">' + e(x.t.title) + "</a><small>" + e(x.t.src) + "</small></span></li>"; }).join("") + "</ul>" : '<p class="x-hint">No matches yet.</p>') + "</div></div>" + landscape() + profileHTML() +
+        '<div class="prose" style="margin-top:28px"><h3 style="font:var(--type-heading);margin-bottom:10px">More next steps</h3><ol>' + next.map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ol></div>";
     }
+  };
+  // Your next 3 steps this week: who to interview, what to ask, and when to stop.
+  var SIGNAL = [
+    "Continue if 3 of 5 people describe it unprompted and already pay for a workaround. Stop or reframe if fewer than 2 do.",
+    "Continue if 3 of 5 people describe it unprompted and already pay for a workaround. Stop or reframe if fewer than 2 do.",
+    "Continue if 3 of 5 people describe it unprompted and already pay for a workaround. Stop or reframe if fewer than 2 do.",
+    "Continue if at least 1 of 5 qualified buyers agrees to a paid pilot or a written commitment. Stop or reframe if none will commit time or money.",
+    "Continue if pilot users keep using it after the pilot ends and at least one converts to paying. Reframe if usage stops when you stop pushing.",
+    "Continue if customers renew or buy more without extra discounts. If they don't, find out why before you add features."
+  ];
+  var topic = function () {
+    var p = listItems(v("l_prob"))[0] || first(v("problem"));
+    p = String(p || "").replace(/[.!?]+$/, "").trim();
+    return p.length > 110 ? p.slice(0, 109).replace(/\s\S*$/, "") + "…" : p;
+  };
+  var next3 = function (el) {
+    var role = v("persona") || v("beach") || v("b_seg") || v("l_early"), where = v("first10") || v("w_access") || v("b_ch");
+    var roleS = role ? first(role).replace(/[.!?]$/, "") : "";
+    var who = roleS ? "Line up five interviews with " + low(roleS) + ". " + (where ? "Start with: " + first(where) : "Find them through trade associations, industry events, LinkedIn groups and people you know who do this work.")
+      : "Name one customer role first: who hits this problem most often? Add it as your beachhead in step " + S_BEACH + ", then line up five of them.";
+    var tp = topic();
+    var qs = [tp ? "Tell me about the last time you dealt with “" + tp + "”." : "Tell me about the last time this happened.", "What did it cost you, in time or money?", "What have you tried to fix it?", "What do you use now, and what do you pay for it?", "Who else deals with this?"];
+    return { who: who, qs: qs, signal: (el < 5 ? "You're at level " + el + "; this tells you if you can reach level " + (el + 1) + ". " : "") + SIGNAL[el] };
+  };
+  var next3HTML = function (el) {
+    var x = next3(el);
+    return '<div class="x-n3" id="next3"><h3>Your next 3 steps this week</h3><ol>' +
+      "<li><h4>Who to interview</h4><p>" + e(x.who) + "</p></li>" +
+      "<li><h4>What to ask</h4><p>Ask about past behavior only. Don't pitch or describe your idea.</p><ul>" + x.qs.map(function (q) { return "<li>" + e(q) + "</li>"; }).join("") + "</ul></li>" +
+      "<li><h4>How to know it's worth solving</h4><p>" + e(x.signal) + "</p></li></ol></div>";
+  };
+  // Founder profile: what an investor needs on one page.
+  var profile = function () {
+    var el = level(), lv = viralLevel(), sup = s.ev.filter(function (x) { return x.k === "s"; }).length;
+    var dom = [optLab("fmf"), n("yrs") ? n("yrs") + " years in this industry" : "", v("w_skills") ? "Related work: " + first(v("w_skills")) : "", v("w_story") ? "Saw the problem: " + first(v("w_story")) : "", insight() ? "Insight: " + first(insight()) : ""].filter(Boolean);
+    var done = [];
+    if (n("w_convo")) done.push(n("w_convo") + " customer conversations");
+    if (s.ev.length) done.push(s.ev.length + " market signals logged (" + sup + " support, " + (s.ev.length - sup) + " contradict)");
+    if (filled().length) done.push(filled().length + " competitors and workarounds mapped");
+    [["s_seg", "Customer segments"], ["s_vp", "Value proposition"], ["s_rev", "Revenue streams"]].forEach(function (b) { var x = v(b[0]); if (x === "int" || x === "money") done.push(b[1] + ": " + optLab(b[0]).toLowerCase()); });
+    if (v("v_proto") === "yes") done.push("Low-fi prototype built");
+    if (tam()) done.push("Beachhead sized at " + money(tam()) + " a year");
+    done.push(VIRALTXT[lv]);
+    var risks = open().sort(function (a, b) { return PEN[b.sev] - PEN[a.sev]; }).slice(0, 3).map(function (g) { return SEV[g.sev] + " severity: " + g.m; });
+    var help = [];
+    if (v("w_ask")) help.push("Asking for: " + v("w_ask"));
+    if (v("v_build") === "no" || v("v_build") === "wip") help.push("A technical builder");
+    if (v("people") === "solo" || v("people") === "one") help.push("A cofounder to cover building or selling");
+    help.push(el <= 2 ? "Intros to customers for discovery interviews" : el === 3 ? "Intros to buyers for a paid pilot" : "Intros to investors and programs that fit this stage");
+    return [
+      ["Domain expertise", dom.length ? dom : ["Not described yet."]],
+      ["Evidence level", ["Level " + el + ": " + LADDER[el]]],
+      ["What's been done", done],
+      ["Open risks", risks.length ? risks : ["No open gaps flagged."]],
+      ["Where help is needed", help],
+      ["Adjacent markets", adjacent().map(function (x) { return x[0] + ": " + x[1]; })]
+    ];
+  };
+  var profileText = function () {
+    var L = ["FOUNDER PROFILE" + (v("name") ? " · " + v("name") : "")];
+    if (v("one")) L.push(v("one"));
+    profile().forEach(function (sec) { L.push("", sec[0].toUpperCase()); sec[1].forEach(function (x) { L.push("- " + x); }); });
+    L.push("", "Consent to share with investors Night Shift works with: " + (s.consent ? "yes" : "no"));
+    return L.join("\n");
+  };
+  var PROFSEND = "Email my profile for an investor referral", PROFWAIT = "Check the consent box to include your profile.";
+  var profSend = function () {
+    var a = $("prof-send"); if (!a) return;
+    if (s.consent) { a.href = "mailto:?subject=" + encodeURIComponent("Night Shift: Founder profile for an investor referral") + "&body=" + encodeURIComponent(profileText()); a.textContent = PROFSEND; a.removeAttribute("aria-disabled"); }
+    else { a.removeAttribute("href"); a.textContent = PROFWAIT; a.setAttribute("aria-disabled", "true"); }
+  };
+  var profileHTML = function () {
+    var P = profile();
+    return '<div class="x-prof" id="profile" style="margin-top:28px"><h3 style="font:var(--type-heading);margin-bottom:6px">Founder profile</h3><p class="x-hint" style="margin-bottom:16px">One page for a mentor or investor: your expertise, evidence, progress, risks and asks. The copied profile also lists your adjacent markets.</p><div class="cards">' +
+      P.slice(0, 5).map(function (sec) { return "<div><h3>" + e(sec[0]) + "</h3><ul>" + sec[1].map(function (x) { return "<li>" + e(x) + "</li>"; }).join("") + "</ul></div>"; }).join("") + "</div>" +
+      '<label class="x-inv-share x-noprint" style="margin-top:16px"><input type="checkbox" id="prof-consent"' + (s.consent ? " checked" : "") + " />I agree to share this profile with investors Night Shift works with.</label>" +
+      '<p class="fineprint">Your profile is shared with an investor only if you choose to share it.</p>' +
+      '<p class="fineprint x-print-only">Consent to share with investors Night Shift works with: ' + (s.consent ? "yes" : "no") + ".</p>" +
+      '<div class="links x-noprint" style="margin-top:12px"><button type="button" class="btn" id="prof-copy">Copy founder profile</button>' +
+      (s.consent ? '<a class="btn" id="prof-send" href="mailto:?subject=' + encodeURIComponent("Night Shift: Founder profile for an investor referral") + "&amp;body=" + e(encodeURIComponent(profileText())) + '">' + PROFSEND + "</a>" : '<a class="btn" id="prof-send" aria-disabled="true">' + PROFWAIT + "</a>") +
+      '</div><textarea class="x-in x-noprint" id="prof-out" readonly hidden aria-label="Founder profile" style="min-height:160px"></textarea></div>';
   };
   var links = function (ph) {
     var q = encodeURIComponent(ph), L = [
@@ -389,7 +548,7 @@
       ["Google: alternatives", "https://www.google.com/search?q=" + encodeURIComponent(ph + " alternatives")]];
     return L.map(function (l) { return '<a class="btn" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + "</a>"; }).join("");
   };
-  // Adjacent markets: three prompts built from the founder's own answers, no network.
+  // Adjacent markets: three prompts built from the founder's own answers.
   var listItems = function (x) { return String(x || "").split(/\n|;|,(?!\d)|\s(?=\d[.)]\s)/).map(function (p) { return p.replace(/^\s*(\d+[.)]|[-•*])\s*/, "").trim(); }).filter(function (p) { return p.length > 2; }); };
   var adjacent = function () {
     var cust = v("beach") || v("l_early") || v("b_seg"), seg = v("b_seg") || v("l_early") || v("beach"), probs = listItems(v("l_prob"));
@@ -403,7 +562,7 @@
   };
   var coachPrompt = function () {
     var lines = ["Act as a skeptical but supportive seed investor. Review this idea across the frameworks below. Ask me 5 clarifying questions, rank the three biggest risks, and name the riskiest assumption to test this week and the cheapest way to test it.", ""];
-    [0].concat(FW).forEach(function (i) { var f = ALL[i]; lines.push("## " + f.name + (i ? " (score " + stepScore(i) + "/100)" : "")); f.qs.forEach(function (q) { if (v(q.id) && q.id !== "whywin") lines.push(q.l + ": " + v(q.id)); }); });
+    [0].concat(FW).forEach(function (i) { var f = ALL[i]; lines.push("## " + f.name); f.qs.forEach(function (q) { if (v(q.id) && q.id !== "whywin") lines.push(q.l + ": " + v(q.id)); }); });
     var cr = filled().slice().sort(function (a, b) { return (CORDER[a.type] != null ? CORDER[a.type] : 4) - (CORDER[b.type] != null ? CORDER[b.type] : 4); });
     lines.push("", "## Competition");
     if (cr.length) cr.forEach(function (r) {
@@ -413,7 +572,9 @@
     else lines.push("No companies listed yet.");
     if (v("past")) lines.push("Earlier notes: " + v("past").replace(/\s*\n\s*/g, "; "));
     lines.push("Why I'll win against the strongest one: " + (v("whywin") || "[not answered]"));
-    lines.push("", "Beachhead TAM (customers x revenue each): " + money(tam()) + (tam() ? (tam() < 5e6 ? " · too small for venture" : tam() < 2e7 ? " · below the $20M-$100M sweet spot" : tam() <= 1e8 ? " · in the $20M-$100M sweet spot" : tam() > 1e9 ? " · too broad, narrow it" : " · above the sweet spot") : ""), "Overall score: " + overall() + "/100", "VIRAL: " + VIRALTXT[viralLevel()], "", "Open gaps:");
+    lines.push("", "Beachhead TAM (customers x revenue each): " + money(tam()) + (tam() ? (tam() < 5e6 ? " · too small for venture" : tam() < 2e7 ? " · below the $20M-$100M sweet spot" : tam() <= 1e8 ? " · in the $20M-$100M sweet spot" : tam() > 1e9 ? " · too broad, narrow it" : " · above the sweet spot") : ""), "Evidence ladder: level " + level() + ", " + LADDER[level()].toLowerCase(), "VIRAL: " + VIRALTXT[viralLevel()], "", "Where I stand:");
+    reads().forEach(function (r) { lines.push("- " + r[0] + ": " + READS[r[1]] + ". " + r[2]); });
+    lines.push("", "Open gaps:");
     open().forEach(function (g) { lines.push("- [" + SEV[g.sev] + "] " + g.m); });
     lines.push("", "Adjacent markets to explore:"); adjacent().forEach(function (x) { lines.push("- " + x[0] + ": " + x[1]); });
     var fu = gaps().filter(resolved); if (fu.length) { lines.push("", "My answers to follow-ups:"); fu.forEach(function (g) { lines.push("- " + g.q + " " + s.fu[g.id]); }); }
@@ -442,7 +603,7 @@
     var i = s.step;
     if (i === S_WHY && $("why-out")) { clearTimeout(window._wt); window._wt = setTimeout(function () { $("why-out").innerHTML = whyOut(); }, 300); }
     if (FW.indexOf(i) > -1) {
-      var m = $("meter"); if (m) m.outerHTML = meter(touched(i) ? stepScore(i) : 0, "Step score");
+      var m = $("meter"); if (m) m.outerHTML = meter(stepProgress(i), "Questions in this step");
       if ($("tam")) $("tam").textContent = "Beachhead TAM (customers x revenue each): " + money(tam()) + (tam() ? (tam() < 5e6 ? " · too small for venture" : tam() < 2e7 ? " · below the $20M-$100M sweet spot" : tam() <= 1e8 ? " · in the $20M-$100M sweet spot" : tam() > 1e9 ? " · too broad, narrow it" : " · above the sweet spot") : "");
     }
   };
@@ -821,6 +982,10 @@
     else if (t.id === "ev-add") { var src = $("ev-src").value.trim(), note = $("ev-note").value.trim(); if (!src && !note) return; s.ev.push({ src: src || "Unnamed source", note: note, k: $("ev-k").value }); save(); render(); }
     else if (t.dataset.del != null) { s.ev.splice(+t.dataset.del, 1); save(); render(); }
     else if (t.id === "print") window.print();
+    else if (t.id === "prof-copy") {
+      var pt = profileText(), po = $("prof-out"), pf = function () { po.hidden = false; po.value = pt; po.focus(); po.select(); t.textContent = "Select and copy the text below"; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pt).then(function () { t.textContent = "Copied"; setTimeout(function () { t.textContent = "Copy founder profile"; }, 2000); }, pf); else pf();
+    }
     else if (t.id === "copy-kit") {
       var k = kit(), ko = $("kit-out"), kf = function () { ko.hidden = false; ko.value = k; ko.focus(); ko.select(); t.textContent = "Select and copy the text below"; };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(k).then(function () { t.textContent = "Copied"; setTimeout(function () { t.textContent = "Copy my pitch kit"; }, 2000); }, kf); else kf();
@@ -830,7 +995,12 @@
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(p).then(function () { t.textContent = "Copied"; setTimeout(function () { t.textContent = "Copy prompt for an AI coach"; }, 2000); }, fall); else fall();
     }
   });
-  window.__nsic = { steps: { SC: S_SC, TECH: S_TECH, WHY: S_WHY, LAST: LAST }, s: s, EX: EX, EXS: EXS, answered: answered, coverage: coverage, stepScore: stepScore, viralLevel: viralLevel, gaps: gaps, matches: matches, overall: overall, fit: fit, whyOut: whyOut, kit: kit, views: views, setA: function (a) { s.a = a; }, load: function (t) { THESES = t; }, theses: function () { return THESES; }, prefill: function (txt) { s.a.problem = txt; s.step = 1; save(); render(); },
+  document.addEventListener("change", function (ev) {
+    var t = ev.target; if (t.id !== "prof-consent") return;
+    s.consent = !!t.checked; save(); profSend();
+    var pp = document.querySelector("#profile .x-print-only"); if (pp) pp.textContent = "Consent to share with investors Night Shift works with: " + (s.consent ? "yes" : "no") + ".";
+  });
+  window.__nsic = { steps: { SC: S_SC, TECH: S_TECH, WHY: S_WHY, LAST: LAST }, s: s, EX: EX, EXS: EXS, answered: answered, coverage: coverage, progress: progress, level: level, reads: reads, profileText: profileText, viralLevel: viralLevel, gaps: gaps, matches: matches, fit: fit, whyOut: whyOut, kit: kit, views: views, setA: function (a) { s.a = a; }, load: function (t) { THESES = t; }, theses: function () { return THESES; }, prefill: function (txt) { s.a.problem = txt; s.step = 1; save(); render(); },
     // Fills only the fields that are still empty, then opens a step for review. Used by the deck and description import.
     fill: function (a, step) { Object.keys(a || {}).forEach(function (k) { if (a[k] !== "" && a[k] != null && v(k) === "") s.a[k] = String(a[k]); }); s.exNote = ""; s.exSrc = ""; s.step = step || 0; save(); render(); },
     // Adds imported companies after the founder's own rows; never changes a row that has content. Returns how many were added.

@@ -1,6 +1,6 @@
 /* Idea Check, Investor diligence mode. Fifth option in the Idea Check switch
    (#check .x-fp-switch [data-mode="diligence"]), panel #dil-panel.
-   Answers are saved in localStorage (nsdd-v1).
+   Saves answers to localStorage (nsdd-v1).
    Adapted from Startup Science's Startup Due Diligence Checklist for Investors
    (Gregory Shepard, May 20, 2026). Styles: .x-dd-* in index.html, plus .x-inv-*. */
 (function () {
@@ -193,7 +193,7 @@
   var asText = function () {
     var c = count(SECTIONS), lab = {};
     CHOICES.forEach(function (x) { lab[x[0]] = x[1]; });
-    var L = ["Investor diligence checklist", "Stage: " + stage()[1], "Overall: " + countText(c), ""];
+    var L = ["Investor diligence checklist", "Stage: " + stage()[1], "All sections: " + countText(c), ""];
     ordered().forEach(function (o) {
       L.push(o.s.name + " (" + EMPH[o.em] + "): " + countText(count([o.s])));
       o.s.items.forEach(function (it, k) { L.push("- [" + (lab[st.a[key(o.s, k)]] || "Not answered") + "] " + it[0] + (it[1] ? " (common red flag)" : "")); });

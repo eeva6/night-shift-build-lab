@@ -1,7 +1,7 @@
 /* Idea Check, Find investors mode. Self-contained: adds a third option to the
    Idea Check switch (#check .x-fp-switch), its own panel, and "Find investors
    for this idea" buttons on Find-mode idea cards and Check results.
-   Answers are saved in localStorage. Styles: idea-check.css (.x-inv-*). */
+   Saves answers to localStorage. Styles: idea-check.css (.x-inv-*). */
 (function () {
   "use strict";
 
@@ -119,7 +119,7 @@
   };
   var NEED = ["", "customer conversations", "a prototype or MVP", "paying customers or pilots"];
 
-  var score = function (r) {
+  var matchOf = function (r) {
     var hay = (r.sectors_thesis + " " + r.type + " " + r.name).toLowerCase();
     var hits = st.sectors.filter(function (id) { var x = SECTORS.filter(function (s) { return s[0] === id; })[0]; return x && x[2] && x[2].test(hay); });
     // Sector match 3 each, industry-agnostic 1, unverified status ranks 2 lower.
@@ -138,7 +138,7 @@
     var picked = st.sectors.length > 0; // "Other" alone leaves the industry-agnostic investors
     var out = { aqi: null, now: [], later: [], grants: [], nowAll: 0, laterAll: 0 };
     INVESTORS.forEach(function (r) {
-      var m = score(r);
+      var m = matchOf(r);
       if (st.regcf && /reg cf/i.test(r.type)) { out.aqi = m; return; }
       if (neOnly(r) && !st.ne) return;
       if (r.women_founder_focus === "yes" && !st.women) return;
